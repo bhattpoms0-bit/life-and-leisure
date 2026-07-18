@@ -1,0 +1,422 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Destinations | LUXE VOYAGE</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#737780",
+                    "on-surface-variant": "#43474f",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-container": "#a4a6a8",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbc8",
+                    "on-primary-container": "#85a7e2",
+                    "surface-tint": "#3c5f96",
+                    "outline-variant": "#c3c6d1",
+                    "surface-container-low": "#f6f3f2",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#743400",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#632c00",
+                    "on-primary-fixed-variant": "#21477c",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary-fixed": "#321300",
+                    "on-surface": "#1b1c1c",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "tertiary-fixed": "#e1e2e4",
+                    "primary-container": "#123b70",
+                    "surface": "#fcf9f8",
+                    "tertiary-container": "#393c3e",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#242628",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-fixed-dim": "#a9c7ff",
+                    "inverse-primary": "#a9c7ff",
+                    "secondary": "#994700",
+                    "surface-variant": "#e5e2e1",
+                    "surface-dim": "#dcd9d9",
+                    "inverse-surface": "#303030",
+                    "inverse-on-surface": "#f3f0ef",
+                    "background": "#fcf9f8",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001b3e",
+                    "on-background": "#1b1c1c",
+                    "secondary-container": "#ff8429",
+                    "primary": "#002550",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "surface-container-high": "#eae7e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "xxl": "24px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "md": "16px",
+                    "xl": "40px",
+                    "gutter": "24px",
+                    "xxl": "80px",
+                    "container-max": "1280px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "unit": "8px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .hero-gradient {
+        background: linear-gradient(to bottom, rgba(0,37,80,0.4) 0%, rgba(0,37,80,0) 50%, rgba(0,37,80,0.8) 100%);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c3c6d1;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] h-20 flex items-center">
+<div class="max-w-container-max mx-auto px-gutter flex justify-between items-center w-full">
+<div class="font-display-lg text-headline-md tracking-tighter text-primary">LUXE VOYAGE</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="font-label-md text-label-md text-primary border-b-2 border-secondary font-bold pb-1" href="#">Destinations</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Packages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Visa</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Blog</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm hover:opacity-80 transition-all duration-300">
+<span class="material-symbols-outlined text-on-surface">search</span>
+</button>
+<button class="p-sm hover:opacity-80 transition-all duration-300">
+<span class="material-symbols-outlined text-on-surface">account_circle</span>
+</button>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md hover:scale-95 transition-transform">
+                    Book Now
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Editorial Hero Section -->
+<section class="relative h-[870px] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] hover:scale-105" data-alt="A breathtaking aerial view of a luxury yacht sailing through the turquoise waters of Ha Long Bay, Vietnam. The scene is bathed in the warm, golden light of late afternoon, highlighting the jagged limestone karsts draped in lush greenery. The water is crystal clear, reflecting the serene sky. The aesthetic is ultra-high-end editorial, evoking a sense of tranquil exclusivity and aspirational calm, perfectly aligned with a quiet luxury brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4h5dGTFvgBClGQ_b7PZGSvtT5w2ISB570x_HPH7awEafIGrhTSW0Qyyv1sdZkMopdE5USswtyuW7jpZZE0R1w80MCbC_86kyA5iO8F03jPaTXN2YvFyazcy9vyT7cJglJ01WODd8VVVhmOo8I2E6V-9Zt0XQ51A6cu7c2kJmLOAFFbW7aMFztMkXHXTb-j87TtXrXweW1dgHy8fcaQNS5661bEYdC-LApJQjV0lu0YvIHf74UYT6dCBDwb0og4dERwKRHQHOL7Tyn')">
+</div>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="relative h-full max-w-container-max mx-auto px-gutter flex flex-col justify-end pb-xxl">
+<div class="max-w-2xl space-y-md">
+<span class="inline-block px-md py-xs bg-secondary/90 text-white rounded-full font-label-md tracking-widest uppercase">Special Feature</span>
+<h1 class="font-display-lg text-display-lg text-white leading-tight">The Allure of Southeast Asia</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-lg">
+                        Explore a world where ancient traditions meet modern luxury. From the emerald waters of Vietnam to the bustling streets of Singapore, discover the curated side of the Orient.
+                    </p>
+<div class="pt-md">
+<button class="group flex items-center gap-md text-white font-label-md">
+<span class="h-12 w-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined">arrow_forward</span>
+</span>
+                            EXPLORE THE REGION
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Filtering System -->
+<section class="bg-surface py-lg sticky top-20 z-40 border-b border-outline-variant/30">
+<div class="max-w-container-max mx-auto px-gutter flex flex-wrap items-center justify-between gap-md">
+<div class="flex items-center gap-md">
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Regions:</span>
+<div class="flex gap-sm">
+<button class="px-lg py-sm bg-primary text-on-primary rounded-full font-label-md transition-all">All Regions</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-variant rounded-full font-label-md transition-all">Southeast Asia</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-variant rounded-full font-label-md transition-all">East Asia</button>
+<button class="px-lg py-sm bg-surface-container-high text-on-surface hover:bg-surface-variant rounded-full font-label-md transition-all">Europe</button>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Type:</span>
+<select class="bg-surface-container-high border-none rounded-full px-xl py-sm font-label-md focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+<option>Luxury Escapes</option>
+<option>Adventure</option>
+<option>Wellness</option>
+<option>Cultural Tours</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Destinations Grid -->
+<section class="max-w-container-max mx-auto px-gutter py-xxl">
+<div class="flex items-baseline justify-between mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary">Signature Destinations</h2>
+<span class="font-body-md text-on-surface-variant">Showing 6 exclusive locations</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Card 1: Thailand -->
+<div class="group relative aspect-[3/4] overflow-hidden rounded-xxl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-all duration-500">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="A serene private infinity pool at a luxury villa in Koh Samui, Thailand, overlooking the Gulf of Thailand at sunset. The sky is painted with soft hues of lavender and peach. Elegant minimalist lounge chairs sit on a light wood deck. The overall lighting is soft and golden, emphasizing a mood of 'Quiet Luxury' and high-end serenity with a pristine white and deep blue color palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAczXJbOI4Aoe_Qw00K2kDMEOT2StJD2FuHYTfcqGYAe88IDW62DQ0fo48V4fRcv-qmbP4JIz-SDA07tk1sLcKbDvxOtdtk-2_E1-RR3XkLJz9sZcTpkTqlql6qgKmEXRzojESqe-S2T1aaOyN5QweWSBV5WuNAfRbwy5LH1INzXv7ns2Jw7akI4E217k8bR527HrrmVush3HEVx1A1T2S6nycqI6R9pMH3EFW3wDNJFciCS-8YyxaWZ-DYuFKMr3n62YvwCKsV9Gic')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-lg right-lg">
+<span class="glass-card px-md py-sm rounded-full font-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Thailand
+                        </span>
+</div>
+<div class="absolute bottom-0 w-full p-xl flex flex-col justify-end gap-md">
+<div class="glass-card p-lg rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<h3 class="font-headline-md text-primary mb-xs">Bespoke Bangkok &amp; Beyond</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">Discover curated luxury from the golden temples to private island retreats.</p>
+<button class="w-full bg-secondary text-white py-md rounded-lg font-label-md hover:bg-secondary-container transition-colors">
+                                View Packages
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 2: Vietnam -->
+<div class="group relative aspect-[3/4] overflow-hidden rounded-xxl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-all duration-500">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Interior of a luxury heritage boutique hotel in Hoi An, Vietnam. The room features dark polished woods, silk fabrics in vibrant ochre, and traditional lanterns. High-key light streams through large windows overlooking a lush garden. The style is sophisticated and timeless, using a palette of deep navy and rich natural textures to create a high-end travel editorial feel." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD82lsJ8qeTpkfnFNegXvwj85CHqCxnLlRvnOn1swJtL81uEysd3is8g00F_Och5YELOJSd5bhx-_bJJCvuar5Sad7JcgQFe2yL-TB8KQ4nmCrW3gEFttvfKVBWhVwUtBVquxH8Uz0bq5nJ7_zacuv0MvepJbN3wM1SGCeFmjiC5oBiJULH5PTXNUUjWvXljpyEK_ajvFat4RAENUC8YfAEJtCMN1KvQjVFWZ1721O-ExK6_FMf2D-WOXD0ZbujHQpPZiTCk42vurUw')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-lg right-lg">
+<span class="glass-card px-md py-sm rounded-full font-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Vietnam
+                        </span>
+</div>
+<div class="absolute bottom-0 w-full p-xl flex flex-col justify-end gap-md">
+<div class="glass-card p-lg rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<h3 class="font-headline-md text-primary mb-xs">Heritage &amp; Horizon</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">A journey through ancient Hoi An and the surreal beauty of Ninh Binh.</p>
+<button class="w-full bg-secondary text-white py-md rounded-lg font-label-md hover:bg-secondary-container transition-colors">
+                                View Packages
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 3: Singapore -->
+<div class="group relative aspect-[3/4] overflow-hidden rounded-xxl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-all duration-500">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="The futuristic skyline of Singapore at dusk, focusing on the Supertrees at Gardens by the Bay glowing in neon blues and purples. The modern architecture is sharp and clean, with a backdrop of a deep indigo sky. The lighting is sophisticated and dramatic, emphasizing precision and technological luxury. The overall palette is composed of cool blues and crisp whites." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB019XOESkdSNXNZJPp1EIzIItHRhrtHYKLup7KrBRDZ2yquPQoGXkilpXVByQlpUkFdvKhnubRL6IrNbAbaBFdK1_yqRDt0CBzdhHeH8t2RH5jFkmBSJr9gfwuvCAuRNiV95LxXUzlDzL_6KHdbOWD4jkCY3aAQmshhFRn261ERnSCR2FXqNJ12Lw75d2LwQCd9ga5aARlsbxYBVa5UmZzQ0cWnM6JJ7rEL3OqnwTPrbajgHXwdf7RWYrZgadxmiEZKi_QSM893KpB')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-lg right-lg">
+<span class="glass-card px-md py-sm rounded-full font-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Singapore
+                        </span>
+</div>
+<div class="absolute bottom-0 w-full p-xl flex flex-col justify-end gap-md">
+<div class="glass-card p-lg rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<h3 class="font-headline-md text-primary mb-xs">Metropolitan Marvels</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">Experience the pinnacle of modern luxury and culinary excellence.</p>
+<button class="w-full bg-secondary text-white py-md rounded-lg font-label-md hover:bg-secondary-container transition-colors">
+                                View Packages
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 4: Japan -->
+<div class="group relative aspect-[3/4] overflow-hidden rounded-xxl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-all duration-500">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="A minimalist Ryokan interior in Kyoto, Japan, featuring tatami mats and a view of a Zen rock garden through a circular window. Soft, diffused daylight illuminates the natural wood textures. The mood is one of intense 'Quiet Luxury' and contemplative silence. The palette is dominated by light woods, soft creams, and the muted grey of river stones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAVW5jGKP01Yb9k4u25qlUsJvspYduBxddlfpBHumN6M5v6vjnm7jYPa66xgPmU39NMETt1f0huW1eYO4vjAwZJU75_1iUjybH_4MDclsSMTUiqmlOW57jfKjmZIykDLsjXHQpDF6f8bXkuDy2oIpKJOvuwA2nlf-jAj8OC2tRMJqOjieIHqF-QRMkJsnKwHejlvOjd0Lpab5oe-fL6W3kUqbCjmGogIVa2GFE71gcAWSmbuk76TX7aUsIn1hXYwfrI_8Iiws998vDG')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-lg right-lg">
+<span class="glass-card px-md py-sm rounded-full font-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Japan
+                        </span>
+</div>
+<div class="absolute bottom-0 w-full p-xl flex flex-col justify-end gap-md">
+<div class="glass-card p-lg rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<h3 class="font-headline-md text-primary mb-xs">Timeless Kyoto</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">Immersion in the delicate balance of ancient rituals and modern refinement.</p>
+<button class="w-full bg-secondary text-white py-md rounded-lg font-label-md hover:bg-secondary-container transition-colors">
+                                View Packages
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 5: Russia -->
+<div class="group relative aspect-[3/4] overflow-hidden rounded-xxl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-all duration-500">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="The grand, neoclassical facade of the Hermitage Museum in St. Petersburg, Russia, under a crisp winter sky. The building's mint green and white details are sharp against the soft blue light. The vibe is opulent and historical, reflecting imperial luxury. High-end photography with a focus on architectural precision and a sophisticated, cool-toned color palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXrghMZB9-4ss4YwK2qg5gb_yKIwgjmccz1IEeqgiwRAJqRRHkVL_EDGC5YEBCUD5DD81Io5aEpcIO4oU62f_C5KczTrxZNsky9yf2HZog0Wu7d62NHlIj_kfYYI4ZBhYUH-LcmpCPgVXALqdrZD7F3XZrKpdOi0kbVD3hXdaSUyWLjkMlXEPC3fOVs_q4gKTJ21Nivg9w06CFMkx1HTmU0WKMglsJUQvzqv6O-FJiOfcE7aGH4mqhS-QH7NEhddvYIKVsgzFI7OTE')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-lg right-lg">
+<span class="glass-card px-md py-sm rounded-full font-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Russia
+                        </span>
+</div>
+<div class="absolute bottom-0 w-full p-xl flex flex-col justify-end gap-md">
+<div class="glass-card p-lg rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<h3 class="font-headline-md text-primary mb-xs">Imperial Grandeur</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">Private tours of St. Petersburg's palaces and the world's most opulent museums.</p>
+<button class="w-full bg-secondary text-white py-md rounded-lg font-label-md hover:bg-secondary-container transition-colors">
+                                View Packages
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 6: China -->
+<div class="group relative aspect-[3/4] overflow-hidden rounded-xxl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-all duration-500">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="A misty morning view of the Great Wall of China as it winds over green mountain ridges. The lighting is ethereal and soft, with layers of fog creating a sense of vast depth. The aesthetic is clean and majestic, using a natural palette of emerald green, mist white, and ancient stone grey. A high-end editorial composition that values scale and historical serenity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXXFnIs8BVGGmo9m9sr-2tXw2kHl2WErMsn-ceCrurR5C6p-GpgXIU-xBgCiZWJYDliEeMd7xR6sTj8XvMqB4O_XdQQ8WRXLGIaRo8P2XsLadwwIYlB1N33o1r6kaSFrBTencYmwLVnXGOWsEicOhhOGPD_uyqfFf5SEirFll9UdkOAcDbbSS_Q6r2LICuVrCCw2uy02Q4G-JNPyhiiUBWkQDpJXSGFqRzFzj542nqFzcO_EOJP1p5y_fkh4L_jz33y05x-InrzyBl')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-80"></div>
+<div class="absolute top-lg right-lg">
+<span class="glass-card px-md py-sm rounded-full font-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            China
+                        </span>
+</div>
+<div class="absolute bottom-0 w-full p-xl flex flex-col justify-end gap-md">
+<div class="glass-card p-lg rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<h3 class="font-headline-md text-primary mb-xs">Celestial Wonders</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">From the futuristic skyline of Shanghai to the silent mountains of Guilin.</p>
+<button class="w-full bg-secondary text-white py-md rounded-lg font-label-md hover:bg-secondary-container transition-colors">
+                                View Packages
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact Teaser -->
+<section class="max-w-container-max mx-auto px-gutter pb-xxl">
+<div class="relative bg-primary-container rounded-xxl p-xxl overflow-hidden text-center">
+
+<div class="relative z-10 space-y-md">
+<h2 class="font-headline-lg text-white">Can't decide on a destination?</h2>
+<p class="text-on-primary-container font-body-lg max-w-xl mx-auto">Our travel consultants specialize in crafting personalized itineraries that reflect your unique preferences and style.</p>
+<div class="flex justify-center gap-md pt-lg">
+<button class="bg-secondary text-white px-xxl py-md rounded-lg font-label-md hover:bg-secondary-container transition-all">Talk to an Expert</button>
+<button class="bg-white/10 text-white backdrop-blur-md border border-white/20 px-xxl py-md rounded-lg font-label-md hover:bg-white/20 transition-all">Browse All Services</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high dark:bg-tertiary-container w-full pt-xxl pb-xl border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-md">LUXE VOYAGE</div>
+<p class="font-body-md text-on-surface-variant dark:text-on-tertiary-container mb-md">Elevating global travel to an art form. Exclusive experiences for the discerning voyager.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">public</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">chat</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">mail</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface font-bold uppercase tracking-wider mb-md">Explore</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Destinations</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Packages</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface font-bold uppercase tracking-wider mb-md">Support</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">About Us</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Contact</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface font-bold uppercase tracking-wider mb-md">Legal</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter mt-xxl pt-lg border-t border-outline-variant/30 text-center">
+<p class="font-label-md text-on-surface-variant">© 2024 Luxe Voyage International. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Micro-interactions and subtle scroll effects
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('h-20');
+                nav.classList.add('h-16');
+            } else {
+                nav.classList.remove('py-2');
+                nav.classList.add('h-20');
+                nav.classList.remove('h-16');
+            }
+        });
+
+        // Simple filter button interaction
+        const filterButtons = document.querySelectorAll('.flex.gap-sm button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface');
+                });
+                btn.classList.remove('bg-surface-container-high', 'text-on-surface');
+                btn.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+    </script>
+</body></html>

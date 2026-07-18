@@ -1,0 +1,571 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LUXE VOYAGE | The Art of Extraordinary Travel</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#737780",
+                    "on-surface-variant": "#43474f",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-container": "#a4a6a8",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbc8",
+                    "on-primary-container": "#85a7e2",
+                    "surface-tint": "#3c5f96",
+                    "outline-variant": "#c3c6d1",
+                    "surface-container-low": "#f6f3f2",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#743400",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#632c00",
+                    "on-primary-fixed-variant": "#21477c",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary-fixed": "#321300",
+                    "on-surface": "#1b1c1c",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "tertiary-fixed": "#e1e2e4",
+                    "primary-container": "#123b70",
+                    "surface": "#fcf9f8",
+                    "tertiary-container": "#393c3e",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#242628",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-fixed-dim": "#a9c7ff",
+                    "inverse-primary": "#a9c7ff",
+                    "secondary": "#994700",
+                    "surface-variant": "#e5e2e1",
+                    "surface-dim": "#dcd9d9",
+                    "inverse-surface": "#303030",
+                    "inverse-on-surface": "#f3f0ef",
+                    "background": "#fcf9f8",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001b3e",
+                    "on-background": "#1b1c1c",
+                    "secondary-container": "#ff8429",
+                    "primary": "#002550",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "surface-container-high": "#eae7e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "md": "16px",
+                    "xl": "40px",
+                    "gutter": "24px",
+                    "xxl": "80px",
+                    "container-max": "1280px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "unit": "8px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%);
+        }
+        .editorial-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<div class="max-w-container-max mx-auto px-gutter flex justify-between items-center h-20">
+<!-- Brand Logo -->
+<a class="font-display-lg text-headline-md tracking-tighter text-primary" href="#">LUXE VOYAGE</a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex items-center space-x-xl">
+<a class="font-label-md text-label-md text-primary border-b-2 border-secondary font-bold pb-1" href="#">Destinations</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Packages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Visa</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Blog</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-md">
+<button class="p-2 hover:opacity-80 transition-all">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+<button class="p-2 hover:opacity-80 transition-all">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+<button class="hidden md:block bg-secondary text-on-secondary px-lg py-sm rounded-lg font-label-md hover:scale-95 transition-transform">
+                    Book Now
+                </button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-[1024px] min-h-[700px] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, high-resolution photograph of a luxury infinity pool overlooking a sunset in Santorini, Greece. The water reflects deep blues and oranges of the sky. Minimalist white architecture surrounds the pool, embodying quiet luxury. The lighting is soft and golden, creating an aspirational and serene atmosphere consistent with a premium travel brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxYYHhY2zmnvukejiUNSOj5Qp2FCZd8KqLc9nK_WFb32DoRWwxWGa1uiGoFw7dnqSahIynrraZgRm224loQRcYCu_R-JAI7v94tAflTITalc-M4KulSUpBwVecGuiCs36g_z0ca3qYpLXRQHbGgyWJo6iUFPHIF-kN0RY-LG0xIQGNde9TEmOO3HSDqaFkdySmqfJLNBk5NbvB0SeX_F0RbfQwEW2-vPpfmlruSXvZO187ztzQ_YU9kIsb1itD28DtznifaSFnzaKb')"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 text-center px-gutter max-w-4xl animate-fade-in-up">
+<h1 class="font-display-lg text-display-lg text-white mb-md drop-shadow-lg">
+                The Art of <br><span class="italic font-light">Extraordinary</span> Travel
+            </h1>
+<p class="font-body-lg text-body-lg text-white/90 mb-xl max-w-2xl mx-auto drop-shadow-md">
+                Curation for the discerning explorer. We craft bespoke journeys that transcend the ordinary and redefine the essence of global exploration.
+            </p>
+</div>
+<!-- Floating Search Widget -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-container-max px-gutter z-20">
+<div class="glass p-lg rounded-2xl editorial-shadow grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+<div class="space-y-xs">
+<label class="text-caption font-label-md text-on-surface-variant uppercase tracking-widest px-2">Destination</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-md h-14">
+<span class="material-symbols-outlined text-outline mr-sm">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-md" placeholder="Where to?" type="text">
+</div>
+</div>
+<div class="space-y-xs">
+<label class="text-caption font-label-md text-on-surface-variant uppercase tracking-widest px-2">Dates</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-md h-14">
+<span class="material-symbols-outlined text-outline mr-sm">calendar_month</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-md" placeholder="Select dates" type="text">
+</div>
+</div>
+<div class="space-y-xs">
+<label class="text-caption font-label-md text-on-surface-variant uppercase tracking-widest px-2">Travelers</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-md h-14">
+<span class="material-symbols-outlined text-outline mr-sm">group</span>
+<select class="bg-transparent border-none focus:ring-0 w-full text-body-md appearance-none">
+<option>2 Adults, 0 Children</option>
+<option>1 Adult</option>
+<option>4 Adults, 2 Children</option>
+</select>
+</div>
+</div>
+<button class="bg-secondary-container text-on-secondary-container h-14 rounded-xl font-headline-md text-body-md flex items-center justify-center space-x-2 hover:bg-secondary transition-colors duration-300">
+<span>Explore Packages</span>
+<span class="material-symbols-outlined">arrow_right_alt</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Travel Categories -->
+<section class="py-xxl bg-white">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg">
+<div class="group flex flex-col items-center text-center p-xl rounded-2xl hover:bg-surface-container-low transition-colors duration-300 cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">favorite</span>
+</div>
+<h3 class="font-headline-md text-body-md font-bold mb-xs">Honeymoon</h3>
+<p class="font-body-md text-caption text-on-surface-variant">Romantic getaways</p>
+</div>
+<div class="group flex flex-col items-center text-center p-xl rounded-2xl hover:bg-surface-container-low transition-colors duration-300 cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">landscape</span>
+</div>
+<h3 class="font-headline-md text-body-md font-bold mb-xs">Adventure</h3>
+<p class="font-body-md text-caption text-on-surface-variant">Off the beaten path</p>
+</div>
+<div class="group flex flex-col items-center text-center p-xl rounded-2xl hover:bg-surface-container-low transition-colors duration-300 cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">business_center</span>
+</div>
+<h3 class="font-headline-md text-body-md font-bold mb-xs">Corporate</h3>
+<p class="font-body-md text-caption text-on-surface-variant">Elite business travel</p>
+</div>
+<div class="group flex flex-col items-center text-center p-xl rounded-2xl hover:bg-surface-container-low transition-colors duration-300 cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">groups</span>
+</div>
+<h3 class="font-headline-md text-body-md font-bold mb-xs">Group Tours</h3>
+<p class="font-body-md text-caption text-on-surface-variant">Shared experiences</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Destinations -->
+<section class="py-xxl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex justify-between items-end mb-xl">
+<div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Global Portfolio</span>
+<h2 class="font-display-lg text-headline-lg text-primary mt-xs">Curated Destinations</h2>
+</div>
+<a class="font-label-md text-label-md text-primary flex items-center hover:translate-x-1 transition-transform" href="#">
+                    View All <span class="material-symbols-outlined ml-xs">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Maldives -->
+<div class="group relative bg-white rounded-[24px] overflow-hidden editorial-shadow hover:-translate-y-2 transition-transform duration-500">
+<div class="relative h-[480px]">
+<img class="w-full h-full object-cover" data-alt="A luxurious overwater villa in the Maldives at dusk. The villa features warm ambient lighting, a private pool, and steps leading directly into the turquoise ocean. The sky is a gradient of indigo and deep purple. This shot is taken with a wide-angle lens, capturing the expansive serenity and exclusive atmosphere of a high-end island resort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNF_Map_-FGY2vnSXPW4UQBOcZRqMEPO6HW444Loy1kjIHNbJ3qj_7Pk6qnu0orDWLawLa143n2FYgMfnuhSrCsJWesFxPlTWgNUximqW5-2myR2PgcMOLmppM8wu5k43juVN1K4ZhBXPw4yyrkEEnQgyfMZPk4iN-Cx_6PAeY-TBBBK03xnRfsR-zj02sCDAf6PC4k5I0MKZc3zVFjs5LKHsgpuxAmZUv1YGYHmO63FEn-bwKKz2WIAF8HF_hlYwJb3tu0LvtJ59">
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<span class="font-label-md text-caption font-bold">Maldives</span>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Azure Paradise</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Private island seclusion with 24/7 butler service.</p>
+<div class="flex justify-between items-center pt-md border-t border-outline-variant">
+<span class="font-label-md text-caption text-outline uppercase tracking-wider">Starts from</span>
+<span class="font-headline-md text-headline-md text-secondary">$12,500</span>
+</div>
+</div>
+</div>
+<!-- Bali -->
+<div class="group relative bg-white rounded-[24px] overflow-hidden editorial-shadow hover:-translate-y-2 transition-transform duration-500">
+<div class="relative h-[480px]">
+<img class="w-full h-full object-cover" data-alt="An editorial photography shot of a luxury jungle retreat in Ubud, Bali. A serene infinity pool hangs over a dense green tropical valley. Mist rises from the trees in the morning light. The architecture uses sustainable bamboo and local stone. The lighting is natural and atmospheric, emphasizing a connection between luxury and nature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpJ4Gl-6F6m3Bg-1iG3EWN8Knut4ioWVYIERtxWJEBzWMKSXEV42P4nWXa7CqtiFTkeOT2zwU8t_CKixxxjGnmjBwyuNRwCjxt9JEIn_hefSQ9Rr9_UaYvgFSz_SUz3OM5mNdF4Zo3pzpyyzcwS-1wSvckBFo-uUoUtuet3RNm8Qp3bAqx4FUD9HsIZNQL2aFA7G5Y52kykvO1OU9dsVwpj2U3dcMFUX5ZS0BnxkhzlBxJU2pujE-KRiKRi60Z3Un8_vn0tFJAALP8">
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<span class="font-label-md text-caption font-bold">Bali</span>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Mystical Ubud</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Immersive wellness retreats in the heart of the jungle.</p>
+<div class="flex justify-between items-center pt-md border-t border-outline-variant">
+<span class="font-label-md text-caption text-outline uppercase tracking-wider">Starts from</span>
+<span class="font-headline-md text-headline-md text-secondary">$8,900</span>
+</div>
+</div>
+</div>
+<!-- Europe -->
+<div class="group relative bg-white rounded-[24px] overflow-hidden editorial-shadow hover:-translate-y-2 transition-transform duration-500">
+<div class="relative h-[480px]">
+<img class="w-full h-full object-cover" data-alt="A glamorous vintage boat cruising through the canals of Venice, Italy. The shot captures the historic architecture of the Grand Canal reflected in the shimmering water during the blue hour. Elegant passengers are visible on the boat, dressed in luxury evening wear. The image has a rich, cinematic grain and deep colors, evoking timeless European sophistication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVKS2ZPo3clGH6EsRkGbbeJY3DIrVPoOoDxciKDA3PZwxbrilHpKMMQxd97HY7E6SC1_po0QOtliDhYLcX6RExatpYkPBW_J29oHrXz89dTiknnUV6WT5Bxcp8W79JmONsB8-ZagYBHUqRXW9KCId09aLgSrB0bEN0uR3Hx7ScdrCOuAfIaetGfTCx-UYjW-JTyWFczolq1H__lbELKa7QXdMt7b_ztiD5WM6RNEc5lCybBiw5_R5XGpG_kbOK_8baGBeTm7soHU-6">
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<span class="font-label-md text-caption font-bold">Venice</span>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Venetian Heritage</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Grand canals and centuries of aristocratic luxury.</p>
+<div class="flex justify-between items-center pt-md border-t border-outline-variant">
+<span class="font-label-md text-caption text-outline uppercase tracking-wider">Starts from</span>
+<span class="font-headline-md text-headline-md text-secondary">$15,200</span>
+</div>
+</div>
+</div>
+<!-- Thailand -->
+<div class="group relative bg-white rounded-[24px] overflow-hidden editorial-shadow hover:-translate-y-2 transition-transform duration-500">
+<div class="relative h-[480px]">
+<img alt="Cinematic luxury travel photography of Thailand, a beautiful beach resort with turquoise water and limestone cliffs in the background, golden hour lighting, high-end travel aesthetic." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU8oosUH-JFQCBgRokS8_JvZeNAb1tb9Q87Da5k2hq7eZxgFp4WgGxZprgHCyCE-muHUlqoRoB2DEQtMxJmC71a8e0QXeTeCOBngnSgl5RYYIrgH35Rqy75oGpJN9IiWN3JHiOFvC6_bs7vj6HZnOk6ZkJV074rM6BBkcUhp8hJZr8ISkoMp4ofKFjmh7eMUB1ev_kT9khjZSBc9JKoleuckF5NszdKj4xUGm8IxYU6w9fLUkgeT-sx8zs4MTg8zwKTzy4I8i_XIHb">
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<span class="font-label-md text-caption font-bold">Thailand</span>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Tropical Paradise</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Pristine beaches and limestone cliffs in the heart of the Andaman Sea.</p>
+<div class="flex justify-between items-center pt-md border-t border-outline-variant">
+<span class="font-label-md text-caption text-outline uppercase tracking-wider">Starts from</span>
+<span class="font-headline-md text-headline-md text-secondary">$9,500</span>
+</div>
+</div>
+</div>
+<!-- Russia -->
+<div class="group relative bg-white rounded-[24px] overflow-hidden editorial-shadow hover:-translate-y-2 transition-transform duration-500">
+<div class="relative h-[480px]">
+<img alt="Cinematic luxury travel photography of Russia, the St. Basil's Cathedral in Moscow during a clear winter evening with soft snow and elegant street lighting, majestic architectural detail." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD28oSv80R0BUw2Awwo8nAshfvEXwmbKRlguwOOnF0WlOOUO_3AtIXiBRrtYwzB9a1WnriwHu9VhtAqgBnUu_nDBewwnQJARaIyZbkGTYizn80MLvFrTACViDzDzRuh9-mu-SWSHeoNI7kKSikXWbMCBzuWPe0L9Qz4yhnjZEAlMygRUQgg4Lvnm19RiaorGIdQTpcq_-tTZ5h8eggpVzsuMSDDvl9BwByJhj_kkmoCXt6PD6g-OCmSR_yEfwr1h3BGE0ivtaXQdW4c">
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<span class="font-label-md text-caption font-bold">Russia</span>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Imperial Moscow</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Experience the historic grandeur and vibrant culture of the Russian capital.</p>
+<div class="flex justify-between items-center pt-md border-t border-outline-variant">
+<span class="font-label-md text-caption text-outline uppercase tracking-wider">Starts from</span>
+<span class="font-headline-md text-headline-md text-secondary">$7,800</span>
+</div>
+</div>
+</div>
+<!-- Switzerland -->
+<div class="group relative bg-white rounded-[24px] overflow-hidden editorial-shadow hover:-translate-y-2 transition-transform duration-500">
+<div class="relative h-[480px]">
+<img alt="Cinematic luxury travel photography of the Swiss Alps, a modern luxury chalet overlooking snow-capped mountains and a pine forest, cozy firelight, serene mountain atmosphere." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwXJoXrF5aQPJENrqig-80NZzUWclyHOEnuXRPos1oKbKQ8_LQJz9AYcEiPw15oS_-C30JijLTa079epuzO1vT2hDlxxoUD1W8JOsF0SSowCrXgqni-XZWGZ3L1ZjnsKZfkOx_SPWn2m-FfXLegD61b3XmL_bKhQlN5_kbevgSRthwEqGyBE2qluRO13X9LkwNiBUSCkwvXV5SRm1JeWcl6IvLJfhEfCrU0KpPVVc997tmRWPkZ3r8sH5EiEr00bZJlh4UPz0JTaTk">
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-md px-md py-xs rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<span class="font-label-md text-caption font-bold">Switzerland</span>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Alpine Serenity</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Luxury chalet living with breathtaking views of the snow-capped Swiss Alps.</p>
+<div class="flex justify-between items-center pt-md border-t border-outline-variant">
+<span class="font-label-md text-caption text-outline uppercase tracking-wider">Starts from</span>
+<span class="font-headline-md text-headline-md text-secondary">$11,200</span>
+</div>
+</div>
+</div></div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section class="py-xxl bg-white">
+<div class="max-w-container-max mx-auto px-gutter text-center mb-xl">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Our Excellence</span>
+<h2 class="font-display-lg text-headline-lg text-primary mt-xs">Unrivaled Standards</h2>
+</div>
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-3 gap-xl">
+<div class="flex flex-col items-center text-center">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-primary text-5xl">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-md">Vetted Luxury</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-lg">
+                    Every destination and property is personally inspected to ensure it meets our rigorous standards for comfort and exclusivity.
+                </p>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-primary text-5xl">support_agent</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-md">24/7 Concierge</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-lg">
+                    A dedicated lifestyle manager is available around the clock to handle every detail of your journey, from dinner reservations to private jets.
+                </p>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-primary text-5xl">auto_awesome</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-md">Tailored Itineraries</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-lg">
+                    No two travelers are alike. We design unique, personalized experiences that align perfectly with your preferences and passions.
+                </p>
+</div>
+</div>
+</section>
+<!-- Visa Assistance Section -->
+<section class="py-xxl bg-primary-container text-on-primary">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="bg-surface-container/10 backdrop-blur-sm rounded-[32px] p-xl md:p-xxl flex flex-col md:flex-row items-center gap-xl border border-white/10">
+<div class="flex-1 space-y-md">
+<span class="font-label-md text-label-md text-secondary-fixed uppercase tracking-widest">Seamless Mobility</span>
+<h2 class="font-display-lg text-display-lg text-white">Global Visa Assistance</h2>
+<p class="font-body-lg text-body-lg text-white/80">
+                        Leave the complexities of international travel to us. Our elite visa concierge manages every document, appointment, and detail for over 150 destinations worldwide.
+                    </p>
+<ul class="space-y-sm">
+<li class="flex items-center space-x-md font-body-md">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<span>Expedited Processing Options</span>
+</li>
+<li class="flex items-center space-x-md font-body-md">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<span>Corporate &amp; Diplomatic Specialist Support</span>
+</li>
+<li class="flex items-center space-x-md font-body-md">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<span>Door-to-Door Document Delivery</span>
+</li>
+</ul>
+<button class="mt-lg bg-secondary-container text-on-secondary-container px-xxl py-md rounded-xl font-headline-md hover:scale-105 transition-transform">
+                        Get Started
+                    </button>
+</div>
+<div class="flex-1 w-full aspect-square md:aspect-auto h-[400px] md:h-[500px] rounded-[24px] overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="A macro, editorial photo of a premium leather passport wallet and high-end travel documents sitting on a polished mahogany table in a first-class airport lounge. Beside it is a silver designer pen and a glass of champagne. The lighting is moody and expensive, focusing on textures like the grain of the leather and the shine of the glass, representing the high-end visa and concierge services of a luxury travel brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQlp2Uq2salRXJtCl5n4d_lsT628xpSNcEdOobYRoK31RO6YmDk4OSke4uqNxKxUW4GDUvWiujO4_k1PTg7OnFarLSiQR_RDMnV8IND1B2jDAGEkmlTHb4w5lY3GQIlkKl1FivzN6k86F6kcNDvmDJb-xH3F6SmIGR1qwd48uy6YaT0rtOPVnSEohTUhRGfnnPoJv8e-JunknGlf0-8Y9Ej9xs8-Kdt5MVKHjHSDV3MYSKn0G_1o8iFoFuurlSK9SOlbzJn20-c77P')"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-xxl bg-background">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-xl">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Our Clients</span>
+<h2 class="font-display-lg text-headline-lg text-primary mt-xs">Traveler Experiences</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="bg-white p-xl rounded-[24px] editorial-shadow flex flex-col justify-between">
+<div>
+<div class="flex text-secondary-container mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg text-body-lg italic text-on-surface mb-lg">
+                            "LUXE VOYAGE didn't just book a trip; they curated an experience that will stay with our family forever. The attention to detail in the Maldives was simply beyond words. Their concierge handled a last-minute flight change with such grace it felt like magic."
+                        </p>
+</div>
+<div class="flex items-center space-x-md">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="A portrait of a sophisticated middle-aged man in a linen shirt, smiling warmly. He is standing in front of a coastal background. The photo is styled like a feature in a high-end travel magazine, with shallow depth of field and soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrHs8NRXvWBgSZmdElJoKu89zX4fLtOfZ5AzRz5fvUek9f71la_mt_teVDvtuX9eS2AQICzdOT731pTlXITcmM-weOmGl47pgpa84G9OHqTWPtf9a--WlIvng3Pgvdg5kWUUx8qnFlDSRaiQBbvd_pQz2cTP7UeG1kXXdRiSCOSTwAe4KOppbYVXpKUrQcAeJ-7GnUbwtUrBP869P8HS7BaA27AmRaIqnAGa3G3NEsTo77TBDjXbNi3Njc_bB0kaLVvIy0hCAKIcjD">
+<div>
+<p class="font-headline-md text-body-md font-bold">Julian Sterling</p>
+<p class="font-caption text-caption text-on-surface-variant">Venture Capitalist</p>
+</div>
+</div>
+</div>
+<div class="bg-white p-xl rounded-[24px] editorial-shadow flex flex-col justify-between">
+<div>
+<div class="flex text-secondary-container mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg text-body-lg italic text-on-surface mb-lg">
+                            "The honeymoon they organized in Bali was a masterpiece. From the private flower-bath arrivals to the secluded dinner under the stars, every moment felt deeply personal and flawlessly executed. We wouldn't trust our travels to anyone else."
+                        </p>
+</div>
+<div class="flex items-center space-x-md">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="A portrait of an elegant woman with a relaxed and happy expression, wearing designer sunglasses and a silk headscarf. She is photographed in a luxury car interior. The style is editorial, high-key, and chic, using natural sunlight and a soft-focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlN52jw-KNltlY4StIGczMxw0S6Q2vwQ2yrVrjGntl1xkfoE5QgB6bWChkiv5Bcpbmht67WeFNRdVNA8fLcydkJ9nGFKIiqVOIBC_zlayb5Q6kcBYMF1LXxxdbHKWKGBLa1yhvSke7Xd6WCuw5x-knEQ4iOyH8UortPg9nxqFajAQHd3XcW6n7hg3DTGQ8T90W0xP1xUm0Ha8AvrSrcq5KKlc7NfW5AmrsrrDxkcEUzHp2ydx47BDItZBWoGhRNst4AWEWRwtAdrje">
+<div>
+<p class="font-headline-md text-body-md font-bold">Eleanor Vance</p>
+<p class="font-caption text-caption text-on-surface-variant">Interior Designer</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-high pt-xxl pb-xl border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="space-y-md">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="#">LUXE VOYAGE</a>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Defining the future of luxury travel through precision, passion, and unparalleled curation.
+                </p>
+<div class="flex space-x-md">
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-label-md text-label-md text-on-surface font-bold mb-md">Company</h4>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">About Us</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">Sustainability</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">Careers</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">Blog</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-label-md text-label-md text-on-surface font-bold mb-md">Support</h4>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">Contact</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">FAQ</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">Visa Guide</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform" href="#">Terms of Service</a>
+</div>
+<div class="space-y-md">
+<h4 class="font-label-md text-label-md text-on-surface font-bold mb-md">Newsletter</h4>
+<p class="font-body-md text-on-surface-variant">Subscribe for exclusive travel insights and early access to new collections.</p>
+<div class="flex flex-col space-y-sm">
+<input class="bg-white border-outline-variant rounded-xl px-md py-sm focus:ring-primary focus:border-primary" placeholder="Email address" type="email">
+<button class="bg-primary text-white py-sm rounded-xl font-label-md hover:opacity-90 transition-opacity">Subscribe</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter mt-xxl pt-lg border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-label-md text-body-md text-on-surface-variant">© 2024 Luxe Voyage International. All rights reserved.</p>
+<div class="flex space-x-lg text-on-surface-variant">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms</a>
+<a class="hover:text-primary" href="#">Cookies</a>
+</div>
+</div>
+</footer>
+<!-- Simple Interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Header scroll effect
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    nav.classList.add('py-2');
+                    nav.classList.remove('h-20');
+                    nav.classList.add('h-16');
+                } else {
+                    nav.classList.remove('py-2');
+                    nav.classList.add('h-20');
+                    nav.classList.remove('h-16');
+                }
+            });
+
+            // Smooth reveal animation for elements
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section > div').forEach(el => {
+                el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+                observer.observe(el);
+            });
+        });
+    </script>
+</body></html>

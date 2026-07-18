@@ -1,0 +1,60 @@
+import { unsplashImage } from '../lib/unsplash'
+
+// Home hero grid (6) + Destinations page grid to be added (Vietnam,
+// Singapore, Japan, China) when that page is built.
+export const destinations = [
+  {
+    slug: 'maldives',
+    location: 'Maldives',
+    title: 'Azure Paradise',
+    description: 'Private island seclusion with 24/7 butler service.',
+    price: '$12,500',
+    image: unsplashImage('1637576308588-6647bf80944d', { w: 900 }),
+    imageAlt: 'A wooden dock leading to an overwater villa in the Maldives at sunset.',
+  },
+  {
+    slug: 'bali',
+    location: 'Bali',
+    title: 'Mystical Ubud',
+    description: 'Immersive wellness retreats in the heart of the jungle.',
+    price: '$8,900',
+    image: unsplashImage('1668854085665-0eed599e8078', { w: 900 }),
+    imageAlt: 'A tropical infinity pool in the jungle of Ubud, Bali.',
+  },
+  {
+    slug: 'venice',
+    location: 'Venice',
+    title: 'Venetian Heritage',
+    description: 'Grand canals and centuries of aristocratic luxury.',
+    price: '$15,200',
+    image: unsplashImage('1767199289290-010e7caf8240', { w: 900 }),
+    imageAlt: 'A canal lined with gondolas between historic buildings in Venice.',
+  },
+  {
+    slug: 'thailand',
+    location: 'Thailand',
+    title: 'Tropical Paradise',
+    description: 'Pristine beaches and limestone cliffs in the heart of the Andaman Sea.',
+    price: '$9,500',
+    image: unsplashImage('1744894203354-76df001b04e9', { w: 900 }),
+    imageAlt: 'A beach surrounded by towering limestone cliffs and turquoise water in Thailand.',
+  },
+  {
+    slug: 'russia',
+    location: 'Russia',
+    title: 'Imperial Moscow',
+    description: 'Experience the historic grandeur and vibrant culture of the Russian capital.',
+    price: '$7,800',
+    image: unsplashImage('1755109809268-07e807f1a3ce', { w: 900 }),
+    imageAlt: "Saint Basil's Cathedral in Moscow covered in snow during winter.",
+  },
+  {
+    slug: 'switzerland',
+    location: 'Switzerland',
+    title: 'Alpine Serenity',
+    description: 'Luxury chalet living with breathtaking views of the snow-capped Swiss Alps.',
+    price: '$11,200',
+    image: unsplashImage('1614703501456-c3b535e3fad0', { w: 900 }),
+    imageAlt: 'A chalet on snow-covered ground near green pine trees and mountains.',
+  },
+]

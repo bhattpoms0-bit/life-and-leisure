@@ -1,0 +1,454 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Luxe Voyage | Flight Search Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e1e2e4",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-container": "#393c3e",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#21477c",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "surface-tint": "#3c5f96",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "outline": "#737780",
+                        "secondary": "#994700",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c3c6d1",
+                        "tertiary": "#242628",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container-high": "#eae7e7",
+                        "primary-container": "#123b70",
+                        "error-container": "#ffdad6",
+                        "background": "#fcf9f8",
+                        "on-tertiary-container": "#a4a6a8",
+                        "on-primary-fixed": "#001b3e",
+                        "on-background": "#1b1c1c",
+                        "surface-variant": "#e5e2e1",
+                        "on-primary-container": "#85a7e2",
+                        "inverse-primary": "#a9c7ff",
+                        "on-secondary-container": "#632c00",
+                        "on-secondary-fixed-variant": "#743400",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "surface-container": "#f0eded",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "surface": "#fcf9f8",
+                        "secondary-container": "#ff8429",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-secondary-fixed": "#321300",
+                        "primary": "#002550",
+                        "secondary-fixed": "#ffdbc8",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface-variant": "#43474f",
+                        "on-tertiary-fixed": "#191c1e",
+                        "inverse-surface": "#303030",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "8px",
+                        "lg": "12px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "80px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "xl": "40px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcf9f8; }
+        .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.08); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<div class="flex justify-between items-center px-gutter py-md max-w-container-max mx-auto h-20">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">LUXE VOYAGE</div>
+<nav class="hidden md:flex items-center space-x-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Destinations</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-secondary" href="#">Packages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Visa</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Blog</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container rounded-full transition-colors">search</button>
+<button class="bg-primary text-white font-label-md text-label-md px-lg py-sm rounded-full hover:opacity-90 transition-all active:scale-95">Book Now</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-20 min-h-screen">
+<!-- Search Hero Context Area -->
+<section class="bg-primary-container text-white py-xl">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex flex-col md:flex-row items-center justify-between gap-lg bg-white/10 p-lg rounded-xl backdrop-blur-md">
+<div class="flex items-center gap-lg w-full md:w-auto">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-primary-container uppercase tracking-widest">Origin</span>
+<span class="font-headline-md text-headline-md font-bold">LHR</span>
+</div>
+<div class="flex flex-col items-center flex-1 md:flex-initial">
+<span class="material-symbols-outlined text-secondary-container">flight_takeoff</span>
+<div class="h-[1px] w-12 bg-white/20 my-1"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-primary-container uppercase tracking-widest">Destination</span>
+<span class="font-headline-md text-headline-md font-bold">MLE</span>
+</div>
+</div>
+<div class="h-12 w-[1px] bg-white/20 hidden md:block"></div>
+<div class="flex items-center gap-xl w-full md:w-auto overflow-x-auto no-scrollbar">
+<div class="flex flex-col whitespace-nowrap">
+<span class="font-caption text-caption text-on-primary-container uppercase tracking-widest">Date</span>
+<span class="font-body-md text-body-md font-semibold">12 Oct — 24 Oct</span>
+</div>
+<div class="flex flex-col whitespace-nowrap">
+<span class="font-caption text-caption text-on-primary-container uppercase tracking-widest">Guests</span>
+<span class="font-body-md text-body-md font-semibold">02 Adults, First Class</span>
+</div>
+</div>
+<button class="w-full md:w-auto bg-secondary-container text-on-secondary-container font-label-md text-label-md px-xl py-md rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+                        Modify
+                    </button>
+</div>
+</div>
+</section>
+<!-- Results Grid Layout -->
+<section class="max-w-container-max mx-auto px-gutter py-xxl grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Filters Sidebar -->
+<aside class="lg:col-span-3 space-y-xl">
+<div class="flex items-center justify-between pb-md border-b border-outline-variant">
+<h2 class="font-headline-md text-headline-md text-primary">Filters</h2>
+<button class="text-secondary font-label-md text-label-md hover:underline">Reset</button>
+</div>
+<!-- Price Range -->
+<div class="space-y-md">
+<span class="font-label-md text-label-md text-primary uppercase">Price Range</span>
+<div class="relative h-2 bg-surface-container-high rounded-full">
+<div class="absolute h-full w-2/3 bg-primary rounded-full left-0"></div>
+<div class="absolute -top-1.5 left-0 w-5 h-5 bg-white border-2 border-primary rounded-full shadow-sm cursor-pointer"></div>
+<div class="absolute -top-1.5 left-2/3 w-5 h-5 bg-white border-2 border-primary rounded-full shadow-sm cursor-pointer"></div>
+</div>
+<div class="flex justify-between font-caption text-caption text-on-surface-variant">
+<span>$1,200</span>
+<span>$8,500</span>
+</div>
+</div>
+<!-- Stops -->
+<div class="space-y-md">
+<span class="font-label-md text-label-md text-primary uppercase">Stops</span>
+<div class="space-y-sm">
+<label class="flex items-center gap-md cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Non-stop</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">1 Stop</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">2+ Stops</span>
+</label>
+</div>
+</div>
+<!-- Airlines -->
+<div class="space-y-md">
+<span class="font-label-md text-label-md text-primary uppercase">Airlines</span>
+<div class="space-y-sm">
+<label class="flex items-center gap-md cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Emirates</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Qatar Airways</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Singapore Airlines</span>
+</label>
+</div>
+</div>
+<!-- Promo Banner -->
+<div class="relative rounded-xl overflow-hidden aspect-[3/4] group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A luxurious aerial view of an overwater bungalow resort in the Maldives with crystal clear turquoise water, soft white sand, and a vibrant sunset casting warm golden light over the ocean, high-end travel magazine photography style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOG9NeYg865LNWU9D-KZZBA9NW9egpo_7ZDQ5R5i7cTRDWfZv09dP1cL2XcooZ-JtNG0bhCqHVpsSa_dhLrX23Y1VV9ElaO9jdYrm8lyjANgWyzpIFm3Yl_3aPCi1NTYM-mvRJyvsP5UMM_ORRKxMNSEswvQis-BZPHizG4Raw3Zdl_fBCH36LP0NbO-qxxK3onaFco--Q1E6z61Xlofoh2JCU6KkuFtJQjB0n8heEZGSvz2BIynV0UxEX-Tj1EJAVReQ533lA9qFK')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-lg left-lg right-lg text-white">
+<p class="font-label-md text-label-md uppercase tracking-widest text-secondary-container mb-xs">Member Exclusive</p>
+<h3 class="font-headline-md text-headline-md font-bold mb-md">Unlock 15% off Maldives Resorts</h3>
+<button class="bg-white text-primary font-label-md text-label-md px-lg py-sm rounded-full w-full">Join Luxe Circle</button>
+</div>
+</div>
+</aside>
+<!-- Flight Cards List -->
+<div class="lg:col-span-9 space-y-lg">
+<div class="flex items-center justify-between mb-lg">
+<p class="font-body-md text-body-md text-on-surface-variant"><span class="font-bold text-primary">42</span> flights found for your journey</p>
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Sort by:</span>
+<select class="bg-transparent border-none font-label-md text-label-md text-primary focus:ring-0 cursor-pointer">
+<option>Best Value</option>
+<option>Cheapest</option>
+<option>Fastest</option>
+</select>
+</div>
+</div>
+<!-- Flight Card 1 -->
+<article class="bg-white rounded-xl border border-outline-variant/30 card-lift overflow-hidden">
+<div class="p-lg md:p-xl flex flex-col md:flex-row gap-xl">
+<!-- Airline & Times -->
+<div class="flex-1 space-y-xl">
+<div class="flex items-center gap-lg">
+<div class="w-16 h-16 bg-surface-container rounded-lg flex items-center justify-center p-md">
+<img class="w-full h-full object-contain" data-alt="A stylized minimalist corporate logo for an elite airline, featuring clean geometric shapes and a sophisticated deep gold and navy color scheme, presented on a clean studio white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIDw5B2R7TWmtwkl0eOrBja010OlXyc7DjBQUciCYttLVpboWw2MDWlcG51h-M0fi8Gmb6fpZdgTHaxMAIK86vnuXdfhNkmtolpjAdr4U7iO4blXgULFOhXZgxSrmf3W1NjfimCZ-WfTfEjqON3UKBW9XpA6ym8b-5qXRjLorkFym-LEYfrbPIKmmakhjc2aeH7h7G9O9QGb_v6yAwGoxFELqBZ4Wa5W4j_lxDWHoJPzmGB9SUTkRtL0yO9dneFl7PGULQaQ9kcIGS">
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-primary">Emirates</p>
+<p class="font-caption text-caption text-on-surface-variant">EK 002 • Boeing 777-300ER</p>
+</div>
+<div class="ml-auto md:hidden">
+<span class="bg-primary-container/10 text-primary-container font-label-md text-label-md px-md py-xs rounded-full">First Class</span>
+</div>
+</div>
+<div class="grid grid-cols-3 items-center">
+<div class="text-left">
+<p class="font-headline-lg text-headline-lg text-primary">14:20</p>
+<p class="font-body-md text-body-md text-on-surface-variant font-semibold">LHR</p>
+<p class="font-caption text-caption text-on-surface-variant">London Heathrow</p>
+</div>
+<div class="flex flex-col items-center px-lg">
+<p class="font-caption text-caption text-on-surface-variant mb-xs">13h 45m</p>
+<div class="w-full h-[1px] bg-outline-variant relative">
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 border-2 border-outline-variant bg-white rounded-full"></div>
+</div>
+<p class="font-caption text-caption text-secondary mt-xs font-semibold">1 stop in DXB</p>
+</div>
+<div class="text-right">
+<p class="font-headline-lg text-headline-lg text-primary">08:05<sup class="text-[14px] font-normal">+1</sup></p>
+<p class="font-body-md text-body-md text-on-surface-variant font-semibold">MLE</p>
+<p class="font-caption text-caption text-on-surface-variant">Velana Intl</p>
+</div>
+</div>
+</div>
+<!-- Price & Action -->
+<div class="md:w-64 md:border-l md:border-outline-variant/30 md:pl-xl flex flex-col justify-center items-center md:items-end gap-md">
+<div class="hidden md:block">
+<span class="bg-primary-container/10 text-primary-container font-label-md text-label-md px-md py-xs rounded-full">First Class Available</span>
+</div>
+<div class="text-center md:text-right">
+<p class="font-caption text-caption text-on-surface-variant line-through">$6,200</p>
+<p class="font-display-lg-mobile text-display-lg-mobile text-primary font-bold tracking-tight">$4,850</p>
+<p class="font-caption text-caption text-on-surface-variant">per traveler</p>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md py-md rounded-lg hover:opacity-90 transition-all shadow-md active:scale-95">Select Flight</button>
+</div>
+</div>
+<!-- Amenities Footer -->
+<div class="bg-surface-container-low px-xl py-sm flex items-center gap-xl overflow-x-auto no-scrollbar">
+<div class="flex items-center gap-xs text-on-surface-variant whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">bed</span>
+<span class="font-caption text-caption">Fully Flat Bed</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+<span class="font-caption text-caption">Fine Dining</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span class="font-caption text-caption">Free Wi-Fi</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">luggage</span>
+<span class="font-caption text-caption">50kg Check-in</span>
+</div>
+</div>
+</article>
+<!-- Flight Card 2 -->
+<article class="bg-white rounded-xl border border-outline-variant/30 card-lift overflow-hidden">
+<div class="p-lg md:p-xl flex flex-col md:flex-row gap-xl">
+<div class="flex-1 space-y-xl">
+<div class="flex items-center gap-lg">
+<div class="w-16 h-16 bg-surface-container rounded-lg flex items-center justify-center p-md">
+<img class="w-full h-full object-contain" data-alt="A premium airline brand logo featuring elegant crimson and silver typography and a stylized oryx symbol, set against a pristine, soft-focus airport lounge environment for a high-end luxury feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi8tCTb9dRMt3ulwRfsG8GzeU2XIooqJoagIY01U70019DFfOkalosjHIQj-feYCSGfxw0plyrZgUUw_qqyxAzgWXug0qmVkcpisFPnGs9jEIGHKveA06-tAQTZb_kgNIfXLFbMPwGBMhy_v3HtAOE8o3ExOw3kZC700t2AxniqvuJG_Boxz3bgFzJ_NpjMcFaGCEWWRdT9xFEgnwSze3qliXatD0-s7C0QoNhGrziPj2-NDANLoSAeLw16ISBye-YbwBsTuMTvI7n">
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-primary">Qatar Airways</p>
+<p class="font-caption text-caption text-on-surface-variant">QR 008 • Airbus A350-1000</p>
+</div>
+</div>
+<div class="grid grid-cols-3 items-center">
+<div class="text-left">
+<p class="font-headline-lg text-headline-lg text-primary">21:55</p>
+<p class="font-body-md text-body-md text-on-surface-variant font-semibold">LHR</p>
+</div>
+<div class="flex flex-col items-center px-lg">
+<p class="font-caption text-caption text-on-surface-variant mb-xs">12h 10m</p>
+<div class="w-full h-[1px] bg-outline-variant relative">
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 border-2 border-outline-variant bg-white rounded-full"></div>
+</div>
+<p class="font-caption text-caption text-secondary mt-xs font-semibold">1 stop in DOH</p>
+</div>
+<div class="text-right">
+<p class="font-headline-lg text-headline-lg text-primary">14:05<sup class="text-[14px] font-normal">+1</sup></p>
+<p class="font-body-md text-body-md text-on-surface-variant font-semibold">MLE</p>
+</div>
+</div>
+</div>
+<div class="md:w-64 md:border-l md:border-outline-variant/30 md:pl-xl flex flex-col justify-center items-center md:items-end gap-md">
+<div class="hidden md:block">
+<span class="bg-secondary-container/10 text-secondary font-label-md text-label-md px-md py-xs rounded-full">Business Class</span>
+</div>
+<div class="text-center md:text-right">
+<p class="font-display-lg-mobile text-display-lg-mobile text-primary font-bold tracking-tight">$3,120</p>
+<p class="font-caption text-caption text-on-surface-variant">per traveler</p>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md py-md rounded-lg hover:opacity-90 transition-all shadow-md active:scale-95">Select Flight</button>
+</div>
+</div>
+</article>
+<!-- Load More Button -->
+<div class="flex justify-center pt-xl">
+<button class="flex items-center gap-sm font-label-md text-label-md text-primary border-2 border-primary/20 px-xl py-md rounded-full hover:bg-primary/5 transition-colors">
+                        View More Flights
+                        <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Newsletter / Concierge Section -->
+<section class="bg-surface-container py-xxl">
+<div class="max-w-container-max mx-auto px-gutter text-center space-y-lg">
+<span class="material-symbols-outlined text-[48px] text-primary">support_agent</span>
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-primary font-bold">Need a bespoke itinerary?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Our Luxe Concierge team is available 24/7 to arrange private transfers, exclusive lounge access, and premium resort bookings tailored to your preferences.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md pt-md">
+<button class="bg-primary text-white font-label-md text-label-md px-xl py-md rounded-lg shadow-lg hover:opacity-95 transition-all">Chat with Concierge</button>
+<button class="border-2 border-primary text-primary font-label-md text-label-md px-xl py-md rounded-lg hover:bg-primary hover:text-white transition-all">View All Services</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full bg-surface-container-low border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-gutter py-xxl max-w-container-max mx-auto">
+<div class="space-y-lg">
+<div class="font-headline-md text-headline-md font-bold text-primary">LUXE VOYAGE</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Defining the future of luxury travel through precision, serenity, and unparalleled service.</p>
+<div class="flex gap-md">
+<a class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</a>
+</div>
+</div>
+<div class="space-y-md">
+<h4 class="font-label-md text-label-md text-primary uppercase">Company</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">About Us</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Sustainability</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Press</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<h4 class="font-label-md text-label-md text-primary uppercase">Support</h4>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Contact</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Refund Policy</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<h4 class="font-label-md text-label-md text-primary uppercase">Newsletter</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Join our curated list for exclusive destinations.</p>
+<div class="flex gap-xs">
+<input class="bg-white border border-outline-variant rounded-lg px-md py-sm w-full focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Email Address" type="email">
+<button class="bg-primary text-white p-sm rounded-lg hover:opacity-90">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-lg border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 LUXE VOYAGE. All rights reserved.</p>
+<div class="flex items-center gap-lg">
+<span class="material-symbols-outlined text-on-surface-variant">payments</span>
+<span class="material-symbols-outlined text-on-surface-variant">shield</span>
+<span class="material-symbols-outlined text-on-surface-variant">verified</span>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for flight cards
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(18, 59, 112, 0.2)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(195, 198, 209, 0.3)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,26 @@
+import { Route, Routes } from 'react-router-dom'
+import TopNav from './components/layout/TopNav'
+import Footer from './components/layout/Footer'
+import Home from './pages/Home'
+import Destinations from './pages/Destinations'
+import Packages from './pages/Packages'
+import PackageDetail from './pages/PackageDetail'
+import Visa from './pages/Visa'
+
+export default function App() {
+  return (
+    <div className="bg-background text-on-surface font-body-md overflow-x-hidden">
+      <TopNav />
+      <main className="pt-20">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/destinations" element={<Destinations />} />
+          <Route path="/packages" element={<Packages />} />
+          <Route path="/packages/:slug" element={<PackageDetail />} />
+          <Route path="/visa" element={<Visa />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  )
+}

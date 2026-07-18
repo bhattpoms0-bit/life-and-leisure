@@ -1,0 +1,513 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>7 Days of Balinese Bliss | LUXE VOYAGE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0, 37, 80, 0.4) 0%, rgba(0, 37, 80, 0) 50%, rgba(0, 37, 80, 0.6) 100%);
+        }
+        .itinerary-line::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: 0;
+            width: 1px;
+            background-color: #c3c6d1;
+        }
+        .itinerary-item:last-child .itinerary-line::before {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#737780",
+                    "on-surface-variant": "#43474f",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-container": "#a4a6a8",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbc8",
+                    "on-primary-container": "#85a7e2",
+                    "surface-tint": "#3c5f96",
+                    "outline-variant": "#c3c6d1",
+                    "surface-container-low": "#f6f3f2",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#743400",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#632c00",
+                    "on-primary-fixed-variant": "#21477c",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary-fixed": "#321300",
+                    "on-surface": "#1b1c1c",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "tertiary-fixed": "#e1e2e4",
+                    "primary-container": "#123b70",
+                    "surface": "#fcf9f8",
+                    "tertiary-container": "#393c3e",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#242628",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-fixed-dim": "#a9c7ff",
+                    "inverse-primary": "#a9c7ff",
+                    "secondary": "#994700",
+                    "surface-variant": "#e5e2e1",
+                    "surface-dim": "#dcd9d9",
+                    "inverse-surface": "#303030",
+                    "inverse-on-surface": "#f3f0ef",
+                    "background": "#fcf9f8",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001b3e",
+                    "on-background": "#1b1c1c",
+                    "secondary-container": "#ff8429",
+                    "primary": "#002550",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "surface-container-high": "#eae7e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "xxl": "24px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "md": "16px",
+                    "xl": "40px",
+                    "gutter": "24px",
+                    "xxl": "80px",
+                    "container-max": "1280px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "unit": "8px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] h-20 flex items-center">
+<div class="max-w-container-max mx-auto px-gutter w-full flex justify-between items-center">
+<div class="font-display-lg text-headline-md tracking-tighter text-primary dark:text-primary-fixed">LUXE VOYAGE</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Destinations</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-secondary font-bold pb-1" href="#">Packages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Visa</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Blog</a>
+</div>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:opacity-80 transition-all">search</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:opacity-80 transition-all">account_circle</span>
+<button class="hidden md:block bg-primary text-on-primary px-8 py-3 rounded-full font-label-md hover:opacity-90 transition-all active:scale-95">Book Now</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Banner -->
+<section class="relative h-[716px] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, wide-angle shot of a lush Balinese infinity pool overlooking deep green tropical jungle terraces at sunrise. The lighting is ethereal and soft, with golden rays filtering through the palm leaves. The overall aesthetic is one of quiet luxury, featuring premium stone architecture and a serene, aspirational atmosphere that feels both exclusive and timeless." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBH9jKZn2a29U3ExOdrVfi7letOzZJ-RLUppesDGJNNyuZ9EX5uz9Xa-2J6rhRCmYh5tJigul9gNGK8jKC6N2bMkNXzpy2Pcy94t3DaihQ5gdZIRXzTx-6T3HNQfDsrA8QYwHO3pshCChrNDonNA2Kskvlp_JYbRFoKYsFAAd6G_R_pqVUN73QvDdqZYDIdXsM8zGaWws5YS-cQLw6r2IEyCSplJdRaNNO0Kg7PBgrnW56gLd5JyqpCy-QrMD-VnTDcWpOqnGPyFqCK')"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="absolute inset-0 flex flex-col justify-end pb-xl px-gutter">
+<div class="max-w-container-max mx-auto w-full">
+<div class="flex items-center space-x-2 text-primary-fixed mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Bali, Indonesia</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white max-w-2xl">7 Days of Balinese Bliss</h1>
+<div class="flex items-center mt-6 space-x-6 text-white/90">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-body-md text-body-md">7 Days / 6 Nights</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md text-body-md">4.9 (120 Reviews)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<section class="max-w-container-max mx-auto px-gutter py-xxl">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Left Column (2/3) -->
+<div class="lg:col-span-2 space-y-xl">
+<!-- Highlights Section -->
+<div class="space-y-md">
+<h2 class="font-headline-lg text-headline-lg text-primary">Experience Perfection</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                            Embark on a curated journey through the heart of Bali. From the spiritual echoes of Ubud's ancient temples to the pristine azure waters of Uluwatu, this package offers a seamless blend of cultural immersion and modern luxury.
+                        </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md pt-md">
+<div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">spa</span>
+<span class="font-label-md text-caption text-center">Luxury Wellness</span>
+</div>
+<div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">restaurant</span>
+<span class="font-label-md text-caption text-center">Fine Dining</span>
+</div>
+<div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">temple_buddhist</span>
+<span class="font-label-md text-caption text-center">Cultural Tours</span>
+</div>
+<div class="flex flex-col items-center p-md bg-surface-container-low rounded-xl border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">directions_car</span>
+<span class="font-label-md text-caption text-center">Private Chauffeur</span>
+</div>
+</div>
+</div>
+<!-- Gallery Grid (Bento Style) -->
+<div class="grid grid-cols-4 grid-rows-2 gap-md h-[500px]">
+<div class="col-span-2 row-span-2 rounded-xxl overflow-hidden shadow-sm group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A breathtaking aerial view of a private luxury villa in Ubud, Bali, surrounded by vibrant green rice terraces. The architecture features traditional Balinese thatched roofs mixed with modern glass walls. The lighting is warm afternoon sun, creating high contrast and rich textures in the foliage and stonework." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAFfD6dPgSqTsfTNU8XCNrOTEz1sa-nb_g6uI7ZC7WS2_-md5TJDu4NSySwLz4cRj0PEt6L3APXNPAbzl1OmTG5XyP-31McOVGPPQeZbzVSZOiqVonM75XeWKNymD763HllnwUHsWqaHtTHvo6b_g6qz6ncdq3-19KaP2xdgplTbJRlZjKLHOC5YUNR67u6wOEC9qiQP-MuYs8a39N9FRf1fjG22FJr3Cw2s_-yDoI7wKABgdEmCsH1Ixd_nIKxUhO8KqdRxpSrETS">
+</div>
+<div class="col-span-2 row-span-1 rounded-xxl overflow-hidden shadow-sm group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Close-up of an exquisite fine-dining table set for two on a Balinese beach at dusk. The scene features glowing lanterns, delicate white orchids, and a backdrop of the gentle Indian Ocean waves. The mood is romantic and sophisticated with a color palette of deep blues and warm oranges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1OWNIyuC9rLFRkpNE7gbjQWQ6cUdLFel_meVGRa0HVvkYBT4LgmWrNUIZnyIjLX4EgZfa1aYoOQKyr1v7Bm0LQcd8hzSfgOpfukyAitrmshnuUZJwhYxIXG0v03BDkt60l3cCX2_Gyag4Uky1zcEtllKHwVHg4CZVMvNz9vqRGxPwoiWIfcQlcx41nz-1bL8f_R8gJt68zzVN5nLhJ5iT8hDo1r_vBvLIFxlr68POcptJNAx3G10u7lnOozqs1jQCbJCfLyeSRh9i">
+</div>
+<div class="col-span-1 row-span-1 rounded-xxl overflow-hidden shadow-sm group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A minimalist interior shot of a luxury spa room in Bali. Large open windows frame the tropical jungle outside. The room features a stone soaking tub filled with frangipani flowers and smooth volcanic rocks. Soft morning light creates a clean, airy, and high-end editorial feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh0VVc_jf58hqFLCJG0Lk_w9t7QHX3JZ4xW1tq9I2ehV_MpAduo_BKL8YCoNBIkghR8NIzLdy8-N3L1FzDNkYqqU7QMNmYiB7RSKyQpqztaWGjblbatdsr0371udeWg-EJ-xux_A0buzFTgT_W3aE38ewDzSufCILYfUXwjdQGx2WwtjocN0VQ5CMu-7d6SNeNmKK2aViFYWnkupK7q3hSWOKodDcofSZRYJe2JDahhyvrvt9RgwiSk4RN5-sIu5t96ykJSArG5DXf">
+</div>
+<div class="col-span-1 row-span-1 rounded-xxl overflow-hidden shadow-sm group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Intricate stone carvings of an ancient Balinese temple gateway, framed by exotic palm leaves. The lighting is moody and dramatic, highlighting the masterful craftsmanship of the heritage site. The aesthetic is curated, focusing on cultural depth and historical luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgRrpFPbp4UQ1QH9_sG339P2bSU2h7ohAN1jZOB9z7TO2AlYC8ER7P8DiRCmKjZnbN4DbjgxeAqwxEaEGynW7t0c15dKymBJRj4c_vAkSczbeoi3yHEJVhCpzu1_RfLblU_x800DoawWovEZawV5vFzWnT-bwkmbA26xtIn1ZZG-Nd0RCZCTHRQXK7PliG6-WMFb3Y3EL28DiySTu9-wsWYdObOy51JtUww6WeRXBXf6wjMvF3K9JD_VCBolmeEJWiRKgMfN-Xiy7O">
+</div>
+</div>
+<!-- Itinerary Timeline -->
+<div class="space-y-lg">
+<h3 class="font-headline-md text-headline-md text-primary">Your Journey Itinerary</h3>
+<div class="space-y-0">
+<!-- Day 1 -->
+<div class="itinerary-item relative pb-lg">
+<div class="itinerary-line"></div>
+<div class="flex items-start">
+<div class="relative z-10 bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center mr-4 mt-1">
+<span class="text-[10px] font-bold">1</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-md rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-headline-md text-body-lg font-bold">Arrival in Paradise</h4>
+<span class="material-symbols-outlined text-outline-variant">flight_land</span>
+</div>
+<p class="text-on-surface-variant font-body-md">VIP airport transfer to your Ubud jungle retreat. Evening welcome dinner at our signature tree-top restaurant.</p>
+</div>
+</div>
+</div>
+<!-- Day 2 -->
+<div class="itinerary-item relative pb-lg">
+<div class="itinerary-line"></div>
+<div class="flex items-start">
+<div class="relative z-10 bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center mr-4 mt-1">
+<span class="text-[10px] font-bold">2</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-md rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-headline-md text-body-lg font-bold">Spiritual Ubud Tour</h4>
+<span class="material-symbols-outlined text-outline-variant">temple_hindu</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Private sunrise visit to Tirta Empul Holy Water Temple, followed by a curated tour of the Tegallalang Rice Terraces.</p>
+</div>
+</div>
+</div>
+<!-- Day 3-6 (Simplified for layout) -->
+<div class="itinerary-item relative pb-lg">
+<div class="itinerary-line"></div>
+<div class="flex items-start">
+<div class="relative z-10 bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center mr-4 mt-1">
+<span class="text-[10px] font-bold">3</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-md rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-headline-md text-body-lg font-bold">Coastal Transition</h4>
+<span class="material-symbols-outlined text-outline-variant">directions_car</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Drive south to the limestone cliffs of Uluwatu. Check-in to your ocean-front villa with a private infinity pool.</p>
+</div>
+</div>
+</div>
+<!-- Day 7 -->
+<div class="itinerary-item relative">
+<div class="itinerary-line"></div>
+<div class="flex items-start">
+<div class="relative z-10 bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center mr-4 mt-1">
+<span class="text-[10px] font-bold">7</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-md rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-headline-md text-body-lg font-bold">Final Serenity</h4>
+<span class="material-symbols-outlined text-outline-variant">beach_access</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Leisurely morning by the ocean, followed by a final spa treatment and VIP transfer back to Denpasar International Airport.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- What's Included -->
+<div class="p-lg bg-primary-container text-on-primary-container rounded-xxl">
+<h3 class="font-headline-md text-headline-md mb-md">What's Included</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-body-md">6 Nights in 5-Star Luxury Accommodations</span>
+</div>
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-body-md">All Daily Gourmet Meals and Beverages</span>
+</div>
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-body-md">Private Dedicated Chauffeur and Local Guide</span>
+</div>
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-body-md">All Entry Fees to Selected Heritage Sites</span>
+</div>
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-body-md">Daily 90-minute Spa or Wellness Treatment</span>
+</div>
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span class="font-body-md">Complimentary Local SIM &amp; Concierge Support</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Sticky Booking Card - 1/3) -->
+<div class="lg:col-span-1">
+<div class="sticky top-28 bg-white rounded-xxl p-lg shadow-[0px_20px_48px_rgba(0,0,0,0.06)] border border-outline-variant/20 space-y-lg">
+<div>
+<span class="font-label-md text-on-surface-variant">Starts from</span>
+<div class="flex items-baseline space-x-2">
+<h3 class="font-display-lg text-[32px] text-primary">$4,250</h3>
+<span class="font-body-md text-on-surface-variant">/ per person</span>
+</div>
+</div>
+<div class="space-y-md">
+<div class="space-y-sm">
+<label class="font-label-md text-on-surface block">Travel Date</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">calendar_today</span>
+<input class="w-full h-[56px] pl-12 bg-surface-container-low border-none rounded-xl font-body-md focus:ring-2 focus:ring-primary cursor-pointer" readonly="" type="text" value="Oct 12 - Oct 19, 2024">
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-on-surface block">Passengers</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">group</span>
+<select class="w-full h-[56px] pl-12 bg-surface-container-low border-none rounded-xl font-body-md focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+<option>2 Adults</option>
+<option>1 Adult</option>
+<option>3 Adults</option>
+<option>Group (4+)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<div class="pt-4 space-y-4">
+<div class="flex justify-between items-center font-body-md">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="font-bold">$8,500</span>
+</div>
+<div class="flex justify-between items-center font-body-md">
+<span class="text-on-surface-variant">Taxes &amp; Fees</span>
+<span class="font-bold">$420</span>
+</div>
+<div class="h-px bg-outline-variant/30"></div>
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-body-lg">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$8,920</span>
+</div>
+</div>
+<button class="w-full bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.98]">
+                            Secure Your Spot
+                        </button>
+<p class="text-caption text-on-surface-variant text-center">No payment required for booking confirmation today.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Packages -->
+<section class="bg-surface-container-low py-xxl">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">You May Also Like</h2>
+<p class="font-body-md text-on-surface-variant mt-2">Curated luxury alternatives for your next adventure.</p>
+</div>
+<a class="font-label-md text-primary flex items-center space-x-1 group" href="#">
+<span>View All Packages</span>
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Package Card 1 -->
+<div class="bg-white rounded-xxl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A tranquil, high-end resort overlooking the crystal clear turquoise waters of the Maldives. A series of wooden overwater bungalows with private decks and stairs leading directly into the ocean. The light is soft and warm, capturing the essence of a serene, elite island escape." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbYZAsejzue8WRZJaB9-X7zJhtJJlrImedwsh455UlmroedzqFFn0bPHsqlMdCMh53Pg0WyUSjgy8_kKszag5btBC6Wof9kxzQ2SjStklIMKHrLdT8GRAv53b0_HDJIbNxeEhBkCPpGI4aaNQoEzJTCWRQ8r1CgFXML5auGtb1BKsAM-FLe4JCPFgrzmBxMlZf_BnQ4tnm2Mj8Z_15IKmh1OZgc3sb9bRWcxeOfmE8oRvPUuTi33v96uVZI563HsIOVLEetdXxFVjC">
+<div class="absolute top-4 right-4 glass-panel px-3 py-1 rounded-full text-primary text-caption font-bold">
+                                10 Days
+                            </div>
+</div>
+<div class="p-lg space-y-sm">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-md text-body-lg text-primary leading-tight">Maldivian Overwater Serenity</h4>
+<div class="flex items-center text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-caption ml-1">4.9</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-caption line-clamp-2">Escape to a world of pure seclusion in your private overwater bungalow surrounded by turquoise lagoons.</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="font-headline-md text-body-lg text-primary">$6,800</span>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider text-[10px]">Per person</span>
+</div>
+</div>
+</div>
+<!-- Package Card 2 -->
+<div class="bg-white rounded-xxl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A spectacular sunset over the Santorini caldera, featuring the iconic blue-domed churches and whitewashed architecture of Oia. The lighting is golden and warm, casting long shadows and vibrant colors across the Aegean Sea. The aesthetic is purely editorial and aspirational luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxvtjvu27dUvxUu9U127DyvqAHHm5Du7tu_8Wklo_M7iDLFacEjsnglJU64MUxEZhP5WHM8Rqk_KiqwjnKbL1d9RYeACX4-8uFLXcIJL1D6kq2-m4NoRBV9kbxe7r_Z3lXcmNdDA1mbHjClQxuYKdCu32Nu73QaFM_nEx7kEoNY4OToD2unvyWkcLWkztw6A07frCUnFEvY7769QkV4PuJXv5z5ymjRFRzklLHKWi91NbPFNnvY_MyAu3SQrZKSIC98zZudkPMiEmU">
+<div class="absolute top-4 right-4 glass-panel px-3 py-1 rounded-full text-primary text-caption font-bold">
+                                8 Days
+                            </div>
+</div>
+<div class="p-lg space-y-sm">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-md text-body-lg text-primary leading-tight">Grecian Isles Grand Tour</h4>
+<div class="flex items-center text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-caption ml-1">4.8</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-caption line-clamp-2">A majestic odyssey through Athens, Mykonos, and Santorini with private yacht transfers and boutique hotels.</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="font-headline-md text-body-lg text-primary">$5,400</span>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider text-[10px]">Per person</span>
+</div>
+</div>
+</div>
+<!-- Package Card 3 -->
+<div class="bg-white rounded-xxl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A luxury safari tent set in the heart of the Serengeti, overlooking a vast savanna landscape at dawn. The scene features premium canvas furniture, a private deck, and wild elephants grazing in the distance. The lighting is crisp morning sun, creating a high-end, adventurous, yet exceptionally comfortable mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb-XA0HMJacqzhbiads24EHFJqRAMxDxW8bpoAibL2jmGRtorFxH0ihos6TY5rnSkBeNZtXYpuVl3yU545s_YzRZ94EQNxHwIjUQv1QTGoa_WXqRr1eTeCTzwJ9ru_n_4Dtdj7tT8cdAXjgrZRe1JKSZ3YQcShW5RMYkck4emFHQgs0Ofwr8-8dJbi1vSBzqz3Lf1dZssAdB8xFPakw1_0LK5IFiW0v_sJfN7g9zdo3R0C5nFojfr-bxhSAb2fEszmc3WZjujD9pOC">
+<div class="absolute top-4 right-4 glass-panel px-3 py-1 rounded-full text-primary text-caption font-bold">
+                                12 Days
+                            </div>
+</div>
+<div class="p-lg space-y-sm">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-md text-body-lg text-primary leading-tight">Serengeti Luxury Safari</h4>
+<div class="flex items-center text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-caption ml-1">5.0</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-caption line-clamp-2">Witness the Great Migration from the comfort of award-winning eco-lodges with private game drives.</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="font-headline-md text-body-lg text-primary">$9,200</span>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider text-[10px]">Per person</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high dark:bg-tertiary-container w-full pt-xxl pb-xl border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="space-y-md">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">LUXE VOYAGE</div>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-on-tertiary-container">Curating the world's most extraordinary travel experiences for the discerning explorer.</p>
+</div>
+<div class="space-y-md">
+<h5 class="font-label-md text-on-surface dark:text-on-tertiary font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-sm">
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">About Us</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Contact</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">FAQ</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<h5 class="font-label-md text-on-surface dark:text-on-tertiary font-bold uppercase tracking-widest">Legal</h5>
+<ul class="space-y-sm">
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Privacy Policy</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:translate-x-1 transition-all inline-block" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<h5 class="font-label-md text-on-surface dark:text-on-tertiary font-bold uppercase tracking-widest">Newsletter</h5>
+<p class="font-body-md text-caption text-on-surface-variant dark:text-on-tertiary-container">Join our elite circle for exclusive travel insights and early access to packages.</p>
+<div class="flex space-x-2">
+<input class="flex-1 h-12 px-4 rounded-lg bg-surface-container border-none focus:ring-2 focus:ring-primary text-sm" placeholder="Email address" type="email">
+<button class="bg-primary text-white px-4 rounded-lg hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter mt-xxl pt-lg border-t border-outline-variant/30 text-center">
+<p class="font-label-md text-label-md text-on-surface-variant dark:text-on-tertiary-container">© 2024 Luxe Voyage International. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the sticky booking card
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.add('bg-white/95');
+            } else {
+                nav.classList.remove('py-2');
+                nav.classList.remove('bg-white/95');
+            }
+        });
+    </script>
+</body></html>

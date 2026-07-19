@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[1024px] min-h-[700px] w-full flex items-center justify-center overflow-hidden">
+      <section className="relative h-auto md:h-[1024px] min-h-[700px] w-full flex flex-col items-center justify-center overflow-hidden py-32 md:py-0">
         <div className="absolute inset-0 z-0">
           <div
             className="w-full h-full bg-cover bg-center"
@@ -63,7 +63,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 hero-gradient" />
         </div>
-        <div className="relative z-10 text-center px-gutter max-w-4xl">
+        <div className="relative z-10 text-center px-gutter max-w-4xl mb-xl md:mb-0">
           <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-md drop-shadow-lg">
             The Art of <br />
             <span className="italic font-light">Extraordinary</span> Travel
@@ -73,7 +73,7 @@ export default function Home() {
             the essence of global exploration.
           </p>
         </div>
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-container-max px-gutter z-20">
+        <div className="relative md:absolute md:bottom-12 md:left-1/2 md:-translate-x-1/2 w-full max-w-container-max px-gutter z-20">
           <GlassSearchBar />
         </div>
       </section>

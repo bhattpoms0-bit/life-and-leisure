@@ -7,7 +7,7 @@ import { destinations } from '../data/destinations'
 import { testimonials } from '../data/testimonials'
 import { unsplashImage } from '../lib/unsplash'
 
-const HERO_IMAGE = unsplashImage('1758448756167-88dc934c58e4', { w: 1920 })
+const HERO_IMAGE = unsplashImage('1781455495358-b38f1f2bad0b', { w: 1920 })
 const VISA_IMAGE = unsplashImage('1646303297330-17073f7823c3', { w: 1200 })
 
 const CATEGORIES = [
@@ -15,6 +15,13 @@ const CATEGORIES = [
   { icon: 'landscape', title: 'Adventure', description: 'Off the beaten path' },
   { icon: 'business_center', title: 'Corporate', description: 'Elite business travel' },
   { icon: 'groups', title: 'Group Tours', description: 'Shared experiences' },
+]
+
+const TRUST_SIGNALS = [
+  { icon: 'public', label: '150+ Destinations' },
+  { icon: 'support_agent', label: '24/7 Concierge' },
+  { icon: 'sentiment_satisfied', label: '98% Client Satisfaction' },
+  { icon: 'lock', label: 'Secure Booking' },
 ]
 
 const VALUE_PROPS = [
@@ -68,6 +75,18 @@ export default function Home() {
         </div>
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-container-max px-gutter z-20">
           <GlassSearchBar />
+        </div>
+      </section>
+
+      {/* Trust Strip */}
+      <section className="bg-surface-container-low border-b border-outline-variant/30 py-md">
+        <div className="max-w-container-max mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-md">
+          {TRUST_SIGNALS.map((signal) => (
+            <div key={signal.label} className="flex items-center justify-center gap-xs text-on-surface-variant">
+              <span className="material-symbols-outlined text-secondary text-lg">{signal.icon}</span>
+              <span className="font-label-md text-caption uppercase tracking-wide">{signal.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -189,6 +208,10 @@ export default function Home() {
                   <div>
                     <p className="font-headline-md text-body-md font-bold">{testimonial.name}</p>
                     <p className="font-caption text-caption text-on-surface-variant">{testimonial.role}</p>
+                    <p className="font-caption text-caption text-on-surface-variant/70 flex items-center gap-1 mt-1">
+                      <span className="material-symbols-outlined text-[14px] text-secondary">verified</span>
+                      Verified Traveler · {testimonial.destination}, {testimonial.tripDate}
+                    </p>
                   </div>
                 </div>
               </div>

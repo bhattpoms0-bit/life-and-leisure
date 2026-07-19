@@ -131,7 +131,7 @@ export default function GlassSearchBar({
         </div>
       </div>
       <button
-        className="bg-secondary-container text-on-secondary-container h-14 rounded-xl font-headline-md text-body-md flex items-center justify-center space-x-2 hover:bg-secondary transition-colors duration-300"
+        className="bg-secondary-container text-on-secondary-container h-16 rounded-xl font-headline-md text-body-lg font-bold flex items-center justify-center space-x-2 shadow-lg hover:bg-secondary hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
         type="submit"
       >
         <span>{ctaLabel ?? 'Explore Packages'}</span>

@@ -57,7 +57,7 @@ export default function Footer() {
         <div className="space-y-md">
           <h4 className="font-label-md text-label-md text-on-surface font-bold mb-md">Newsletter</h4>
           <p className="font-body-md text-on-surface-variant">
-            Subscribe for exclusive travel insights and early access to new collections.
+            Get our Private Villa Guide + early access to new collections.
           </p>
           <form className="flex flex-col space-y-sm" onSubmit={handleSubscribe}>
             <input

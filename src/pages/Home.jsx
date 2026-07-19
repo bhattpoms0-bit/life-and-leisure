@@ -8,6 +8,13 @@ import { testimonials } from '../data/testimonials'
 import { unsplashImage } from '../lib/unsplash'
 
 const HERO_IMAGE = unsplashImage('1781455495358-b38f1f2bad0b', { w: 1920 })
+// Mobile hero is a much narrower/taller viewport than the source photo's native 3:2
+// landscape ratio, so background-size:cover ends up height-bound and shows the full
+// sky-to-pool range with the pool squeezed into a thin sliver at the very bottom.
+// Pre-cropping a bottom-biased slice server-side (rather than fighting it with CSS
+// background-position, which has no effect once the container is portrait enough
+// to be height-bound) keeps the pool/architecture as the dominant subject on mobile.
+const HERO_IMAGE_MOBILE = unsplashImage('1781455495358-b38f1f2bad0b', { w: 1600, h: 650, crop: 'bottom' })
 const VISA_IMAGE = unsplashImage('1646303297330-17073f7823c3', { w: 1200 })
 
 const CATEGORIES = [
@@ -55,10 +62,14 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-auto md:h-[1024px] min-h-[700px] w-full flex flex-col items-center justify-center overflow-hidden py-32 md:py-0">
+      <section className="relative h-auto md:h-[1024px] min-h-[560px] md:min-h-[700px] w-full flex flex-col items-center justify-center overflow-hidden py-24 md:py-0">
         <div className="absolute inset-0 z-0">
           <div
-            className="w-full h-full bg-cover bg-center"
+            className="md:hidden w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: `url('${HERO_IMAGE_MOBILE}')` }}
+          />
+          <div
+            className="hidden md:block w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           />
           <div className="absolute inset-0 hero-gradient" />

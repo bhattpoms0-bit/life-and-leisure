@@ -33,12 +33,16 @@ export default function TopNav() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] transition-all duration-300 ${
-        scrolled ? 'h-16' : 'h-20'
+        scrolled ? 'h-20' : 'h-24'
       }`}
     >
       <div className="max-w-container-max mx-auto px-gutter flex justify-between items-center h-full">
-        <Link className="font-display-lg text-headline-md tracking-tighter text-primary" to="/">
-          Life and Leisure
+        <Link to="/" className="flex items-center">
+          <img
+            src="/logo.png"
+            alt="Life and Leisure"
+            className={`w-auto transition-all duration-300 ${scrolled ? 'h-14' : 'h-20'}`}
+          />
         </Link>
 
         <div className="hidden md:flex items-center space-x-xl">

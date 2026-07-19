@@ -11,7 +11,7 @@ export default function App() {
   return (
     <div className="bg-background text-on-surface font-body-md overflow-x-hidden">
       <TopNav />
-      <main className="pt-20">
+      <main className="pt-24">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/destinations" element={<Destinations />} />

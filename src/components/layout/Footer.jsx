@@ -16,8 +16,8 @@ export default function Footer() {
     <footer className="bg-surface-container-high pt-xxl pb-xl border-t border-outline-variant">
       <div className="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
         <div className="space-y-md">
-          <Link className="font-headline-md text-headline-md font-bold text-primary" to="/">
-            Life and Leisure
+          <Link to="/" className="inline-block">
+            <img src="/logo.png" alt="Life and Leisure" className="h-20 w-auto" />
           </Link>
           <p className="font-body-md text-body-md text-on-surface-variant">
             Defining the future of luxury travel through precision, passion, and unparalleled curation.

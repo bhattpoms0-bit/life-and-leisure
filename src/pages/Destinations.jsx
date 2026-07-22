@@ -25,6 +25,7 @@ const SIGNATURE_DESTINATIONS = [
     description: 'A journey through ancient Hoi An and the surreal beauty of Ninh Binh.',
     image: unsplashImage('1639458110591-17c4cede0c4b', { w: 900 }),
     imageAlt: 'A room filled with glowing traditional lanterns in Hoi An, Vietnam.',
+    to: '/destinations/vietnam',
   },
   {
     slug: 'singapore',
@@ -143,7 +144,12 @@ export default function Destinations() {
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
           {SIGNATURE_DESTINATIONS.map((destination) => (
-            <DestinationCard key={destination.slug} variant="editorial" to="/packages" {...destination} />
+            <DestinationCard
+              key={destination.slug}
+              variant="editorial"
+              {...destination}
+              to={destination.to || '/packages'}
+            />
           ))}
         </div>
       </section>

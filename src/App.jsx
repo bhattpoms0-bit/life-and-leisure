@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer'
 import Home from './pages/Home'
 import Destinations from './pages/Destinations'
 import VietnamDestination from './pages/VietnamDestination'
+import ThailandDestination from './pages/ThailandDestination'
 import Packages from './pages/Packages'
 import PackageDetail from './pages/PackageDetail'
 import Visa from './pages/Visa'
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/destinations" element={<Destinations />} />
           <Route path="/destinations/vietnam" element={<VietnamDestination />} />
+          <Route path="/destinations/thailand" element={<ThailandDestination />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:slug" element={<PackageDetail />} />
           <Route path="/visa" element={<Visa />} />

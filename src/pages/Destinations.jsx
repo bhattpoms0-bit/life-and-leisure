@@ -17,6 +17,7 @@ const SIGNATURE_DESTINATIONS = [
     description: 'Discover curated luxury from the golden temples to private island retreats.',
     image: unsplashImage('1715158230572-f571ba4952da', { w: 900 }),
     imageAlt: 'A private infinity pool overlooking the ocean with lounge chairs and palm trees.',
+    to: '/destinations/thailand',
   },
   {
     slug: 'vietnam',

@@ -71,4 +71,14 @@ export const packages = [
     image: unsplashImage('1745781230148-cd467af9ac58', { w: 900 }),
     imageAlt: 'Turquoise water framed by limestone cliffs at Maya Bay, Phi Phi Islands.',
   },
+  {
+    slug: 'bali-signature-escape',
+    title: 'Bali Signature Escape',
+    description: 'A premium 4-star journey through Ubud and Seminyak, with a Nusa Penida island adventure and an Uluwatu sunset.',
+    duration: '8 Days',
+    rating: 4.8,
+    price: '₹72,999',
+    image: unsplashImage('1578490264471-807b49c9a41f', { w: 900 }),
+    imageAlt: 'The split gate of Lempuyang Temple in Bali, framing a reflection pool.',
+  },
 ]

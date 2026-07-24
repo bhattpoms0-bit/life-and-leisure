@@ -20,6 +20,7 @@ export const destinations = [
     price: '$8,900',
     image: unsplashImage('1668854085665-0eed599e8078', { w: 900 }),
     imageAlt: 'A tropical infinity pool in the jungle of Ubud, Bali.',
+    to: '/packages/bali-signature-escape',
   },
   {
     slug: 'venice',

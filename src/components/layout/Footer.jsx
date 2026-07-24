@@ -48,7 +48,7 @@ export default function Footer() {
 
         <div className="flex flex-col space-y-sm">
           <h4 className="font-label-md text-label-md text-on-surface font-bold mb-md">Support</h4>
-          <a className={linkClass} href="#">Contact</a>
+          <Link className={linkClass} to="/contact">Contact</Link>
           <a className={linkClass} href="#">FAQ</a>
           <Link className={linkClass} to="/visa">Visa Guide</Link>
           <a className={linkClass} href="#">Terms of Service</a>

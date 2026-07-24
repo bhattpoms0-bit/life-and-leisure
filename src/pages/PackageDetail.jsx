@@ -4,6 +4,7 @@ import PackageCard from '../components/ui/PackageCard'
 import Reveal from '../components/ui/Reveal'
 import { packageDetails } from '../data/packageDetails'
 import { packages } from '../data/packages'
+import { computeBreakdown } from '../lib/currency'
 
 const PASSENGER_OPTIONS = ['2 Adults', '1 Adult', '3 Adults', 'Group (4+)']
 
@@ -17,6 +18,7 @@ export default function PackageDetail() {
   const { slug } = useParams()
   const pkg = packageDetails[slug]
   const [passengers, setPassengers] = useState(PASSENGER_OPTIONS[0])
+  const [seasonKey, setSeasonKey] = useState(pkg?.seasonalPricing?.[0]?.key ?? null)
 
   if (!pkg) {
     return (
@@ -32,8 +34,12 @@ export default function PackageDetail() {
 
   const relatedPackages = packages.filter((p) => p.slug !== slug).slice(0, 3)
 
+  const activeSeason = pkg.seasonalPricing?.find((season) => season.key === seasonKey)
+  const displayPrice = activeSeason ? activeSeason.price : pkg.price
+  const priceBreakdown = activeSeason ? computeBreakdown(activeSeason.price) : pkg.priceBreakdown
+
   const handleSecureSpot = () => {
-    console.log('Secure your spot:', { slug, travelDate: pkg.travelDate, passengers })
+    console.log('Secure your spot:', { slug, travelDate: pkg.travelDate, passengers, season: seasonKey })
   }
 
   return (
@@ -74,6 +80,27 @@ export default function PackageDetail() {
             <div className="space-y-md">
               <h2 className="font-headline-lg text-headline-lg text-primary">{pkg.highlightsTitle}</h2>
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">{pkg.highlightsBody}</p>
+              {pkg.destinationsCovered && (
+                <div className="flex items-start gap-xs text-on-surface-variant">
+                  <span className="material-symbols-outlined text-[18px] text-secondary mt-0.5">location_on</span>
+                  <span className="font-body-md text-caption">{pkg.destinationsCovered.join(' · ')}</span>
+                </div>
+              )}
+              {pkg.idealFor && (
+                <div className="flex flex-wrap items-center gap-xs">
+                  <span className="font-label-md text-caption text-on-surface-variant uppercase tracking-wider mr-xs">
+                    Ideal For
+                  </span>
+                  {pkg.idealFor.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-md py-xs bg-surface-container-low rounded-full font-label-md text-caption text-primary border border-outline-variant/30"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-md pt-md">
                 {pkg.features.map((feature) => (
                   <div
@@ -138,15 +165,98 @@ export default function PackageDetail() {
                 ))}
               </div>
             </div>
+
+            {/* Package Exclusions */}
+            {pkg.excluded && (
+              <div className="p-lg bg-surface-container-high text-on-surface-variant rounded-xxl border border-outline-variant/30">
+                <h3 className="font-headline-md text-headline-md mb-md text-on-surface">Package Exclusions</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+                  {pkg.excluded.map((item) => (
+                    <div key={item} className="flex items-center space-x-3">
+                      <span className="material-symbols-outlined text-outline">cancel</span>
+                      <span className="font-body-md">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Recommended Hotels */}
+            {pkg.recommendedHotels && (
+              <div className="space-y-md">
+                <h3 className="font-headline-md text-headline-md text-primary">Recommended Hotels</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+                  {pkg.recommendedHotels.map((group) => (
+                    <div
+                      key={group.location}
+                      className="p-lg bg-surface-container-low rounded-xl border border-outline-variant/30"
+                    >
+                      <h4 className="font-label-md text-label-md text-secondary uppercase tracking-widest mb-sm">
+                        {group.location}
+                      </h4>
+                      <ul className="space-y-2">
+                        {group.hotels.map((hotel) => (
+                          <li key={hotel} className="flex items-start gap-2 font-body-md text-on-surface">
+                            <span className="material-symbols-outlined text-[16px] text-primary mt-1">hotel</span>
+                            <span>{hotel}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-caption text-on-surface-variant">
+                  A 5-star upgrade is available on select properties — ask your travel consultant for details.
+                </p>
+              </div>
+            )}
+
+            {/* Optional Add-Ons */}
+            {pkg.addOns && (
+              <div className="space-y-md">
+                <h3 className="font-headline-md text-headline-md text-primary">Optional Add-Ons</h3>
+                <div className="border border-outline-variant/30 rounded-xxl overflow-hidden">
+                  {pkg.addOns.map((addon, index) => (
+                    <div
+                      key={addon.name}
+                      className={`flex justify-between items-center gap-md px-lg py-md ${
+                        index % 2 === 1 ? 'bg-surface-container-low' : 'bg-white'
+                      }`}
+                    >
+                      <span className="font-body-md text-on-surface">{addon.name}</span>
+                      <span className="font-label-md text-secondary font-bold whitespace-nowrap">{addon.priceRange}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right Column (Sticky Booking Card - 1/3) */}
           <div className="lg:col-span-1">
             <div className="sticky top-28 bg-white rounded-xxl p-lg shadow-[0px_20px_48px_rgba(0,0,0,0.06)] border border-outline-variant/20 space-y-lg">
               <div>
+                {pkg.seasonalPricing && (
+                  <div className="flex gap-1 bg-surface-container-low p-1 rounded-xl mb-md">
+                    {pkg.seasonalPricing.map((season) => (
+                      <button
+                        key={season.key}
+                        type="button"
+                        onClick={() => setSeasonKey(season.key)}
+                        className={`flex-1 py-sm rounded-lg font-label-md text-[11px] leading-tight transition-colors ${
+                          seasonKey === season.key
+                            ? 'bg-primary text-on-primary'
+                            : 'text-on-surface-variant hover:bg-surface-container-high'
+                        }`}
+                      >
+                        {season.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <span className="font-label-md text-on-surface-variant">Starts from</span>
                 <div className="flex items-baseline space-x-2">
-                  <h3 className="font-display-lg text-[32px] text-primary">{pkg.price}</h3>
+                  <h3 className="font-display-lg text-[32px] text-primary">{displayPrice}</h3>
                   <span className="font-body-md text-on-surface-variant">/ per person</span>
                 </div>
               </div>
@@ -189,16 +299,16 @@ export default function PackageDetail() {
               <div className="pt-4 space-y-4">
                 <div className="flex justify-between items-center font-body-md">
                   <span className="text-on-surface-variant">Subtotal</span>
-                  <span className="font-bold">{pkg.priceBreakdown.subtotal}</span>
+                  <span className="font-bold">{priceBreakdown.subtotal}</span>
                 </div>
                 <div className="flex justify-between items-center font-body-md">
                   <span className="text-on-surface-variant">Taxes & Fees</span>
-                  <span className="font-bold">{pkg.priceBreakdown.taxes}</span>
+                  <span className="font-bold">{priceBreakdown.taxes}</span>
                 </div>
                 <div className="h-px bg-outline-variant/30" />
                 <div className="flex justify-between items-center">
                   <span className="font-headline-md text-body-lg">Total</span>
-                  <span className="font-headline-md text-headline-md text-primary">{pkg.priceBreakdown.total}</span>
+                  <span className="font-headline-md text-headline-md text-primary">{priceBreakdown.total}</span>
                 </div>
               </div>
               <button
@@ -211,6 +321,17 @@ export default function PackageDetail() {
               <p className="text-caption text-on-surface-variant text-center">
                 No payment required for booking confirmation today.
               </p>
+              <div className="pt-4 border-t border-outline-variant/30 space-y-sm text-center">
+                <p className="font-body-md text-caption text-on-surface-variant">
+                  Looking for something different? Contact us to build a custom itinerary.
+                </p>
+                <Link
+                  to="/contact"
+                  className="block w-full text-center py-sm rounded-xl font-label-md border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </div>
           </div>
         </div>

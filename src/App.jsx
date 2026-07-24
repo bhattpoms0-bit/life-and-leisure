@@ -8,6 +8,7 @@ import ThailandDestination from './pages/ThailandDestination'
 import Packages from './pages/Packages'
 import PackageDetail from './pages/PackageDetail'
 import Visa from './pages/Visa'
+import Contact from './pages/Contact'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:slug" element={<PackageDetail />} />
           <Route path="/visa" element={<Visa />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />

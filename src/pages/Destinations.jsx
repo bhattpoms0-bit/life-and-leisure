@@ -51,6 +51,7 @@ const SIGNATURE_DESTINATIONS = [
     description: "Private tours of St. Petersburg's palaces and the world's most opulent museums.",
     image: unsplashImage('1692190145571-cfac67889fc4', { w: 900 }),
     imageAlt: 'The Winter Palace in Saint Petersburg blanketed in snow.',
+    to: '/packages/russia-signature-escape',
   },
   {
     slug: 'china',

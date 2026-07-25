@@ -81,4 +81,14 @@ export const packages = [
     image: unsplashImage('1578490264471-807b49c9a41f', { w: 900 }),
     imageAlt: 'The split gate of Lempuyang Temple in Bali, framing a reflection pool.',
   },
+  {
+    slug: 'russia-signature-escape',
+    title: 'Russia Signature Escape',
+    description: 'A premium 4-star journey through Moscow and St. Petersburg, connected by the high-speed Sapsan train.',
+    duration: '8 Days',
+    rating: 4.7,
+    price: '₹99,999',
+    image: unsplashImage('1513326738677-b964603b136d', { w: 900 }),
+    imageAlt: "Saint Basil's Cathedral and the Minin and Pozharsky monument on Red Square, Moscow.",
+  },
 ]

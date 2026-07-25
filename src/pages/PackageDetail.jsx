@@ -230,6 +230,27 @@ export default function PackageDetail() {
                 </div>
               </div>
             )}
+
+            {/* Categorized Pricing Tables (Optional Experiences, Hotel Upgrades, Seasonal Supplements, etc.) */}
+            {pkg.pricingTables &&
+              pkg.pricingTables.map((table) => (
+                <div key={table.title} className="space-y-md">
+                  <h3 className="font-headline-md text-headline-md text-primary">{table.title}</h3>
+                  <div className="border border-outline-variant/30 rounded-xxl overflow-hidden">
+                    {table.items.map((item, index) => (
+                      <div
+                        key={item.name}
+                        className={`flex justify-between items-center gap-md px-lg py-md ${
+                          index % 2 === 1 ? 'bg-surface-container-low' : 'bg-white'
+                        }`}
+                      >
+                        <span className="font-body-md text-on-surface">{item.name}</span>
+                        <span className="font-label-md text-secondary font-bold whitespace-nowrap">{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
           </div>
 
           {/* Right Column (Sticky Booking Card - 1/3) */}
@@ -336,6 +357,39 @@ export default function PackageDetail() {
           </div>
         </div>
       </section>
+
+      {/* Destination Extensions */}
+      {pkg.destinationExtensions && (
+        <section className="bg-surface-container-low py-xxl">
+          <Reveal className="max-w-container-max mx-auto px-gutter">
+            <div className="mb-xl">
+              <h2 className="font-headline-lg text-headline-lg text-primary">Extend Your Journey</h2>
+              <p className="font-body-md text-on-surface-variant mt-2">
+                Optional multi-day add-ons you can pair with this itinerary.
+              </p>
+            </div>
+            <div className="flex md:grid md:grid-cols-3 lg:grid-cols-5 gap-lg overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-md -mx-gutter px-gutter md:mx-0 md:px-0">
+              {pkg.destinationExtensions.map((extension) => (
+                <div
+                  key={extension.name}
+                  className="shrink-0 w-72 md:w-auto snap-start bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-lg flex flex-col"
+                >
+                  <h4 className="font-headline-md text-body-lg font-bold text-primary mb-xs">{extension.name}</h4>
+                  <div className="flex items-center gap-xs text-on-surface-variant mb-sm">
+                    <span className="material-symbols-outlined text-[16px]">schedule</span>
+                    <span className="font-body-md text-caption">{extension.duration}</span>
+                  </div>
+                  <p className="font-body-md text-caption text-on-surface-variant flex-1">{extension.inclusions}</p>
+                  <div className="mt-md pt-md border-t border-outline-variant/30 flex items-baseline justify-between">
+                    <span className="font-label-md text-caption text-outline uppercase tracking-wider">From</span>
+                    <span className="font-headline-md text-body-lg text-secondary">{extension.startingPrice}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* Related Packages */}
       {relatedPackages.length > 0 && (

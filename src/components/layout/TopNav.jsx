@@ -5,7 +5,7 @@ const NAV_LINKS = [
   { label: 'Destinations', to: '/destinations', match: (pathname) => ['/', '/destinations'].includes(pathname) },
   { label: 'Packages', to: '/packages', match: (pathname) => pathname.startsWith('/packages') },
   { label: 'Visa', to: '/visa', match: (pathname) => pathname === '/visa' },
-  { label: 'Services', stub: true },
+  { label: 'Services', to: '/services', match: (pathname) => pathname === '/services' },
   { label: 'Blog', stub: true },
 ]
 

@@ -43,6 +43,7 @@ const SIGNATURE_DESTINATIONS = [
     description: 'Immersion in the delicate balance of ancient rituals and modern refinement.',
     image: unsplashImage('1764445274404-f2e14fd3f20c', { w: 900 }),
     imageAlt: 'A traditional Japanese room with shoji screens and tatami mats.',
+    to: '/packages/japan-signature-escape',
   },
   {
     slug: 'russia',

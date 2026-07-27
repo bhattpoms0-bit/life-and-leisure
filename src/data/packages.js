@@ -91,4 +91,14 @@ export const packages = [
     image: unsplashImage('1513326738677-b964603b136d', { w: 900 }),
     imageAlt: "Saint Basil's Cathedral and the Minin and Pozharsky monument on Red Square, Moscow.",
   },
+  {
+    slug: 'japan-signature-escape',
+    title: 'Japan Signature Escape',
+    description: 'A premium 4-star journey through Tokyo, Mt. Fuji, Kyoto, Nara, and Osaka, connected by the Shinkansen.',
+    duration: '9 Days',
+    rating: 4.8,
+    price: '₹1,49,999',
+    image: unsplashImage('1753159397174-c75f512a305e', { w: 900 }),
+    imageAlt: 'Mount Fuji rising above a lake, framed by blooming cherry blossoms.',
+  },
 ]

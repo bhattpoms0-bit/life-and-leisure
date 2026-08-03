@@ -101,4 +101,14 @@ export const packages = [
     image: unsplashImage('1753159397174-c75f512a305e', { w: 900 }),
     imageAlt: 'Mount Fuji rising above a lake, framed by blooming cherry blossoms.',
   },
+  {
+    slug: 'georgia-signature-escape',
+    title: 'Georgia Signature Escape',
+    description: 'A premium 4-star journey through Tbilisi, the Caucasus Mountains, and the Kakheti wine region.',
+    duration: '8 Days',
+    rating: 4.7,
+    price: '₹74,999',
+    image: unsplashImage('1507194615470-9ed0f7dafe99', { w: 900 }),
+    imageAlt: 'Gergeti Trinity Church perched on a hilltop against the dramatic snow-capped Caucasus Mountains.',
+  },
 ]

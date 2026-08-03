@@ -181,6 +181,23 @@ export default function PackageDetail() {
               </div>
             )}
 
+            {/* Mandatory Insurance / Entry Requirement Notice — kept visually separate from the
+                generic exclusions list above since this is a legal entry requirement, not an
+                optional add-on the traveler can simply skip. */}
+            {pkg.entryRequirementNotice && (
+              <div className="p-lg bg-amber-50 border-2 border-amber-300 rounded-xxl flex items-start gap-md">
+                <span className="material-symbols-outlined text-amber-600 shrink-0" style={{ fontSize: '32px' }}>
+                  info
+                </span>
+                <div>
+                  <h4 className="font-headline-md text-body-lg font-bold text-amber-900 mb-xs">
+                    {pkg.entryRequirementNotice.title}
+                  </h4>
+                  <p className="font-body-md text-amber-800">{pkg.entryRequirementNotice.body}</p>
+                </div>
+              </div>
+            )}
+
             {/* Recommended Hotels */}
             {pkg.recommendedHotels && (
               <div className="space-y-md">
@@ -372,17 +389,28 @@ export default function PackageDetail() {
               {pkg.destinationExtensions.map((extension) => (
                 <div
                   key={extension.name}
-                  className="shrink-0 w-72 md:w-auto snap-start bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-lg flex flex-col"
+                  className="shrink-0 w-72 md:w-auto snap-start bg-white rounded-2xl border border-outline-variant/20 shadow-sm overflow-hidden flex flex-col"
                 >
-                  <h4 className="font-headline-md text-body-lg font-bold text-primary mb-xs">{extension.name}</h4>
-                  <div className="flex items-center gap-xs text-on-surface-variant mb-sm">
-                    <span className="material-symbols-outlined text-[16px]">schedule</span>
-                    <span className="font-body-md text-caption">{extension.duration}</span>
-                  </div>
-                  <p className="font-body-md text-caption text-on-surface-variant flex-1">{extension.inclusions}</p>
-                  <div className="mt-md pt-md border-t border-outline-variant/30 flex items-baseline justify-between">
-                    <span className="font-label-md text-caption text-outline uppercase tracking-wider">From</span>
-                    <span className="font-headline-md text-body-lg text-secondary">{extension.startingPrice}</span>
+                  {extension.image && (
+                    <div className="h-40 overflow-hidden relative">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={extension.image}
+                        alt={extension.imageAlt}
+                      />
+                    </div>
+                  )}
+                  <div className="p-lg flex flex-col flex-1">
+                    <h4 className="font-headline-md text-body-lg font-bold text-primary mb-xs">{extension.name}</h4>
+                    <div className="flex items-center gap-xs text-on-surface-variant mb-sm">
+                      <span className="material-symbols-outlined text-[16px]">schedule</span>
+                      <span className="font-body-md text-caption">{extension.duration}</span>
+                    </div>
+                    <p className="font-body-md text-caption text-on-surface-variant flex-1">{extension.inclusions}</p>
+                    <div className="mt-md pt-md border-t border-outline-variant/30 flex items-baseline justify-between">
+                      <span className="font-label-md text-caption text-outline uppercase tracking-wider">From</span>
+                      <span className="font-headline-md text-body-lg text-secondary">{extension.startingPrice}</span>
+                    </div>
                   </div>
                 </div>
               ))}

@@ -62,6 +62,15 @@ const SIGNATURE_DESTINATIONS = [
     image: unsplashImage('1716929955955-f6ef9c1ca084', { w: 900 }),
     imageAlt: 'The Great Wall of China winding across mountainous terrain.',
   },
+  {
+    slug: 'georgia',
+    location: 'Georgia',
+    title: 'Caucasus Crossing',
+    description: 'Mountain monasteries, Old Tbilisi, and the vineyards of Kakheti wine country.',
+    image: unsplashImage('1507194615470-9ed0f7dafe99', { w: 900 }),
+    imageAlt: 'Gergeti Trinity Church perched on a hilltop against the dramatic snow-capped Caucasus Mountains.',
+    to: '/packages/georgia-signature-escape',
+  },
 ]
 
 export default function Destinations() {

@@ -54,6 +54,15 @@ export default function PackageDetail() {
               <span className="material-symbols-outlined text-[18px]">location_on</span>
               <span className="font-label-md text-label-md uppercase tracking-widest">{pkg.location}</span>
             </div>
+            {pkg.visaFree && (
+              <div className="mb-4">
+                <div className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full font-label-md text-label-md shadow-lg">
+                  <span className="material-symbols-outlined text-[20px]">verified_user</span>
+                  {pkg.visaFree.label}
+                </div>
+                {pkg.visaFree.detail && <p className="text-white/80 text-caption mt-2">{pkg.visaFree.detail}</p>}
+              </div>
+            )}
             <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-white max-w-2xl">{pkg.title}</h1>
             <div className="flex items-center mt-6 space-x-6 text-white/90">
               <div className="flex items-center space-x-2">
@@ -171,12 +180,18 @@ export default function PackageDetail() {
               <div className="p-lg bg-surface-container-high text-on-surface-variant rounded-xxl border border-outline-variant/30">
                 <h3 className="font-headline-md text-headline-md mb-md text-on-surface">Package Exclusions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
-                  {pkg.excluded.map((item) => (
-                    <div key={item} className="flex items-center space-x-3">
-                      <span className="material-symbols-outlined text-outline">cancel</span>
-                      <span className="font-body-md">{item}</span>
-                    </div>
-                  ))}
+                  {pkg.excluded.map((item) => {
+                    const isNote = typeof item === 'object'
+                    const text = isNote ? item.text : item
+                    return (
+                      <div key={text} className="flex items-center space-x-3">
+                        <span className={`material-symbols-outlined ${isNote ? 'text-green-600' : 'text-outline'}`}>
+                          {isNote ? 'check_circle' : 'cancel'}
+                        </span>
+                        <span className={`font-body-md ${isNote ? 'text-green-700 font-semibold' : ''}`}>{text}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             )}
@@ -274,6 +289,14 @@ export default function PackageDetail() {
           <div className="lg:col-span-1">
             <div className="sticky top-28 bg-white rounded-xxl p-lg shadow-[0px_20px_48px_rgba(0,0,0,0.06)] border border-outline-variant/20 space-y-lg">
               <div>
+                {pkg.visaFree && (
+                  <div className="flex items-center gap-2 bg-green-50 border border-green-300 text-green-800 rounded-full px-3 py-1.5 mb-3 w-fit">
+                    <span className="material-symbols-outlined text-green-600" style={{ fontSize: '18px' }}>
+                      check_circle
+                    </span>
+                    <span className="font-label-md text-[11px] font-bold">{pkg.visaFree.label}</span>
+                  </div>
+                )}
                 {pkg.seasonalPricing && (
                   <div className="flex gap-1 bg-surface-container-low p-1 rounded-xl mb-md">
                     {pkg.seasonalPricing.map((season) => (

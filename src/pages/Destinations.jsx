@@ -71,6 +71,15 @@ const SIGNATURE_DESTINATIONS = [
     imageAlt: 'Gergeti Trinity Church perched on a hilltop against the dramatic snow-capped Caucasus Mountains.',
     to: '/packages/georgia-signature-escape',
   },
+  {
+    slug: 'philippines',
+    location: 'Philippines',
+    title: 'Island Hopping Escape',
+    description: 'Historic Manila, Cebu island hopping, and the otherworldly Chocolate Hills — visa-free for Indian travelers.',
+    image: unsplashImage('1667823506151-836beb11723d', { w: 900 }),
+    imageAlt: "The distinctive mounded landscape of Bohol's Chocolate Hills bathed in warm golden light.",
+    to: '/packages/philippines-signature-escape',
+  },
 ]
 
 export default function Destinations() {

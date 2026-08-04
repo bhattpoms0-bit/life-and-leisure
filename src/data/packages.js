@@ -111,4 +111,14 @@ export const packages = [
     image: unsplashImage('1507194615470-9ed0f7dafe99', { w: 900 }),
     imageAlt: 'Gergeti Trinity Church perched on a hilltop against the dramatic snow-capped Caucasus Mountains.',
   },
+  {
+    slug: 'philippines-signature-escape',
+    title: 'Philippines Signature Escape',
+    description: 'A premium 4-star journey through Manila, Cebu, and Bohol, from island hopping to the Chocolate Hills — visa-free for Indian travelers.',
+    duration: '8 Days',
+    rating: 4.8,
+    price: '₹89,999',
+    image: unsplashImage('1667823506151-836beb11723d', { w: 900 }),
+    imageAlt: "The distinctive mounded landscape of Bohol's Chocolate Hills bathed in warm golden light.",
+  },
 ]

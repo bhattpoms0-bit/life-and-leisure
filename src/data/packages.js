@@ -2,12 +2,12 @@ import { unsplashImage } from '../lib/unsplash'
 
 export const packages = [
   {
-    slug: 'maldivian-overwater-serenity',
-    title: 'Maldivian Overwater Serenity',
-    description: 'Escape to a world of pure seclusion in your private overwater bungalow surrounded by turquoise lagoons.',
-    duration: '10 Days',
+    slug: 'maldives-signature-escape',
+    title: 'Maldives Signature Escape',
+    description: 'A premium 5-star beach villa escape with private speedboat transfers, dolphin cruises, and sandbank excursions.',
+    duration: '5 Days',
     rating: 4.9,
-    price: '$6,800',
+    price: '₹99,999',
     image: unsplashImage('1753939223042-872934ffda15', { w: 900 }),
     imageAlt: 'Overwater bungalows connected by wooden walkways over a turquoise Maldives lagoon.',
   },

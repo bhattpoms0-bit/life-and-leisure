@@ -11,6 +11,7 @@ export const destinations = [
     price: '$12,500',
     image: unsplashImage('1637576308588-6647bf80944d', { w: 900 }),
     imageAlt: 'A wooden dock leading to an overwater villa in the Maldives at sunset.',
+    to: '/packages/maldives-signature-escape',
   },
   {
     slug: 'bali',

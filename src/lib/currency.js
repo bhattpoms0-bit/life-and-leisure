@@ -2,6 +2,7 @@
 // currency symbol and numeric amount, so seasonal pricing tiers can be
 // recomputed (subtotal/taxes/total) without hardcoding a breakdown per tier.
 export function parsePrice(priceStr) {
+  if (typeof priceStr !== 'string') return null
   const match = priceStr.match(/^([^\d]*)([\d,]+)/)
   if (!match) return null
   return { symbol: match[1].trim(), amount: parseInt(match[2].replace(/,/g, ''), 10) }

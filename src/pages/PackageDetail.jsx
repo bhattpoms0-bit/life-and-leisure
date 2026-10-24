@@ -16,6 +16,12 @@ const GALLERY_SPAN_CLASSES = {
 
 export default function PackageDetail() {
   const { slug } = useParams()
+  // Reset booking state before rendering a different package, including
+  // navigation between detail pages through related-package links.
+  return <PackageDetailContent key={slug} slug={slug} />
+}
+
+function PackageDetailContent({ slug }) {
   const pkg = packageDetails[slug]
   const [passengers, setPassengers] = useState(PASSENGER_OPTIONS[0])
   const [seasonKey, setSeasonKey] = useState(pkg?.seasonalPricing?.[0]?.key ?? null)
@@ -35,11 +41,12 @@ export default function PackageDetail() {
   const relatedPackages = packages.filter((p) => p.slug !== slug).slice(0, 3)
 
   const activeSeason = pkg.seasonalPricing?.find((season) => season.key === seasonKey)
-  const displayPrice = activeSeason ? activeSeason.price : pkg.price
+    ?? pkg.seasonalPricing?.[0]
+  const displayPrice = (activeSeason ? activeSeason.price : pkg.price) || 'Price on request'
   const priceBreakdown = activeSeason ? computeBreakdown(activeSeason.price) : pkg.priceBreakdown
 
   const handleSecureSpot = () => {
-    console.log('Secure your spot:', { slug, travelDate: pkg.travelDate, passengers, season: seasonKey })
+    console.log('Secure your spot:', { slug, travelDate: pkg.travelDate, passengers, season: activeSeason?.key ?? null })
   }
 
   return (
@@ -305,7 +312,7 @@ export default function PackageDetail() {
                         type="button"
                         onClick={() => setSeasonKey(season.key)}
                         className={`flex-1 py-sm rounded-lg font-label-md text-[11px] leading-tight transition-colors ${
-                          seasonKey === season.key
+                          activeSeason?.key === season.key
                             ? 'bg-primary text-on-primary'
                             : 'text-on-surface-variant hover:bg-surface-container-high'
                         }`}
@@ -360,16 +367,16 @@ export default function PackageDetail() {
               <div className="pt-4 space-y-4">
                 <div className="flex justify-between items-center font-body-md">
                   <span className="text-on-surface-variant">Subtotal</span>
-                  <span className="font-bold">{priceBreakdown.subtotal}</span>
+                  <span className="font-bold">{priceBreakdown?.subtotal || 'On request'}</span>
                 </div>
                 <div className="flex justify-between items-center font-body-md">
                   <span className="text-on-surface-variant">Taxes & Fees</span>
-                  <span className="font-bold">{priceBreakdown.taxes}</span>
+                  <span className="font-bold">{priceBreakdown?.taxes || 'On request'}</span>
                 </div>
                 <div className="h-px bg-outline-variant/30" />
                 <div className="flex justify-between items-center">
                   <span className="font-headline-md text-body-lg">Total</span>
-                  <span className="font-headline-md text-headline-md text-primary">{priceBreakdown.total}</span>
+                  <span className="font-headline-md text-headline-md text-primary">{priceBreakdown?.total || 'On request'}</span>
                 </div>
               </div>
               <button

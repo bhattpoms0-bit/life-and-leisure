@@ -1,106 +1,29 @@
 import { useState } from 'react'
-
-const initialForm = { name: '', email: '', message: '' }
+import { useLocation } from 'react-router-dom'
+import PageMeta from '../components/seo/PageMeta'
 
 export default function Contact() {
-  const [form, setForm] = useState(initialForm)
-  const [submitted, setSubmitted] = useState(false)
+  const { state, key } = useLocation()
+  return <ContactDraft key={key} initialMessage={typeof state?.enquiryDraft === 'string' ? state.enquiryDraft : ''} />
+}
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (event) => {
+function ContactDraft({ initialMessage }) {
+  const [form, setForm] = useState({ name: '', email: '', message: initialMessage })
+  const [draft, setDraft] = useState('')
+  const [copyStatus, setCopyStatus] = useState('')
+  const change = event => setForm(previous => ({ ...previous, [event.target.name]: event.target.value }))
+  const prepare = event => {
     event.preventDefault()
-    console.log('Contact form submitted:', form)
-    setSubmitted(true)
-    setForm(initialForm)
+    setDraft(`Travel enquiry\nName: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\n${form.message.trim()}`)
+    setCopyStatus('')
   }
-
-  return (
-    <div className="max-w-container-max mx-auto px-gutter py-xxl">
-      <div className="max-w-2xl mx-auto text-center space-y-md mb-xl">
-        <span className="font-label-md text-label-md text-secondary uppercase tracking-widest">Get In Touch</span>
-        <h1 className="font-display-lg text-headline-lg text-primary">Build a Custom Itinerary</h1>
-        <p className="font-body-lg text-body-lg text-on-surface-variant">
-          Tell us a little about the trip you have in mind, and one of our travel consultants will get back to you
-          with a tailored proposal.
-        </p>
-      </div>
-
-      <div className="max-w-xl mx-auto bg-white rounded-xxl p-xl shadow-[0px_20px_48px_rgba(0,0,0,0.06)] border border-outline-variant/20">
-        {submitted ? (
-          <div className="text-center space-y-md py-lg">
-            <span className="material-symbols-outlined text-primary text-5xl">check_circle</span>
-            <h2 className="font-headline-md text-headline-md text-primary">Thank you</h2>
-            <p className="font-body-md text-on-surface-variant">
-              We've received your message and will be in touch shortly.
-            </p>
-            <button
-              type="button"
-              onClick={() => setSubmitted(false)}
-              className="inline-block text-primary font-label-md hover:translate-x-1 transition-transform"
-            >
-              Send another message
-            </button>
-          </div>
-        ) : (
-          <form className="space-y-md" onSubmit={handleSubmit}>
-            <div className="space-y-sm">
-              <label className="font-label-md text-on-surface block" htmlFor="name">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={handleChange}
-                className="w-full h-[56px] px-4 bg-surface-container-low border-none rounded-xl font-body-md focus:ring-2 focus:ring-primary"
-                placeholder="Your full name"
-              />
-            </div>
-            <div className="space-y-sm">
-              <label className="font-label-md text-on-surface block" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={handleChange}
-                className="w-full h-[56px] px-4 bg-surface-container-low border-none rounded-xl font-body-md focus:ring-2 focus:ring-primary"
-                placeholder="you@example.com"
-              />
-            </div>
-            <div className="space-y-sm">
-              <label className="font-label-md text-on-surface block" htmlFor="message">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                value={form.message}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-surface-container-low border-none rounded-xl font-body-md focus:ring-2 focus:ring-primary resize-none"
-                placeholder="Tell us about the trip you're dreaming of..."
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
-            >
-              Send Message
-            </button>
-          </form>
-        )}
-      </div>
-    </div>
-  )
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(draft); setCopyStatus('Draft copied. Nothing has been sent.') }
+    catch { setCopyStatus('Please select and copy the draft below. Nothing has been sent.') }
+  }
+  return <section className="site-container section-space contact-section">
+    <PageMeta title="Plan Your Journey | Life & Leisure Travel" description="Prepare a personalised travel enquiry for holidays, flights, hotels, trains or visa assistance with Life & Leisure Travel." />
+    <div><p className="eyebrow">Start with a conversation</p><h1 className="section-title">Your next chapter.<br /><em>Let's plan it together.</em></h1><p className="section-intro">A destination you love. A date in the diary. An idea that isn't quite an itinerary yet.</p><aside className="enquiry-notice"><h2>Prepare your enquiry</h2><p>Online enquiry delivery is not connected yet. This form prepares a draft you can copy and share through your existing Life & Leisure contact. Nothing is sent or booked here.</p></aside></div>
+    <div className="contact-card">{draft ? <div className="draft-review"><h2>Your enquiry draft</h2><p>Review and copy your details. This is not a submission confirmation.</p><label className="field" htmlFor="enquiry-draft"><span>Draft to copy</span><textarea id="enquiry-draft" rows={13} value={draft} readOnly /></label><div className="button-row"><button type="button" className="button button-navy" onClick={copy}>Copy enquiry</button><button type="button" className="button button-outline" onClick={() => setDraft('')}>Edit details</button></div><p role="status">{copyStatus}</p></div> : <form onSubmit={prepare}><label className="field" htmlFor="contact-name"><span>Your name</span><input id="contact-name" autoComplete="name" name="name" required maxLength={120} value={form.name} onChange={change} pattern=".*\S.*" /></label><label className="field" htmlFor="contact-email"><span>Email address</span><input id="contact-email" type="email" autoComplete="email" name="email" required maxLength={254} value={form.email} onChange={change} /></label><label className="field" htmlFor="contact-message"><span>Your travel plans</span><textarea id="contact-message" name="message" required minLength={10} maxLength={5000} rows={9} value={form.message} onChange={change} placeholder="Where would you like to go, and what matters most to you?" /></label><button type="submit" className="button button-navy">Review My Enquiry <span aria-hidden="true">↗</span></button><p className="form-help">Draft preparation only. No data is transmitted by this form.</p></form>}</div>
+  </section>
 }

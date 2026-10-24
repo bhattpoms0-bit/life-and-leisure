@@ -1,90 +1,24 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { businessDetails } from '../../data/businessDetails'
 
-const linkClass = 'font-body-md text-on-surface-variant hover:text-primary hover:translate-x-1 transition-transform'
-
+const groups = [
+  { title: 'Find your journey', links: [['International holidays', '/packages'], ['Explore destinations', '/destinations'], ['Discover India', '/#discover-india'], ['Tailor-made travel', '/#tailor-made']] },
+  { title: 'Travel, taken care of', links: [['Travel services', '/services'], ['Flight, hotel & train enquiries', '/#service-selector'], ['Visa assistance', '/visa'], ['Travel resources', '/#travel-resources']] },
+  { title: 'Life & Leisure', links: [['Our approach', '/#about-us'], ['Plan your trip', '/contact'], ['Contact us', '/contact']] },
+]
 export default function Footer() {
-  const [email, setEmail] = useState('')
-
-  const handleSubscribe = (event) => {
-    event.preventDefault()
-    console.log('Newsletter subscribe:', email)
-    setEmail('')
-  }
-
-  return (
-    <footer className="bg-surface-container-high pt-xxl pb-xl border-t border-outline-variant">
-      <div className="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
-        <div className="space-y-md">
-          <Link to="/" className="inline-block">
-            <img src="/logo.png" alt="Life and Leisure" className="h-20 w-auto" />
-          </Link>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            Defining the future of luxury travel through precision, passion, and unparalleled curation.
-          </p>
-          <div className="flex space-x-md">
-            <a
-              className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-              href="#"
-            >
-              <span className="material-symbols-outlined text-sm">public</span>
-            </a>
-            <a
-              className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-              href="#"
-            >
-              <span className="material-symbols-outlined text-sm">share</span>
-            </a>
-          </div>
-        </div>
-
-        <div className="flex flex-col space-y-sm">
-          <h4 className="font-label-md text-label-md text-on-surface font-bold mb-md">Company</h4>
-          <a className={linkClass} href="#">About Us</a>
-          <a className={linkClass} href="#">Sustainability</a>
-          <a className={linkClass} href="#">Careers</a>
-          <a className={linkClass} href="#">Blog</a>
-        </div>
-
-        <div className="flex flex-col space-y-sm">
-          <h4 className="font-label-md text-label-md text-on-surface font-bold mb-md">Support</h4>
-          <Link className={linkClass} to="/contact">Contact</Link>
-          <a className={linkClass} href="#">FAQ</a>
-          <Link className={linkClass} to="/visa">Visa Guide</Link>
-          <a className={linkClass} href="#">Terms of Service</a>
-        </div>
-
-        <div className="space-y-md">
-          <h4 className="font-label-md text-label-md text-on-surface font-bold mb-md">Newsletter</h4>
-          <p className="font-body-md text-on-surface-variant">
-            Get our Private Villa Guide + early access to new collections.
-          </p>
-          <form className="flex flex-col space-y-sm" onSubmit={handleSubscribe}>
-            <input
-              className="bg-white border-outline-variant rounded-xl px-md py-sm focus:ring-primary focus:border-primary"
-              placeholder="Email address"
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
-            <button className="bg-primary text-white py-sm rounded-xl font-label-md hover:opacity-90 transition-opacity" type="submit">
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="max-w-container-max mx-auto px-gutter mt-xxl pt-lg border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
-        <p className="font-label-md text-body-md text-on-surface-variant">
-          © 2024 Life and Leisure. All rights reserved.
-        </p>
-        <div className="flex space-x-lg text-on-surface-variant">
-          <a className="hover:text-primary" href="#">Privacy Policy</a>
-          <a className="hover:text-primary" href="#">Terms</a>
-          <a className="hover:text-primary" href="#">Cookies</a>
-        </div>
-      </div>
-    </footer>
-  )
+  return <footer className="site-footer">
+    <div className="site-container footer-grid">
+      <div className="footer-brand"><Link to="/" aria-label="Life & Leisure Travel home"><img src="/logo.png" alt="Life & Leisure Travel" width="1015" height="813" loading="lazy" /></Link><p>Extraordinary places.<br />A more personal way to travel.</p><p className="footer-small">Holidays, flights, hotels, trains and visa assistance. Start with a conversation.</p></div>
+      {groups.map(group => <div key={group.title}><h2>{group.title}</h2><ul>{group.links.map(([label, to]) => <li key={label}><Link to={to}>{label}</Link></li>)}</ul>{group.title === 'Life & Leisure' && <Link className="button button-navy footer-cta" to="/contact">Plan My Trip <span aria-hidden="true">↗</span></Link>}</div>)}
+    </div>
+    {(businessDetails.email || businessDetails.phone || businessDetails.address || businessDetails.supportHours) && <div className="site-container footer-business"><h2>Contact & support</h2><dl>
+      {businessDetails.email && <div><dt>Email</dt><dd><a href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a></dd></div>}
+      {businessDetails.phone && <div><dt>Phone</dt><dd><a href={`tel:${businessDetails.phone.replace(/[^+\d]/g, '')}`}>{businessDetails.phone}</a></dd></div>}
+      {businessDetails.address && <div><dt>Office</dt><dd>{businessDetails.address}</dd></div>}
+      {businessDetails.supportHours && <div><dt>Support hours</dt><dd>{businessDetails.supportHours}</dd></div>}
+    </dl></div>}
+    {businessDetails.trustInformation.length > 0 && <ul className="site-container footer-trust">{businessDetails.trustInformation.map(detail => <li key={detail}>{detail}</li>)}</ul>}
+    <div className="site-container footer-bottom"><p>© {new Date().getFullYear()} Life & Leisure Travel.</p>{businessDetails.policies.length > 0 ? <nav aria-label="Policies">{businessDetails.policies.map(policy => <Link key={policy.to} to={policy.to}>{policy.label}</Link>)}</nav> : <span>Designed around the way you travel.</span>}</div>
+  </footer>
 }

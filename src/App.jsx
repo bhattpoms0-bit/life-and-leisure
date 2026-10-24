@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import TopNav from './components/layout/TopNav'
 import Footer from './components/layout/Footer'
+import ScrollToLocation from './components/layout/ScrollToLocation'
 import Home from './pages/Home'
 import Destinations from './pages/Destinations'
 import VietnamDestination from './pages/VietnamDestination'
@@ -13,9 +14,10 @@ import Contact from './pages/Contact'
 
 export default function App() {
   return (
-    <div className="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <div className="bg-background text-on-surface font-body-md">
+      <ScrollToLocation />
       <TopNav />
-      <main className="pt-24">
+      <main id="main-content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/destinations" element={<Destinations />} />

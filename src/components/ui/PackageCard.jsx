@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import StarRating from './StarRating'
 
-export default function PackageCard({ image, imageAlt, duration, title, description, rating, price, to }) {
+export default function PackageCard({ image, imageAlt, duration, title, description, rating, price, to, variant }) {
+  if (variant === 'editorial') {
+    return <Link to={to} className="editorial-package"><div className="editorial-package-image"><img src={image} alt={imageAlt} width="900" height="1100" loading="lazy" sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 90vw" /><span>{duration}</span></div><div className="editorial-package-body"><h3>{title}</h3><p>{description}</p><div><span>From <strong>{price}</strong><small>per person</small></span><span className="package-arrow" aria-hidden="true">↗</span></div></div></Link>
+  }
   return (
     <Link
       to={to}

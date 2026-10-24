@@ -94,12 +94,12 @@ body {
   .skip-link { position: absolute; left: 1rem; top: -10rem; padding: 1rem; background: var(--navy); color: var(--white); z-index: 100; }
   .skip-link:focus { top: .5rem; }
 
-  .site-header { position: sticky; top: 0; z-index: 60; background: var(--ivory); border-bottom: 1px solid var(--line); }
+  .site-header { position: sticky; top: 0; z-index: 60; background: var(--ivory); border-bottom: 1px solid var(--line); container: site-navigation / inline-size; }
   .header-note { background: var(--navy); color: var(--ivory); text-align: center; padding: .45rem 1rem; font-size: .58rem; letter-spacing: .17em; text-transform: uppercase; }
-  .header-inner { min-height: 92px; display: flex; align-items: center; gap: 1.4rem; }
+  .header-inner { min-height: 92px; display: flex; flex-wrap: nowrap; align-items: center; gap: 1.4rem; }
   .brand-logo { flex-shrink: 0; width: 98px; }
   .brand-logo img { width: 98px; height: 78px; object-fit: contain; }
-  .desktop-navigation { display: none; align-items: center; justify-content: center; gap: 1.25rem; flex: 1; }
+  .desktop-navigation { display: none; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 1.25rem; flex: 1; min-width: 0; }
   .desktop-navigation > a, .nav-dropdown summary { font-size: .69rem; font-weight: 500; padding-block: 1rem; white-space: nowrap; cursor: pointer; }
   .desktop-navigation a:hover, .desktop-navigation a[aria-current], .nav-dropdown summary:hover { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 8px; }
   .nav-dropdown { position: relative; }
@@ -107,8 +107,8 @@ body {
   .nav-dropdown summary::-webkit-details-marker { display: none; }
   .nav-dropdown-panel { position: absolute; top: 100%; left: -.8rem; min-width: 230px; padding: .6rem; background: var(--white); border: 1px solid var(--line); box-shadow: 0 14px 30px rgb(0 0 0 / .08); }
   .nav-dropdown-panel a { display: block; font-size: .78rem; padding: .85rem; }
-  .header-cta { margin-left: auto; font-size: .72rem; }
-  .menu-toggle { display: grid; place-items: center; width: 48px; height: 48px; color: var(--navy); border: 1px solid var(--line); }
+  .header-cta { margin-left: auto; font-size: .72rem; flex-shrink: 0; white-space: nowrap; }
+  .menu-toggle { display: grid; place-items: center; width: 48px; height: 48px; flex-shrink: 0; color: var(--navy); border: 1px solid var(--line); }
   .mobile-navigation { position: absolute; top: 100%; background: var(--ivory); border-bottom: 1px solid var(--line); width: 100%; max-height: calc(100dvh - 123px); overflow-y: auto; box-shadow: 0 12px 20px rgb(0 0 0 / .06); }
   .mobile-navigation .site-container { padding-block: 1rem 1.5rem; }
   .mobile-navigation a { display: flex; justify-content: space-between; align-items: center; min-height: 48px; font-size: .85rem; border-bottom: 1px solid var(--line); }
@@ -244,10 +244,20 @@ body {
   .draft-review > p { font-size: .8rem; line-height: 1.8; color: var(--muted); }
 }
 
-@media (min-width: 1280px) {
+/* 70rem (1120px at the default text size) leaves 1072px inside the gutters for the logo,
+   seven unwrapped navigation labels, gaps and CTA. Use the header's actual
+   available width and let the threshold grow with larger preferred text sizes. */
+@container site-navigation (min-width: 70rem) {
   .desktop-navigation { display: flex; }
   .menu-toggle, .mobile-navigation { display: none !important; }
   .header-cta { margin-left: 0; }
+}
+@supports not (container-type: inline-size) {
+  @media (min-width: 70rem) {
+    .desktop-navigation { display: flex; }
+    .menu-toggle, .mobile-navigation { display: none !important; }
+    .header-cta { margin-left: 0; }
+  }
 }
 @media (max-width: 1023px) {
   .essentials-grid, .india-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -28,6 +28,8 @@ export default function GlassSearchBar({
           <span className="material-symbols-outlined text-outline">public</span>
           <input
             className="bg-transparent border-none focus:ring-0 w-full text-body-md placeholder:text-outline"
+            aria-label="Destination country"
+            maxLength={160}
             placeholder="Where are you traveling to?"
             type="text"
             value={form.destination}

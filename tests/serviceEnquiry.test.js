@@ -11,7 +11,7 @@ test('all five services accept complete enquiries', () => {
     hotels: { destination: 'Kyoto', checkIn: '2026-12-10', checkOut: '2026-12-12', rooms: '1', guests: '2' },
     trains: { from: 'Delhi', to: 'Jaipur', departure: '2026-12-10', class: 'AC Chair Car', passengers: '2' },
     visa: { destination: 'Japan', nationality: 'Indian', purpose: 'Tourism' },
-    holidays: { destination: 'Bali', month: '2026-12', travellers: '2', budget: 'INR 1,50,000 for two' },
+    holidays: { destination: 'Bali', month: '2026-12', travellers: '2', budget: '1,50,000 for two', currency: 'INR' },
   }
   assert.equal(services.length, 5)
   for (const [service, values] of Object.entries(enquiries)) assert.equal(validateService(service, values, today), '', service)
@@ -49,7 +49,7 @@ test('hotel checkout must follow check-in', () => {
 
 test('holiday month must be current or later', () => {
   const values = { destination: 'India', month: '2026-09', travellers: '2', budget: 'Please advise' }
-  assert.match(validateService('holidays', values, today), /later month/)
+  assert.match(validateService('holidays', values, today), /later valid month/)
 })
 
 test('enquiry drafts include only the chosen service fields and preserve entered details', () => {

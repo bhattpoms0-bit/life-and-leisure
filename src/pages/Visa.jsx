@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+import { createEnquiryContext } from '../lib/serviceEnquiry'
 import GlassSearchBar from '../components/ui/GlassSearchBar'
 import Reveal from '../components/ui/Reveal'
 import { unsplashImage } from '../lib/unsplash'
@@ -13,36 +15,38 @@ const AVATARS = [
 
 const PROCESS_STEPS = [
   { icon: 'forum', title: '01. Consultation', description: 'Review your itinerary with our specialized regional experts.' },
-  { icon: 'description', title: '02. Documents', description: 'Submit required documents through our secure, encrypted portal.' },
-  { icon: 'cognition', title: '03. Submission', description: 'We manage all embassy appointments and filing procedures.' },
-  { icon: 'verified', title: '04. Delivery', description: 'Receive your stamped passport via secure premium courier.' },
+  { icon: 'description', title: '02. Documents', description: 'We explain destination-specific requirements. Do not send identity documents through this enquiry form.' },
+  { icon: 'cognition', title: '03. Submission', description: 'We discuss the relevant application and appointment procedures with you.' },
+  { icon: 'verified', title: '04. Delivery', description: 'The embassy decides the outcome. Our team explains the next steps.' },
 ]
 
 const FAQS = [
   {
     question: 'How long does the visa process usually take?',
     answer:
-      'Processing times vary by destination and visa category. Typically, tourist visas take 10-15 working days. However, Life and Leisure offers priority concierge services for most major destinations that can expedite this to 3-5 days in certain cases.',
+      'Processing times depend on the destination, visa category and embassy. Contact our team to discuss current requirements; processing times cannot be guaranteed.',
     defaultOpen: true,
   },
   {
     question: 'Do you guarantee visa approval?',
     answer:
-      'While no service can guarantee approval as it is at the sole discretion of the respective embassy, our 98.7% success rate is built on meticulous document auditing. We flag potential issues before submission to minimize any chance of rejection.',
+      'Visa approval is solely at the discretion of the relevant embassy. Our team can help you understand requirements, but cannot guarantee approval.',
   },
   {
     question: 'Can I track my application status?',
     answer:
-      'Yes. Every Life and Leisure client is assigned a dedicated visa specialist and gains access to our digital portal. You will receive real-time SMS and email updates at every stage—from document verification to embassy filing and final approval.',
+      'Contact our team for application updates. This website does not provide live application tracking or automated SMS and email status updates.',
   },
   {
     question: 'What happens if my visa is rejected?',
     answer:
-      "In the rare event of a rejection, our specialists will review the embassy's feedback with you. We provide a complimentary re-evaluation and assistance with filing an appeal or a new application if the rejection reason can be mitigated.",
+      'Contact our team to discuss the embassy feedback and possible next steps. Appeal or reapplication options depend on the destination and individual circumstances.',
   },
 ]
 
 export default function Visa() {
+  const navigate = useNavigate()
+  const enquire = (destination = '') => navigate('/contact', { state: { enquiry: createEnquiryContext('visa', { destination }, { sourcePath: '/visa' }) } })
   return (
     <div>
       {/* Hero Section */}
@@ -60,9 +64,9 @@ export default function Visa() {
               Simplify Your World Travel
             </h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant mb-xl leading-relaxed">
-              Expert visa processing for over 150 destinations. We handle the complexity so you can focus on the journey.
+              Personal visa assistance for your destination. We handle the complexity so you can focus on the journey.
             </p>
-            <GlassSearchBar variant="compact" />
+            <GlassSearchBar variant="compact" ctaLabel="Check Visa Assistance" onSubmit={values => enquire(values.destination)} />
           </div>
         </div>
       </section>
@@ -97,7 +101,7 @@ export default function Visa() {
             <div className="max-w-xl">
               <h2 className="font-headline-lg text-headline-lg text-primary mb-md">Essential Documentation</h2>
               <p className="text-on-surface-variant">
-                Standard requirements for most international travel visas. Specific destination lists are provided during
+                Illustrative document categories only; embassy requirements vary. Do not upload or send documents here. Destination guidance is discussed during
                 your initial consultation.
               </p>
             </div>
@@ -105,14 +109,14 @@ export default function Visa() {
               <button
                 className="bg-surface-container-high p-3 rounded-full hover:bg-outline-variant transition-colors"
                 type="button"
-                onClick={() => console.log('Download requirements clicked')}
+                aria-label="Request a destination-specific checklist" onClick={() => enquire()}
               >
-                <span className="material-symbols-outlined">download</span>
+                <span className="material-symbols-outlined" aria-hidden="true">checklist</span>
               </button>
               <button
                 className="bg-surface-container-high p-3 rounded-full hover:bg-outline-variant transition-colors"
                 type="button"
-                onClick={() => console.log('Print requirements clicked')}
+                aria-label="Print this guidance" onClick={() => window.print()}
               >
                 <span className="material-symbols-outlined">print</span>
               </button>
@@ -206,13 +210,13 @@ export default function Visa() {
               <div className="p-lg bg-primary rounded-3xl text-on-primary">
                 <span className="material-symbols-outlined text-4xl mb-md">support_agent</span>
                 <h5 className="font-headline-md text-headline-md mb-xs">Need Direct Help?</h5>
-                <p className="text-body-md opacity-80 mb-lg">Chat with our luxury travel concierge 24/7.</p>
+                <p className="text-body-md opacity-80 mb-lg">Send your requirements for personal assistance from our team.</p>
                 <button
                   className="w-full bg-white text-primary font-label-md py-4 rounded-xl hover:bg-opacity-90 transition-all"
                   type="button"
-                  onClick={() => console.log('Start chat clicked')}
+                  onClick={() => enquire()}
                 >
-                  Start Chat
+                  Send an Enquiry
                 </button>
               </div>
             </div>
@@ -246,7 +250,7 @@ export default function Visa() {
               <button
                 className="bg-secondary-container text-on-secondary-container px-xxl py-5 rounded-2xl font-headline-md text-headline-md hover:scale-105 transition-transform duration-300 shadow-xl"
                 type="button"
-                onClick={() => console.log('Talk to a visa expert clicked')}
+                onClick={() => enquire()}
               >
                 Talk to a Visa Expert
               </button>
@@ -258,7 +262,7 @@ export default function Visa() {
                     </div>
                   ))}
                 </div>
-                <span className="text-white/60 font-label-md text-caption">Joined by 2,000+ travelers this month</span>
+                <span className="text-white/60 font-label-md text-caption">Travel enquiries, personally reviewed</span>
               </div>
             </div>
           </div>

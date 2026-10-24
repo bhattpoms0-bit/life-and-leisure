@@ -1,3 +1,4 @@
+import { createEnquiryContext } from '../lib/serviceEnquiry'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PackageCard from '../components/ui/PackageCard'
@@ -45,9 +46,7 @@ function PackageDetailContent({ slug }) {
   const displayPrice = (activeSeason ? activeSeason.price : pkg.price) || 'Price on request'
   const priceBreakdown = activeSeason ? computeBreakdown(activeSeason.price) : pkg.priceBreakdown
 
-  const handleSecureSpot = () => {
-    console.log('Secure your spot:', { slug, travelDate: pkg.travelDate, passengers, season: activeSeason?.key ?? null })
-  }
+  const enquiry = createEnquiryContext('holidays', { destination: pkg.location, travellers: passengers.startsWith('Group') ? '' : passengers.slice(0, 1), preferences: activeSeason ? `Preferred season: ${activeSeason.label ?? activeSeason.key}` : '' }, { sourcePath: `/packages/${slug}`, packageSlug: slug, destination: pkg.location })
 
   return (
     <div>
@@ -379,15 +378,15 @@ function PackageDetailContent({ slug }) {
                   <span className="font-headline-md text-headline-md text-primary">{priceBreakdown?.total || 'On request'}</span>
                 </div>
               </div>
-              <button
-                className="w-full bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
-                type="button"
-                onClick={handleSecureSpot}
+              <Link
+                className="block text-center w-full bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+                to="/contact"
+                state={{ enquiry }}
               >
-                Secure Your Spot
-              </button>
+                Enquire About This Trip
+              </Link>
               <p className="text-caption text-on-surface-variant text-center">
-                No payment required for booking confirmation today.
+                An enquiry does not reserve travel or confirm a booking.
               </p>
               <div className="pt-4 border-t border-outline-variant/30 space-y-sm text-center">
                 <p className="font-body-md text-caption text-on-surface-variant">
@@ -395,6 +394,7 @@ function PackageDetailContent({ slug }) {
                 </p>
                 <Link
                   to="/contact"
+                  state={{ enquiry }}
                   className="block w-full text-center py-sm rounded-xl font-label-md border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors"
                 >
                   Contact Us

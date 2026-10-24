@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom'
+import { createEnquiryContext } from '../../lib/serviceEnquiry'
+import { Link, useLocation } from 'react-router-dom'
 
 // Single pricing-tier card used by TierComparisonSection. The "Most Popular"
 // badge is rendered outside the card's own overflow-hidden wrapper (which
 // clips the image to rounded corners) so it isn't cropped by that clip.
 export default function TierCard({ tier }) {
+  const { pathname } = useLocation()
   return (
     <div className="relative h-full">
       {tier.badge && (
@@ -77,13 +79,13 @@ export default function TierCard({ tier }) {
                 View Full Itinerary
               </Link>
             ) : (
-              <button
-                type="button"
-                onClick={() => console.log('Enquire:', tier.name)}
+              <Link
+                to="/contact"
+                state={{ enquiry: createEnquiryContext('holidays', { destination: tier.cities.join(', ') }, { sourcePath: pathname, experience: tier.name, destination: tier.cities.join(', ') }) }}
                 className="block w-full text-center py-md rounded-lg font-label-md bg-secondary text-white hover:bg-secondary-container transition-colors"
               >
                 Enquire Now
-              </button>
+              </Link>
             )}
           </div>
         </div>

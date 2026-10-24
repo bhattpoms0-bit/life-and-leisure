@@ -15,15 +15,15 @@ const SERVICES = [
   },
   {
     icon: 'support_agent',
-    title: '24/7 Concierge Support',
-    description: 'A dedicated lifestyle manager on call throughout your journey, from dinner reservations to last-minute changes.',
+    title: 'Personal Travel Support',
+    description: 'Discuss your travel questions and support requirements with our team.',
     image: unsplashImage('1766066014237-00645c74e9c6', { w: 700 }),
     imageAlt: 'A smiling concierge wearing a headset at her desk, ready to assist a traveler.',
   },
   {
     icon: 'description',
     title: 'Visa & Documentation Assistance',
-    description: 'Expert visa processing for 150+ destinations.',
+    description: 'Personal assistance with destination-specific visa requirements.',
     learnMoreTo: '/visa',
     image: unsplashImage('1586441133374-ed1cb4007a47', { w: 700 }),
     imageAlt: 'A passport and boarding pass arranged on a travel bag.',
@@ -84,7 +84,7 @@ export default function Services() {
     <div>
       <PageMeta
         title="Our Services | Life and Leisure"
-        description="From bespoke itinerary planning to 24/7 concierge support, visa assistance, private transfers, and worldwide air ticketing — explore every service behind a Life and Leisure journey."
+        description="From bespoke itinerary planning to personal travel support, visa assistance, private transfers, and worldwide air ticketing — explore every service behind a Life and Leisure journey."
       />
 
       {/* Hero Section */}

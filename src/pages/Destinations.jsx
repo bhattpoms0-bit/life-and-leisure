@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+import { createEnquiryContext } from '../lib/serviceEnquiry'
 import { useState } from 'react'
 import DestinationCard from '../components/ui/DestinationCard'
 import Reveal from '../components/ui/Reveal'
@@ -83,6 +85,7 @@ const SIGNATURE_DESTINATIONS = [
 ]
 
 export default function Destinations() {
+  const navigate = useNavigate()
   const [activeRegion, setActiveRegion] = useState(REGIONS[0])
 
   return (
@@ -110,7 +113,7 @@ export default function Destinations() {
               <button
                 className="group flex items-center gap-md text-white font-label-md"
                 type="button"
-                onClick={() => console.log('Explore the region clicked')}
+                onClick={() => navigate('/destinations/vietnam')}
               >
                 <span className="h-12 w-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-all duration-300">
                   <span className="material-symbols-outlined">arrow_forward</span>
@@ -188,14 +191,14 @@ export default function Destinations() {
               <button
                 className="bg-secondary text-white px-xxl py-md rounded-lg font-label-md hover:bg-secondary-container transition-all"
                 type="button"
-                onClick={() => console.log('Talk to an expert clicked')}
+                onClick={() => navigate('/contact', { state: { enquiry: createEnquiryContext('holidays', {}, { sourcePath: '/destinations' }) } })}
               >
                 Talk to an Expert
               </button>
               <button
                 className="bg-white/10 text-white backdrop-blur-md border border-white/20 px-xxl py-md rounded-lg font-label-md hover:bg-white/20 transition-all"
                 type="button"
-                onClick={() => console.log('Browse all services clicked')}
+                onClick={() => navigate('/services')}
               >
                 Browse All Services
               </button>

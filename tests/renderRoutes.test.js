@@ -46,9 +46,9 @@ test('homepage links, enquiry handoff and existing routes render correctly', asy
     for (const route of routes) assert.ok(render(route).includes('<main'), `Could not render ${route}`)
     assert.match(render('/#discover-india'), /id="discover-india"/)
     assert.match(render('/?service=hotels#service-selector'), /id="service-selector"/)
-    const contact = render('/contact', { enquiryDraft: 'Hotels enquiry\nDestination: Kyoto' })
-    assert.match(contact, /Hotels enquiry/)
-    assert.match(contact, /Online enquiry delivery is not connected yet/)
+    const contact = render('/contact', { enquiry: { serviceType: 'hotels', travel: { destination: 'Kyoto' } } })
+    assert.match(contact, /value="Kyoto"/)
+    assert.match(contact, /Privacy information is awaiting business approval/)
     assert.doesNotMatch(contact, /received your message/)
   } finally {
     await server.close()

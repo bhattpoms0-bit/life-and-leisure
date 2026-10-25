@@ -1,8 +1,12 @@
 export const ENQUIRY_FORM_NAME = 'life-leisure-enquiry'
+const acknowledgementBeforeLink = 'I have read the '
+const acknowledgementAfterLink = ' and agree to Life & Leisure Travel using the information I provide to review and respond to my travel enquiry.\n\nI understand that submitting an enquiry does not confirm a booking.'
 export const PRIVACY_NOTICE = {
   approved: false,
-  version: 'phase2a-draft-1',
-  text: 'I acknowledge that Life & Leisure will use the contact details and travel requirements I provide to respond to this enquiry. My enquiry will be processed using Netlify Forms. This does not subscribe me to marketing messages. I will not include passport numbers, identity documents or payment card details.',
+  version: 'phase2a-draft-2',
+  beforeLink: acknowledgementBeforeLink,
+  afterLink: acknowledgementAfterLink,
+  text: `${acknowledgementBeforeLink}Privacy Policy${acknowledgementAfterLink}`,
 }
 
 // UI checks only: neither hostname matching nor public flags authenticate callers

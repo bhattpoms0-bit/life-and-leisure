@@ -1,0 +1,47 @@
+import PageMeta from '../components/seo/PageMeta'
+import { businessDetails } from '../data/businessDetails'
+import { PRIVACY_NOTICE } from '../data/enquiryConfig'
+
+const sections = [
+  ['who-we-are', 'Who We Are'],
+  ['information-we-collect', 'Information We Collect'],
+  ['why-we-collect', 'Why We Collect Information'],
+  ['how-we-use', 'How We Use Enquiry Information'],
+  ['service-providers', 'Service Providers'],
+  ['data-sharing', 'Data Sharing'],
+  ['access', 'Access to Information'],
+  ['retention', 'Enquiry Retention'],
+  ['privacy-requests', 'Customer Privacy Requests'],
+  ['security', 'Information Security'],
+  ['international-enquiries', 'International Enquiries'],
+  ['updates', 'Policy Updates'],
+  ['contact-information', 'Contact Information'],
+]
+
+export default function PrivacyPolicy() {
+  const emailLink = <a href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a>
+  const content = {
+    'who-we-are': <><p>{businessDetails.brandName} is operated by {businessDetails.legalName}. Our trade name is {businessDetails.tradeName}. GSTIN: {businessDetails.gstin}.</p><p>We provide assisted travel planning and booking services, including domestic and international holidays, air and train ticket assistance, hotels, visa assistance, tailor-made holidays, India inbound travel and travel consultation. An enquiry does not confirm a booking.</p></>,
+    'information-we-collect': <><p>Depending on your selected service, the enquiry form requests your name and email address, optional phone number and country of residence, destinations, travel dates or approximate periods, passenger or guest counts, budget and currency, travel preferences, and any message you choose to provide. Visa enquiries also request nationality.</p><p>We record the selected service, relevant package or experience context, source page, enquiry identifier, and your privacy acknowledgement and notice version. Netlify records submission timing and may process technical information needed to deliver the service and filter spam.</p><p>The general enquiry form does not request passport scans, identity documents or payment card details and has no document-upload facility. Please do not include these in free-text fields.</p></>,
+    'why-we-collect': <p>We use enquiry information to review and respond to requests, understand travel requirements, prepare quotations, provide consultation, communicate about requested services, and prevent misuse and spam. Please share only what is relevant to your enquiry.</p>,
+    'how-we-use': <><p>The proposed workflow is to receive enquiries in Netlify Forms and correspond through our business email using Google Workspace. Online submission remains disabled until the privacy information and activation are approved. No CRM is currently implemented.</p><p>Submitting an enquiry does not reserve travel, confirm availability or create a booking. It does not automatically subscribe you to marketing emails.</p></>,
+    'service-providers': <><p><strong>Enquiry processing.</strong> Netlify provides website hosting and, when enabled, form collection and processing through Netlify Forms. Google Workspace supports business email communication and stores related correspondence.</p><p><strong>Website asset delivery.</strong> We use Google Fonts, including Material Symbols icons, from fonts.googleapis.com and fonts.gstatic.com, and externally hosted images from images.unsplash.com. When your browser requests these fonts or images, the providers may receive technical information such as your IP address, browser details and request metadata, including the requested asset and referring page information where supplied by your browser. These asset requests are separate from enquiry processing. Our enquiry form does not send travel enquiry submissions to the font or image providers.</p><p>These providers and their service partners may process information outside India. Their service terms and processing arrangements apply; this policy does not promise storage in a particular country or immediate deletion from all provider systems.</p></>,
+    'data-sharing': <p>Enquiry information is used for the services you request and processed through Netlify Forms and Google Workspace as described above. If a quotation or booking needs information to be shared with a travel supplier, we will explain the relevant next steps and request only the information needed. Information may also need to be retained or disclosed where required by applicable law or in connection with a dispute. The general enquiry form is not a channel for sending travel documents to suppliers.</p>,
+    'access': <p>The proposed initial arrangement limits routine access to enquiry records and business correspondence to one authorized staff member. Provider personnel may process information as needed to operate their services under their terms. Access arrangements must be confirmed before intake is activated; enquiry information is not intended for public access.</p>,
+    'retention': <><p>Travel enquiries that do not result in confirmed bookings are generally retained for up to 90 days after the last relevant customer communication.</p><p>After this period, we review and delete the enquiry information from systems under our control unless continued retention is required for an ongoing matter, legal obligation, or dispute.</p><p>Confirmed bookings, invoices, payments, and transaction records may require separate retention periods.</p><p>This is a proposed manual review procedure, not automatic deletion. The review includes Netlify submissions, related business email and any downloaded exports. Provider retention or backup processes may differ; we do not guarantee immediate erasure of every copy.</p></>,
+    'privacy-requests': <><p>You can email {emailLink} to ask about your enquiry information, request a correction or deletion, or raise a privacy concern. Include enough information to help us locate the enquiry, without sending identity documents or payment details.</p><p>We may ask for proportionate confirmation that the request relates to you. We will review the request and explain any information that needs to be retained for an ongoing matter, legal obligation or dispute.</p></>,
+    'security': <p>We limit the information requested through the general form and use the hosting and email providers described above. Access restrictions and careful handling are part of the proposed enquiry procedure. No internet transmission or storage system can be guaranteed completely secure. Please do not send sensitive documents or payment card information through this form; any later document requirements must be discussed separately.</p>,
+    'international-enquiries': <p>We welcome enquiries about travel within India and overseas. International travel planning may involve providers or suppliers in other countries, where privacy rules may differ. We will discuss the information needed for the requested service before proceeding. You can contact us with questions about the handling of your international enquiry.</p>,
+    'updates': <p>This policy is a draft for owner review, with no approved effective date. The current review version is {PRIVACY_NOTICE.version}. We may update this policy to reflect changes to our enquiry workflow, providers or retention arrangements. The approved version and effective date will be identified when the policy is adopted.</p>,
+    'contact-information': <><p>{businessDetails.brandName}<br />Operated by {businessDetails.legalName}<br />GSTIN: {businessDetails.gstin}</p><p>Email: {emailLink}<br />Website: <a href={businessDetails.website}>{businessDetails.website}</a></p><div className="privacy-offices">{businessDetails.offices.map(office => <address key={office.label}><h3>{office.label}</h3>{office.lines.map((line, index) => <span key={index}>{line}<br /></span>)}</address>)}</div></>,
+  }
+
+  return <article className="site-container section-space privacy-policy">
+    <PageMeta title={`Draft Privacy Policy | ${businessDetails.brandName}`} description="Draft privacy information for travel enquiries, including information use, service providers, retention and contact details." />
+    <header className="privacy-heading"><p className="eyebrow">Your information, thoughtfully handled</p><h1 className="section-title">Privacy Policy</h1><p className="section-intro">How we propose to handle your travel enquiry and the information you choose to share.</p><aside className="privacy-draft" aria-label="Policy review status"><strong>Draft for owner review — not approved</strong><p>No effective date has been set. Online enquiry submission remains disabled. This draft describes the proposed enquiry workflow and retention procedure.</p></aside></header>
+    <div className="privacy-layout">
+      <nav className="privacy-contents" aria-label="Privacy Policy contents"><h2>In this policy</h2><ol>{sections.map(([id, title]) => <li key={id}><a href={`#${id}`}>{title}</a></li>)}</ol></nav>
+      <div className="privacy-sections">{sections.map(([id, title], index) => <section key={id} id={id} aria-labelledby={`${id}-heading`}><p className="eyebrow">{String(index + 1).padStart(2, '0')}</p><h2 id={`${id}-heading`}>{title}</h2>{content[id]}</section>)}</div>
+    </div>
+  </article>
+}

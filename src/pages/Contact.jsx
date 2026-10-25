@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PageMeta from '../components/seo/PageMeta'
 import EnquiryFields from '../components/ui/EnquiryFields'
 import { createEnquiryContext, enquiryServices, switchEnquiryService } from '../lib/serviceEnquiry'
@@ -61,7 +61,7 @@ function EnquiryForm({ initial }) {
         {contactField('country', 'Country of residence', 'text', 80, 'country-name')}
         <label className="field" htmlFor="additional-requirements"><span>Additional requirements (optional)</span><textarea id="additional-requirements" maxLength={5000} rows={5} value={additionalRequirements} onChange={event => setAdditional(event.target.value)} aria-invalid={!!result.errors.additionalRequirements} aria-describedby={`additional-help${result.errors.additionalRequirements ? ' additional-error' : ''}`} /><span id="additional-help" className="form-help">Preferences only; no sensitive documents or payment details.</span>{result.errors.additionalRequirements && <span id="additional-error" className="form-error">{result.errors.additionalRequirements}</span>}</label>
         {!PRIVACY_NOTICE.approved && <p className="form-help">Proposed privacy wording — awaiting business approval</p>}
-        <label className="privacy-ack" htmlFor="privacy-ack"><input id="privacy-ack" type="checkbox" required checked={customer.privacyAcknowledged} onChange={event => setCustomer(previous => ({ ...previous, privacyAcknowledged: event.target.checked }))} aria-invalid={!!result.errors.privacyAcknowledged} aria-describedby={result.errors.privacyAcknowledged ? 'privacy-error' : undefined} /><span>{PRIVACY_NOTICE.text}</span></label>
+        <label className="privacy-ack" htmlFor="privacy-ack"><input id="privacy-ack" type="checkbox" required checked={customer.privacyAcknowledged} onChange={event => setCustomer(previous => ({ ...previous, privacyAcknowledged: event.target.checked }))} aria-invalid={!!result.errors.privacyAcknowledged} aria-describedby={result.errors.privacyAcknowledged ? 'privacy-error' : undefined} /><span>{PRIVACY_NOTICE.beforeLink}<Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy<span className="sr-only"> (opens in a new tab)</span></Link>{PRIVACY_NOTICE.afterLink}</span></label>
         {result.errors.privacyAcknowledged && <p id="privacy-error" className="form-error">{result.errors.privacyAcknowledged}</p>}
         <button type="submit" className="button button-navy" disabled={busy || !!blocked}>{busy ? 'Sending enquiry…' : 'Send My Enquiry'}</button>
         {blocked && <p className="form-help">Submission is disabled pending approval. Nothing has been sent.</p>}

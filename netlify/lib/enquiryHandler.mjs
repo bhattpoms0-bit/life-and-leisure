@@ -35,7 +35,7 @@ function validatePayload(payload, now, notice) {
   return errors
 }
 
-async function boundedJson(request) {
+export async function boundedJson(request) {
   const length = request.headers.get('content-length')
   if (length !== null && (!/^\d+$/.test(length) || Number(length) > MAX_REQUEST_BYTES)) throw new RangeError('size')
   const reader = request.body?.getReader()

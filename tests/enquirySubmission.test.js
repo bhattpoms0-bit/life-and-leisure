@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { createEnquiryContext, validateTravel, isCalendarDate } from '../src/lib/serviceEnquiry.js'
 import { createEnquirySubmitter, validateEnquiry, encodeEnquiry, SUCCESS_MESSAGE, ERROR_MESSAGE } from '../src/lib/enquirySubmission.js'
-import { ENQUIRY_FORM_NAME, NETLIFY_FIELDS, PRIVACY_NOTICE } from '../src/data/enquiryConfig.js'
+import { ENQUIRY_ENDPOINT, PRIVACY_NOTICE } from '../src/data/enquiryConfig.js'
 import { checkEnquiryRelease } from '../scripts/check-enquiry-release.mjs'
 
 const today = '2026-10-24'
@@ -57,19 +57,18 @@ test('calendar validity, past dates, chronology, month and passenger bounds', ()
   assert.ok(validateTravel('flights', { ...multi, leg3Date: '2027-02-02' }, today).leg3Date)
 })
 
-test('URL encoding, canonical form name, honeypot and allowlisted payload', () => {
+test('JSON encoding, honeypot and allowlisted payload', () => {
   const input = valid(); input.customer.fullName = 'Test & Example'; input.additionalRequirements = 'Kyōto + tea & culture\nTwo people'
   input.travel.status = 'approved'; input.metadata.assignee = 'attacker'; input.status = 'booked'
-  const payload = new URLSearchParams(encodeEnquiry(input, 'bot value'))
-  assert.deepEqual([...payload.keys()].sort(), [...NETLIFY_FIELDS].sort())
-  assert.equal(payload.get('form-name'), ENQUIRY_FORM_NAME)
-  assert.equal(payload.get('bot-field'), 'bot value')
-  assert.equal(payload.get('customer_name'), input.customer.fullName)
-  assert.equal(payload.get('additional_requirements'), input.additionalRequirements)
-  assert.equal(payload.get('privacy_acknowledged'), 'yes')
-  assert.equal(payload.get('privacy_notice_version'), PRIVACY_NOTICE.version)
-  assert.doesNotMatch(payload.get('travel_details'), /status|approved/)
-  assert.equal(payload.has('assignee'), false)
+  const payload = JSON.parse(encodeEnquiry(input, 'bot value'))
+  assert.deepEqual(Object.keys(payload).sort(), ['schemaVersion', 'serviceType', 'customer', 'travel', 'additionalRequirements', 'metadata', 'privacyNoticeVersion', 'honeypot'].sort())
+  assert.equal(payload.honeypot, 'bot value')
+  assert.equal(payload.customer.fullName, input.customer.fullName)
+  assert.equal(payload.additionalRequirements, input.additionalRequirements)
+  assert.equal(payload.customer.privacyAcknowledged, true)
+  assert.equal(payload.privacyNoticeVersion, PRIVACY_NOTICE.version)
+  assert.equal(payload.travel.status, undefined)
+  assert.equal(payload.metadata.assignee, undefined)
 })
 
 test('package and India handoff preserves identifiers without contact or staff fields', () => {
@@ -78,22 +77,22 @@ test('package and India handoff preserves identifiers without contact or staff f
   assert.equal(context.travel.destination, 'Bali')
   assert.equal(context.travel.customer, undefined)
   assert.equal(context.metadata.status, undefined)
-  const payload = new URLSearchParams(encodeEnquiry({ ...valid(), ...context }))
-  assert.equal(payload.get('package_slug'), 'bali-escape')
-  assert.equal(payload.get('source_path'), '/packages/bali-escape')
+  const payload = JSON.parse(encodeEnquiry({ ...valid(), ...context }))
+  assert.equal(payload.metadata.packageSlug, 'bali-escape')
+  assert.equal(payload.metadata.sourcePath, '/packages/bali-escape')
   const india = createEnquiryContext('inbound_india', { destination: 'Munsiyari', experiences: 'Himalayan Escapes' }, { experience: 'Himalayan Escapes' })
   assert.equal(india.travel.experiences, 'Himalayan Escapes')
 })
 
 test('acceptance states and duplicate-click lock; success only after acceptance', async () => {
   let resolveRequest; let calls = 0; const states = []
-  const submit = createEnquirySubmitter({ availability, today, onState: state => states.push(state.status), request: (url, options) => { calls++; assert.equal(url, '/'); assert.equal(options.method, 'POST'); assert.equal(options.headers['Content-Type'], 'application/x-www-form-urlencoded'); return new Promise(resolve => { resolveRequest = resolve }) } })
+  const submit = createEnquirySubmitter({ availability, today, onState: state => states.push(state.status), request: (url, options) => { calls++; assert.equal(url, ENQUIRY_ENDPOINT); assert.equal(options.method, 'POST'); assert.equal(options.headers['Content-Type'], 'application/json'); return new Promise(resolve => { resolveRequest = resolve }) } })
   const input = valid(); const original = structuredClone(input)
   const pending = submit(input)
   assert.deepEqual(states, ['VALIDATING', 'SUBMITTING'])
   assert.deepEqual(await submit(input), { ignored: true })
   assert.equal(calls, 1)
-  resolveRequest({ ok: true })
+  resolveRequest(Response.json({ accepted: true, reference: 'LL-test' }))
   assert.equal((await pending).message, SUCCESS_MESSAGE)
   assert.deepEqual(states, ['VALIDATING', 'SUBMITTING', 'SUCCESS'])
   assert.deepEqual(input, original)
@@ -103,7 +102,7 @@ test('acceptance states and duplicate-click lock; success only after acceptance'
 test('network and provider failures preserve entries and allow manual retry', async () => {
   for (const fail of [async () => { throw new Error('offline') }, async () => ({ ok: false })]) {
     let calls = 0
-    const submit = createEnquirySubmitter({ availability, today, request: async (...args) => { calls++; return calls === 1 ? fail(...args) : { ok: true } } })
+    const submit = createEnquirySubmitter({ availability, today, request: async (...args) => { calls++; return calls === 1 ? fail(...args) : Response.json({ accepted: true, reference: 'LL-test' }) } })
     const input = valid(); const original = structuredClone(input)
     assert.equal((await submit(input)).message, ERROR_MESSAGE)
     assert.deepEqual(input, original)
@@ -124,15 +123,11 @@ test('invalid enquiries, unapproved privacy, disabled intake and localhost never
   assert.ok((await submit(input)).errors.privacyAcknowledged)
 })
 
-test('source and production build register exactly the submitted fields, and preserve SPA fallback', () => {
+test('source and built HTML do not register Netlify Forms, and preserve SPA fallback', () => {
   for (const file of ['index.html', 'dist/index.html']) {
     const html = readFileSync(new URL(`../${file}`, import.meta.url), 'utf8')
-    const form = html.match(/<form\b[^>]*name="life-leisure-enquiry"[^>]*>[\s\S]*?<\/form>/)?.[0]
-    assert.ok(form, file)
-    assert.match(form, /data-netlify="true"/)
-    assert.match(form, /netlify-honeypot="bot-field"/)
-    const names = [...form.matchAll(/<(?:input|textarea)\b[^>]*name="([^"]+)"/g)].map(match => match[1])
-    assert.deepEqual(names.sort(), [...NETLIFY_FIELDS].sort())
+    assert.doesNotMatch(html, /data-netlify|netlify-honeypot|name="form-name"/)
+    assert.doesNotMatch(html, /<form\b/)
   }
   assert.match(readFileSync(new URL('../public/_redirects', import.meta.url), 'utf8'), /\/\*\s+\/index.html\s+200/)
 })
@@ -142,6 +137,6 @@ test('production build is blocked until business approval and explicit enablemen
   assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production', VITE_ENQUIRY_INTAKE_ENABLED: 'true' }), /blocked/)
   assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production' }, true), /blocked/)
   assert.doesNotThrow(() => checkEnquiryRelease({ CONTEXT: 'deploy-preview' }))
-  assert.doesNotThrow(() => checkEnquiryRelease({ CONTEXT: 'production', VITE_ENQUIRY_INTAKE_ENABLED: 'true' }, true))
+  assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production', VITE_ENQUIRY_INTAKE_ENABLED: 'true' }, true), /blocked/)
   assert.match(readFileSync(new URL('../netlify.toml', import.meta.url), 'utf8'), /node scripts\/check-enquiry-release.mjs && npm run build/)
 })

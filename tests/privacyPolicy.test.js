@@ -11,7 +11,7 @@ import { enquiryServices } from '../src/lib/serviceEnquiry.js'
 
 test('revised acknowledgement tracks its draft version and cannot activate intake', () => {
   assert.equal(PRIVACY_NOTICE.approved, false)
-  assert.equal(PRIVACY_NOTICE.version, 'phase2a-draft-3')
+  assert.equal(PRIVACY_NOTICE.version, 'email-first-draft-1')
   assert.equal(PRIVACY_NOTICE.text, `${PRIVACY_NOTICE.beforeLink}Privacy Policy${PRIVACY_NOTICE.afterLink}`)
   assert.match(PRIVACY_NOTICE.text, /I have read the Privacy Policy and agree to Life & Leisure Travel/)
   assert.match(PRIVACY_NOTICE.text, /submitting an enquiry does not confirm a booking/)
@@ -19,9 +19,9 @@ test('revised acknowledgement tracks its draft version and cannot activate intak
   assert.ok(validateEnquiry(input).privacyAcknowledged)
   input.customer.privacyAcknowledged = true
   assert.deepEqual(validateEnquiry(input), {})
-  const payload = new URLSearchParams(encodeEnquiry(input))
-  assert.equal(payload.get('privacy_notice_version'), PRIVACY_NOTICE.version)
-  assert.equal(payload.get('privacy_acknowledged'), 'yes')
+  const payload = JSON.parse(encodeEnquiry(input))
+  assert.equal(payload.privacyNoticeVersion, PRIVACY_NOTICE.version)
+  assert.equal(payload.customer.privacyAcknowledged, true)
   assert.notEqual(intakeAvailability({ enabled: true, hostname: 'lifeandleisure.travel' }), '')
   assert.equal(enquiryServices.length, 8)
 })
@@ -58,7 +58,7 @@ test('draft policy, business identity, footer and accessible contact acknowledge
     ])
     const providers = article.match(/<section id="service-providers"[\s\S]*?<\/section>/)?.[0]
     assert.ok(providers)
-    for (const text of ['Enquiry processing.', 'Netlify Forms', 'Google Workspace', 'Website asset delivery.', 'Google Fonts', 'Material Symbols', 'fonts.googleapis.com', 'fonts.gstatic.com', 'images.unsplash.com', 'IP address', 'browser details', 'request metadata']) assert.ok(providers.includes(text), text)
+    for (const text of ['Enquiry processing.', 'Resend', 'Google Workspace', 'Website asset delivery.', 'Google Fonts', 'Material Symbols', 'fonts.googleapis.com', 'fonts.gstatic.com', 'images.unsplash.com', 'IP address', 'browser details', 'request metadata']) assert.ok(providers.includes(text), text)
     assert.match(providers, /Our enquiry form does not send travel enquiry submissions to the font or image providers/)
     assert.doesNotMatch(providers, /cookies|tracking pixels|analytics/i)
     assert.match(article, /90 days after the last relevant customer communication/)

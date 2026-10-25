@@ -38,8 +38,8 @@ function EnquiryForm({ initial }) {
   }
   const submit = async event => {
     event.preventDefault()
-    requestId.current ??= crypto.randomUUID()
-    await submitter({ customer, serviceType, travel: values, additionalRequirements, metadata: { ...context.metadata, clientRequestId: requestId.current } }, new FormData(event.currentTarget).get('bot-field') ?? '')
+    requestId.current ??= { id: crypto.randomUUID(), submittedAt: new Date().toISOString() }
+    await submitter({ customer, serviceType, travel: values, additionalRequirements, metadata: { ...context.metadata, clientRequestId: requestId.current.id, submittedAt: requestId.current.submittedAt } }, new FormData(event.currentTarget).get('bot-field') ?? '')
     requestAnimationFrame(() => statusRef.current?.focus())
   }
   const contactField = (name, label, type, maxLength, autoComplete, required = false) => <label className="field" htmlFor={`customer-${name}`}><span>{label}{!required && ' (optional)'}</span><input id={`customer-${name}`} name={name} type={type} maxLength={maxLength} autoComplete={autoComplete} required={required} value={customer[name]} onChange={event => setCustomer(previous => ({ ...previous, [name]: event.target.value }))} aria-invalid={!!result.errors[name]} aria-describedby={result.errors[name] ? `${name}-error` : undefined} />{result.errors[name] && <span className="form-error" id={`${name}-error`}>{result.errors[name]}</span>}</label>
@@ -47,7 +47,6 @@ function EnquiryForm({ initial }) {
     <PageMeta title="Plan Your Journey | Life & Leisure Travel" description="Share your travel requirements with Life & Leisure Travel for personal booking assistance." />
     <div><p className="eyebrow">Start with a conversation</p><h1 className="section-title">Your next chapter.<br /><em>Let's plan it together.</em></h1><p className="section-intro">A destination you love. A date in the diary. An idea that isn't quite an itinerary yet.</p><aside className="enquiry-notice"><h2>A personally reviewed enquiry</h2><p>Our team reviews your requirements and discusses availability and quotations with you. An enquiry does not reserve travel or confirm a booking.</p><p>Email <a className="text-link break-all" href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a></p><p>Do not include passport numbers, identity documents or payment card details.</p>{blocked && <p role="note">{blocked}</p>}</aside></div>
     <div className="contact-card">{result.status === 'SUCCESS' ? <div className="enquiry-result" role="status" tabIndex={-1} ref={statusRef}>{result.message}</div> : <form name={ENQUIRY_FORM_NAME} onSubmit={submit} noValidate aria-busy={busy}>
-      <input type="hidden" name="form-name" value={ENQUIRY_FORM_NAME} />
       <div hidden aria-hidden="true"><label>Leave this empty<input name="bot-field" tabIndex={-1} autoComplete="off" /></label></div>
       <fieldset disabled={busy} className="service-fieldset"><legend>Your travel requirements</legend>
         <label className="field" htmlFor="service-type"><span>Travel service</span><select id="service-type" value={serviceType} required onChange={event => changeService(event.target.value)} aria-invalid={!!result.errors.serviceType} aria-describedby={result.errors.serviceType ? 'service-type-error' : undefined}><option value="">Choose a service</option>{enquiryServices.map(service => <option key={service.key} value={service.key}>{service.label}</option>)}</select>{result.errors.serviceType && <span id="service-type-error" className="form-error">{result.errors.serviceType}</span>}</label>

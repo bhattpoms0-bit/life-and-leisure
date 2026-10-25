@@ -55,6 +55,7 @@ export function validateTravel(service, values = {}, today = todayLocal()) {
   if (!isServiceType(service)) return { serviceType: 'Please choose a valid travel service.' }
   values = values && typeof values === 'object' ? Object.fromEntries(Object.entries(values).map(([key, value]) => [key, typeof value === 'string' ? value.trim() : value])) : {}
   const errors = {}
+  if (service === 'flights' && values.tripType === 'Multi-city' && values.extraFlights !== undefined && (!Number.isInteger(values.extraFlights) || values.extraFlights < 0 || values.extraFlights > 3)) errors.extraFlights = 'Choose up to three additional flights.'
   for (const field of getServiceFields(service, values)) {
     const raw = values[field.name]
     const value = typeof raw === 'string' || typeof raw === 'number' ? String(raw).trim() : ''

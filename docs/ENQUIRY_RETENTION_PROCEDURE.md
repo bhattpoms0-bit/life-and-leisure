@@ -1,60 +1,43 @@
-# Draft manual enquiry retention procedure
+# Email-first enquiry retention procedure - pending final policy approval
 
-Status: Operating commitments confirmed by the owner; final Privacy Policy approval and online intake activation remain pending. The owner is the single authorized operator and has committed to weekly manual review and ordinary 90-day enquiry retention. Technical account permissions and cross-system deletion have not been operationally or independently verified. No customer records have been accessed or deleted as part of this implementation. No scheduled job or automatic deletion is implemented.
+Owner-confirmed commitments: one operator (the business owner), weekly manual review, ordinary enquiries generally retained up to 90 days after the last relevant customer communication, and separate permission for promotional marketing. Privacy remains false, no effective date is assigned, online intake is disabled, and provider access/deletion processes have not been operationally or independently verified. No data has been accessed or deleted by this implementation.
 
-Scope: enquiries that do not result in confirmed bookings. The owner-confirmed ordinary retention period is generally up to 90 calendar days after the last relevant customer communication. Active bookings, ongoing enquiries, legal obligations, accounting requirements and disputes can justify a documented exception. Confirmed bookings, invoices, payments and transaction records need a separately approved retention schedule; age alone is not authority to delete those records.
+## Ownership and register
 
-## Ownership and access
+The owner manages Google Workspace correspondence and any transactional-email provider records needed for enquiry handling. Check account administrators, delegates, forwarding, connected apps, provider keys and exports against owner-only routine access. This document changes no permissions and authorizes no extra operator.
 
-The business owner is the one authorized staff member responsible for managing Netlify Forms, Google Workspace business email and any enquiry exports. The following account safeguards still need to be verified: access limited to what the role needs, individual accounts, no shared passwords and no enquiry records in public/shared folders. Any additional administrator access or emergency cover must be reviewed explicitly; this document does not change account permissions or authorize another routine operator. Review actual access before activation and when the staff role changes. Do not introduce a CRM or another paid tool for this procedure.
+Use an owner-approved private register, never the Git repository. Keep minimal reference/provider email ID, last relevant interaction date, review-due date, related thread reference, status, holds and known copies. Use the original received date if there is no later relevant customer communication; use Asia/Kolkata consistently. Due date is last relevant communication plus 90 calendar days. Opening mail, internal notes, automated acknowledgements, spam and promotional messages do not restart the clock. Do not copy full customer messages into the register.
 
-## Record last relevant communication
+## Weekly manual review
 
-Maintain a minimal private enquiry register in an owner-approved restricted location, never in this repository. For each enquiry record the Netlify submission identifier/client request ID, received date, last relevant customer communication date, related email-thread reference, status, any booking reference, review-due date, known copies and any retention hold. Use the received date if there has been no later relevant customer communication. Record dates consistently in Asia/Kolkata and calculate the review-due date as last communication plus 90 calendar days.
+1. The owner reviews the register and related mailbox/provider records weekly. Include records due before the next review and prioritize overdue records. This is a manual target, not automatic erasure at an exact hour on day 90.
+2. Reconcile latest relevant customer communication against the mailbox before applying the cutoff. Check duplicate references/messages and known copies.
+3. Check active bookings, ongoing enquiries/quotations, legal obligations, accounting requirements, disputes and preservation instructions. Bookings, invoices, payment and transaction records require separate approved schedules, not automatic deletion based on enquiry age.
+4. Record any exception's scope, reason, owner decision and next review date. Resolve uncertain legal obligations before deletion; do not apply indefinite holds by default.
+5. For expired records without a hold, confirm the exact scope and identifiers. Do not create a new backup export before deletion.
 
-A customer reply or substantive exchange about their travel requirements can update the date. Automated acknowledgements, internal notes, opening an email, spam or a marketing message do not restart the clock. Record the reason for any date correction; do not retain a full second copy of the enquiry in the register. Use only the identifiers needed to reconcile copies.
+## Cross-system deletion after separate authorization
 
-## Weekly review
+- Google Workspace: review received enquiries, staff replies, quoted content, forwarded copies, attachments, duplicate threads, labels, trash and any account retention/Vault holds. Archiving is not deletion. Separate booking/held material from expired content; escalate uncertain mixed threads. Do not bypass preservation rules or promise immediate erasure from provider systems.
+- Transactional provider (proposed Resend): locate the reference/provider ID, inspect actual retained email content, delivery logs, metadata, suppression data and any exports. Use supported account controls or request provider assistance where available. Do not assume a delete API/button exists for sent messages or that the account's retention period is zero. Record provider limitations, pending requests and any automatically expiring records. Account/billing/security records may have separate requirements.
+- Netlify: this branch does not use Forms storage or intentionally log request bodies. Review any platform logs/exports that may include technical metadata. Previously registered Forms records from older deployments, if any, require a separately authorized legacy-data review; local code changes do not delete those records.
+- Exports/copies: review downloaded CSV files, spreadsheets, email exports, attachments, forwarded destinations, synced folders, recycle/trash and known local copies. Remove only approved expired data without disturbing retained records. Do not move a copy elsewhere to preserve it.
+- Log minimal reference, last interaction/due date, systems checked, action date, operator, result, exceptions and outstanding copies. No full messages, credentials or document copies in the deletion log. Register/log retention and location still need owner approval.
 
-1. The business owner will review the register and both verified and spam submissions once each week. Include enquiries reaching 90 days before the next review, and prioritize anything already over 90 days. This confirmed commitment is a manual schedule, not evidence of completed reviews or a guarantee of erasure at an exact hour on day 90.
-2. Reconcile the latest customer communication against Gmail before using the received-at date as a retention cutoff. Check for duplicate submissions, related threads and downloaded copies.
-3. Check for active bookings, ongoing enquiries or quotations, legal obligations, accounting requirements and disputes, including complaints and preservation instructions. Do not delete a booking or accounting record simply because its original enquiry is old.
-4. For an exception, record the reason, owner decision, relevant record scope and next review date. Ask the owner to resolve unclear obligations rather than inventing statutory periods. A hold must be reviewed; it is not an indefinite default for every enquiry.
-5. For an expired enquiry without an exception, verify its identifier and scope before deletion. Do not create a fresh CSV export as a routine backup before deleting it.
-
-## Delete expired copies after authorization
-
-1. In the correct Netlify project's Forms area, locate the exact submission(s), check the identifier against the private register and delete the expired submission records using the available provider controls. Do not delete the entire form or change form detection. Review spam records as well. Confirm the selected records are no longer listed. Provider-side processing or backups may have separate retention; do not certify erasure beyond what was actually checked.
-2. Review the corresponding Google Workspace Gmail messages, including received notification emails, staff replies, quoted enquiry content, attachments, forwarded copies and duplicate threads. Remove expired material within the authorized scope. If a thread also contains booking or held information, separate the decision and escalate uncertain cases rather than deleting the whole thread. Moving mail to Trash is not the same as permanent erasure. Review Trash and any account retention/hold settings with the owner or administrator under the approved process; do not bypass a hold or promise immediate provider-wide deletion.
-3. Review downloaded CSV exports and other known copies in Downloads, working folders, approved cloud folders and any staff-held working documents. Remove expired rows or files without disturbing records still required. Check recycle/trash locations and synced copies as applicable. Do not send a copy to another mailbox or device to preserve it. If a copy cannot be located or removed, log the unresolved item and escalate it.
-4. Record each action in the restricted deletion log: minimal enquiry identifier, last communication date, review/due date, systems checked, action date, operator, result, exceptions/remaining copies and next follow-up. Keep full customer messages out of the log. The owner must approve a retention period for this minimal log and the private register; neither should become permanent replacement storage.
-5. Distinguish completed deletion in business-controlled locations from pending provider retention, mail trash, backups or legal holds. Close the review only when known actions are accounted for, with any remaining limitation recorded honestly.
+Distinguish completed removal in business-controlled locations from provider retention, backups, trash or legal holds. Record unresolved items and follow-up dates rather than certifying unverifiable provider-wide deletion. No automated deletion job is implemented.
 
 ## Correction and deletion requests
 
-Use the official email in `src/data/businessDetails.js` as the request channel. Locate the relevant enquiry using a minimal reference and verify the requester proportionately, preferably using the existing email channel. Do not request passport scans or payment details through the general form.
+The request channel is the official email in `businessDetails.js`. Verify identity proportionately through the existing communication channel, using minimal reference information. Do not request passport scans or payment details through the general enquiry endpoint.
 
-For a correction, confirm the intended change, update the private working record where supported, and ensure staff use the corrected information. Netlify submissions are original received records: do not assume the dashboard can edit them. If an original cannot be corrected in place, use a restricted correction note linked by identifier and review with the owner whether the inaccurate original should be deleted or retained for a documented reason. Avoid unnecessary duplicate copies and preserve an honest record of what changed.
+For correction, update private working records and ensure future correspondence uses corrected details. Original email/provider logs may be immutable: link a restricted correction note and review whether an inaccurate original must be retained or can be deleted. Avoid recreating unnecessary copies.
 
-For deletion, review the request promptly without waiting for the weekly 90-day cycle. Check ongoing matters, booking records, applicable obligations and disputes, then apply the same cross-system checks above to the approved scope. Escalate uncertain identity, disputed records or retention requirements to the owner. Respond through the verified channel with what was done, anything still retained and why, and any follow-up needed. Do not promise a statutory deadline or unconditional deletion without an approved legal basis for that statement.
+For deletion, review promptly without waiting for the weekly cycle, check holds/booking/accounting obligations and apply the cross-system process to approved scope. Explain what was removed, what remains and why, and follow-up limitations through the verified channel. Do not promise a statutory deadline or unconditional deletion before applicable requirements are reviewed.
 
-## Marketing permission
+## Marketing and outstanding approvals
 
-Submitting an enquiry does not automatically subscribe the customer to marketing communications. The owner has confirmed that separate permission is required before promotional marketing is sent. The enquiry acknowledgement is not marketing permission. No promotional workflow is implemented or authorized by this procedure; ordinary enquiry correspondence remains limited to the requested service.
+Enquiry acknowledgement is not promotional consent. Separate permission is required before promotional marketing; no marketing workflow is implemented.
 
-## Owner decisions required before operation
+Before activation: approve the final policy/notice, processing basis and provider terms/locations; verify actual account access, log/content retention and correction/deletion options; approve register/log location and periods, exception handling, incident escalation and separate booking/accounting schedules. Authorize any synthetic send or cleanup separately. No settings, records or DNS are changed by this procedure.
 
-- Approve the policy and acknowledgement version, applicable privacy obligations and basis for processing.
-- Verify actual Netlify and Google Workspace permissions against the confirmed owner-only arrangement, including any provider/account administrator access.
-- Approve the register/log location, minimum fields and their own retention periods.
-- Confirm provider terms, processing locations, Gmail/Netlify retention limitations, any backups or holds and all existing exports.
-- Document how the confirmed exception categories are reviewed, finalize correction/deletion request handling and approve separate booking/transaction retention periods.
-- Review automatic preview builds and site-wide form detection before any push or deployment. A disabled UI is not an endpoint privacy gate.
-
-## Provider references for owner review
-
-- [Netlify submission management](https://docs.netlify.com/manage/forms/submissions/)
-- [Netlify privacy information](https://www.netlify.com/privacy/)
-- [Google Workspace processing terms](https://workspace.google.com/terms/dpa_terms.html)
-
-These references do not establish the account's actual settings or guarantee immediate deletion. No provider configuration has been changed.
+Provider references: https://resend.com/security/gdpr and https://workspace.google.com/terms/dpa_terms.html . Review actual account settings and current terms; neither reference proves completion of deletion.

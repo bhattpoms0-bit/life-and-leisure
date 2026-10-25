@@ -13,9 +13,9 @@ test('consultation is an additional service with validation and canonical encodi
   const input = { ...initial(), ...createEnquiryContext('travel_consultation', { topic: 'Compare travel options', destination: 'Japan', period: 'Spring' }) }
   assert.deepEqual(validateEnquiry(input, '2026-10-25'), {})
   assert.ok(validateEnquiry({ ...input, travel: { topic: ' ' } }).topic)
-  const payload = new URLSearchParams(encodeEnquiry(input))
-  assert.equal(payload.get('service_type'), 'travel_consultation')
-  assert.match(payload.get('travel_summary'), /Travel Consultation enquiry/)
+  const payload = JSON.parse(encodeEnquiry(input))
+  assert.equal(payload.serviceType, 'travel_consultation')
+  assert.equal(payload.travel.topic, 'Compare travel options')
 })
 
 test('switching clears package/experience context and submits current service only', () => {
@@ -25,11 +25,11 @@ test('switching clears package/experience context and submits current service on
   assert.deepEqual(switched.customer, customer)
   assert.deepEqual(switched.travel, { destination: 'Kyoto', guests: '2' })
   assert.deepEqual(switched.metadata, { sourcePath: '/packages/example' })
-  const payload = new URLSearchParams(encodeEnquiry(switched))
-  assert.equal(payload.get('service_type'), 'hotels')
-  for (const field of ['package_slug', 'experience_context', 'destination_context']) assert.equal(payload.get(field), '')
-  assert.equal(payload.get('email'), customer.email)
-  assert.doesNotMatch(payload.get('travel_details'), /budget|month|preferences/)
+  const payload = JSON.parse(encodeEnquiry(switched))
+  assert.equal(payload.serviceType, 'hotels')
+  for (const field of ['packageSlug', 'experience', 'destination']) assert.equal(payload.metadata[field], undefined)
+  assert.equal(payload.customer.email, customer.email)
+  assert.doesNotMatch(JSON.stringify(payload.travel), /budget|month|preferences/)
   assert.deepEqual(original, snapshot)
   // Returning to the original service can restore its draft, never old metadata.
   const back = switchEnquiryService(switched, 'holidays', original.travel)

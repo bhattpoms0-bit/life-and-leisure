@@ -1,12 +1,12 @@
 # Draft manual enquiry retention procedure
 
-Status: OWNER REVIEW ONLY. Not approved, not activated. No customer records have been accessed or deleted as part of this implementation. No scheduled job or automatic deletion is implemented.
+Status: Operating commitments confirmed by the owner; final Privacy Policy approval and online intake activation remain pending. The owner is the single authorized operator and has committed to weekly manual review and ordinary 90-day enquiry retention. Technical account permissions and cross-system deletion have not been operationally or independently verified. No customer records have been accessed or deleted as part of this implementation. No scheduled job or automatic deletion is implemented.
 
-Scope: enquiries that do not result in confirmed bookings. The proposed general retention period is up to 90 calendar days after the last relevant customer communication. Confirmed bookings, invoices, payments and transaction records need a separately approved retention schedule. An ongoing matter, legal obligation or dispute can justify a documented exception; age alone is not authority to delete those records.
+Scope: enquiries that do not result in confirmed bookings. The owner-confirmed ordinary retention period is generally up to 90 calendar days after the last relevant customer communication. Active bookings, ongoing enquiries, legal obligations, accounting requirements and disputes can justify a documented exception. Confirmed bookings, invoices, payments and transaction records need a separately approved retention schedule; age alone is not authority to delete those records.
 
 ## Ownership and access
 
-The owner must name one authorized staff member to manage Netlify Forms, the Google Workspace enquiry mailbox and any exports. Give that operator only the access needed for the role, use individual accounts, avoid shared passwords, and keep enquiry records out of public/shared folders. Owner or administrator access and emergency cover must be reviewed explicitly; this document does not change any account permissions. Review access before activation and when the staff role changes. Do not introduce a CRM or another paid tool for this procedure.
+The business owner is the one authorized staff member responsible for managing Netlify Forms, Google Workspace business email and any enquiry exports. The following account safeguards still need to be verified: access limited to what the role needs, individual accounts, no shared passwords and no enquiry records in public/shared folders. Any additional administrator access or emergency cover must be reviewed explicitly; this document does not change account permissions or authorize another routine operator. Review actual access before activation and when the staff role changes. Do not introduce a CRM or another paid tool for this procedure.
 
 ## Record last relevant communication
 
@@ -16,9 +16,9 @@ A customer reply or substantive exchange about their travel requirements can upd
 
 ## Weekly review
 
-1. The authorized operator reviews the register and both verified and spam submissions once each week. Include enquiries reaching 90 days before the next review, and prioritize anything already over 90 days. A weekly review is a manual schedule, not a guarantee of erasure at an exact hour on day 90.
+1. The business owner will review the register and both verified and spam submissions once each week. Include enquiries reaching 90 days before the next review, and prioritize anything already over 90 days. This confirmed commitment is a manual schedule, not evidence of completed reviews or a guarantee of erasure at an exact hour on day 90.
 2. Reconcile the latest customer communication against Gmail before using the received-at date as a retention cutoff. Check for duplicate submissions, related threads and downloaded copies.
-3. Check whether the enquiry became a confirmed booking, remains an active quotation or other ongoing matter, or is subject to a complaint, dispute, preservation instruction or legal obligation. Do not delete a booking record simply because its original enquiry is old.
+3. Check for active bookings, ongoing enquiries or quotations, legal obligations, accounting requirements and disputes, including complaints and preservation instructions. Do not delete a booking or accounting record simply because its original enquiry is old.
 4. For an exception, record the reason, owner decision, relevant record scope and next review date. Ask the owner to resolve unclear obligations rather than inventing statutory periods. A hold must be reviewed; it is not an indefinite default for every enquiry.
 5. For an expired enquiry without an exception, verify its identifier and scope before deletion. Do not create a fresh CSV export as a routine backup before deleting it.
 
@@ -38,13 +38,17 @@ For a correction, confirm the intended change, update the private working record
 
 For deletion, review the request promptly without waiting for the weekly 90-day cycle. Check ongoing matters, booking records, applicable obligations and disputes, then apply the same cross-system checks above to the approved scope. Escalate uncertain identity, disputed records or retention requirements to the owner. Respond through the verified channel with what was done, anything still retained and why, and any follow-up needed. Do not promise a statutory deadline or unconditional deletion without an approved legal basis for that statement.
 
+## Marketing permission
+
+Submitting an enquiry does not automatically subscribe the customer to marketing communications. The owner has confirmed that separate permission is required before promotional marketing is sent. The enquiry acknowledgement is not marketing permission. No promotional workflow is implemented or authorized by this procedure; ordinary enquiry correspondence remains limited to the requested service.
+
 ## Owner decisions required before operation
 
 - Approve the policy and acknowledgement version, applicable privacy obligations and basis for processing.
-- Confirm the single operator, access permissions and owner/admin oversight.
+- Verify actual Netlify and Google Workspace permissions against the confirmed owner-only arrangement, including any provider/account administrator access.
 - Approve the register/log location, minimum fields and their own retention periods.
 - Confirm provider terms, processing locations, Gmail/Netlify retention limitations, any backups or holds and all existing exports.
-- Approve exception criteria, escalation, correction/deletion request handling and separate booking/transaction retention periods.
+- Document how the confirmed exception categories are reviewed, finalize correction/deletion request handling and approve separate booking/transaction retention periods.
 - Review automatic preview builds and site-wide form detection before any push or deployment. A disabled UI is not an endpoint privacy gate.
 
 ## Provider references for owner review

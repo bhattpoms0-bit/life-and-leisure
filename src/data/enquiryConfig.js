@@ -3,7 +3,7 @@ const acknowledgementBeforeLink = 'I have read the '
 const acknowledgementAfterLink = ' and agree to Life & Leisure Travel using the information I provide to review and respond to my travel enquiry.\n\nI understand that submitting an enquiry does not confirm a booking.'
 export const PRIVACY_NOTICE = {
   approved: false,
-  version: 'phase2a-draft-2',
+  version: 'phase2a-draft-3',
   beforeLink: acknowledgementBeforeLink,
   afterLink: acknowledgementAfterLink,
   text: `${acknowledgementBeforeLink}Privacy Policy${acknowledgementAfterLink}`,

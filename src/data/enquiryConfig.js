@@ -5,12 +5,17 @@ export const PRIVACY_NOTICE = {
   text: 'I acknowledge that Life & Leisure will use the contact details and travel requirements I provide to respond to this enquiry. My enquiry will be processed using Netlify Forms. This does not subscribe me to marketing messages. I will not include passport numbers, identity documents or payment card details.',
 }
 
-// Public feature switch, never a secret. Approval is also required in source.
-export function intakeAvailability({ enabled, hostname, privacyApproved = PRIVACY_NOTICE.approved }) {
+// UI checks only: neither hostname matching nor public flags authenticate callers
+// or prevent direct POSTs to a form already registered with Netlify.
+export function intakeAvailability({ enabled, hostname, previewSiteName = '', privacyApproved = PRIVACY_NOTICE.approved }) {
   if (!privacyApproved) return 'Privacy information is awaiting business approval. Online submission is not enabled.'
   if (!enabled) return 'Online enquiry submission has not been enabled yet.'
-  if (!/^(?:lifeandleisure\.travel|www\.lifeandleisure\.travel|[a-z0-9-]+\.netlify\.app)$/i.test(hostname ?? '')) {
-    return 'Local development cannot receive Netlify Forms submissions. An approved Netlify preview is required.'
+  const host = (hostname ?? '').toLowerCase()
+  const productionHost = host === 'lifeandleisure.travel' || host === 'www.lifeandleisure.travel'
+  const preview = /^deploy-preview-[1-9][0-9]*--([a-z0-9]+(?:-[a-z0-9]+)*)\.netlify\.app$/.exec(host)
+  const approvedPreview = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(previewSiteName) && preview?.[1] === previewSiteName
+  if (!productionHost && !approvedPreview) {
+    return 'Online submission requires the company website or an explicitly configured Life & Leisure Deploy Preview.'
   }
   return ''
 }

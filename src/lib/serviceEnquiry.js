@@ -6,6 +6,7 @@ export const enquiryServices = [
   { key: 'holidays', label: 'Holidays', icon: 'beach_access', action: 'Explore Holidays' },
   { key: 'tailor_made', label: 'Tailor-made travel' },
   { key: 'inbound_india', label: 'Inbound India tours' },
+  { key: 'travel_consultation', label: 'Travel Consultation' },
 ]
 export const services = enquiryServices.slice(0, 5)
 export const isServiceType = value => enquiryServices.some(service => service.key === value)
@@ -24,6 +25,7 @@ export function todayLocal(now = new Date()) {
 export function getServiceFields(service, values = {}) {
   values = values && typeof values === 'object' ? values : {}
   switch (service) {
+    case 'travel_consultation': return [text('topic', 'What would you like help with?', 'Travel plans, options or questions'), text('destination', 'Destination or region', 'If known', false), text('period', 'Approximate travel period', 'If known', false)]
     case 'flights': {
       const extraCount = Number.isInteger(values.extraFlights) ? Math.min(3, Math.max(0, values.extraFlights)) : 0
       return [text('from', 'From', 'City or airport'), text('to', 'To', 'City or airport'),
@@ -110,4 +112,16 @@ export function createEnquiryContext(serviceType, travel = {}, metadata = {}) {
 export function createEnquiryDraft(service, values) {
   const label = enquiryServices.find(item => item.key === service)?.label ?? 'Travel'
   return `${label} enquiry\n\n${getServiceFields(service, values).map(field => `${field.label}: ${String(values[field.name] ?? '').trim()}`).join('\n')}\n\nAdditional preferences: `
+}
+
+// Transfer only equivalent fields. Dates, budgets and country-vs-city destinations
+// have different meanings between services and must be entered for that service.
+export function switchEnquiryService(current, nextService, savedTravel = {}) {
+  if (current.serviceType === nextService) return createEnquiryContext(nextService, current.travel, current.metadata)
+  const shared = {}
+  const destinationServices = ['hotels', 'holidays', 'tailor_made', 'travel_consultation']
+  if (destinationServices.includes(current.serviceType) && destinationServices.includes(nextService)) shared.destination = current.travel.destination
+  const countFields = { flights: 'passengers', trains: 'passengers', hotels: 'guests', holidays: 'travellers', tailor_made: 'travellers', inbound_india: 'travellers' }
+  if (countFields[current.serviceType] && countFields[nextService]) shared[countFields[nextService]] = current.travel[countFields[current.serviceType]]
+  return createEnquiryContext(nextService, { ...shared, ...savedTravel }, { sourcePath: current.metadata?.sourcePath })
 }

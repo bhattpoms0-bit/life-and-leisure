@@ -6,7 +6,7 @@ Status: IMPLEMENTED / TESTED LOCALLY. Actual storage REQUIRES NETLIFY PREVIEW TE
 
 The homepage ServiceSelector and canonical Contact page share `EnquiryFields` and the service schema in `serviceEnquiry.js`. The homepage hands structured route state to `/contact`; it does not send customer information itself. Package, India experience, destination, tailor-made and visa actions use the same intake. Package prices and Phase 1 assets are unchanged.
 
-Seven validated service identifiers: `flights`, `hotels`, `trains`, `visa`, `holidays`, `tailor_made`, `inbound_india`. Contact details, travel details and metadata are separate objects. Switching services retains a separate in-memory travel draft for each service and submits only the active service's fields. No localStorage, document uploads, payments, customer accounts or staff workflow fields are implemented.
+Eight validated service identifiers: `flights`, `hotels`, `trains`, `visa`, `holidays`, `tailor_made`, `inbound_india`, `travel_consultation`. Contact details, travel details and metadata are separate objects. Switching services retains a separate in-memory travel draft for each service and submits only the active service's fields. No localStorage, document uploads, payments, customer accounts or staff workflow fields are implemented.
 
 Contact requires full name, email, service-specific requirements and an unchecked privacy acknowledgement. Phone, residence country and additional requirements are optional. Holidays include a separate budget currency. Other optional budgets require currency when provided. Multi-city flights support two to five legs. Optional hotel preferences can be entered in additional requirements.
 
@@ -71,3 +71,19 @@ Browser interaction and Netlify storage have not been verified by these unit/SSR
 5. Confirm homepage, routes, logo, prices, India photo and credits remain visually intact. Review usage afterward. Email notifications remain a separate Phase 2B task.
 
 Do not commit, push, merge, deploy or enable production intake until the owner approves the next step.
+
+## Focused readiness corrections (2026-10-25)
+
+Travel Consultation is an eighth service (`travel_consultation`), with a required consultation topic and optional destination/period. Existing domestic/international holidays and inbound India options remain. The homepage retains its existing five tabs. Every services-page card now routes to the canonical `/contact` form with its service identifier and the card title as visible requested-service context. Support and transfers map to consultation; accommodation to hotels; air ticketing to flights; bespoke, occasion, group and multi-destination planning to tailor-made; visa assistance to visa. The general services CTA maps to consultation.
+
+The official business email lives only in `businessDetails.email`. The Contact page, existing footer and provider-failure message use that value. No phone, address, registration, support hours or response-time promises were added.
+
+Service changes retain contact state and per-service travel/additional-requirements drafts. Equivalent traveller counts transfer to a new service; destination transfers only between hotels, holidays, tailor-made and consultation, where it has the same broad meaning. Visa country and inbound India destinations, service-specific dates, budgets and preferences do not transfer across services. An existing target-service draft takes precedence. Package, experience and destination metadata are cleared on service change and do not reappear when switching back. Source path remains provenance only. A new request ID is generated for the changed service. This avoids submitting a package association or free-text requirements belonging to another service.
+
+Preview intake fails closed unless `VITE_NETLIFY_SITE_NAME` is explicitly set to the owner-verified Netlify project slug for an authorized preview build. It accepts only `deploy-preview-<positive PR number>--<configured site slug>.netlify.app`; unrelated sites, branch deploys, project-root Netlify URLs, and suffix lookalikes are rejected. The actual project slug has not been established locally; do not infer it from the custom domain or test fixtures. The company production hostnames are unchanged. No environment settings were created or enabled in this correction.
+
+Hostname checks are not authentication. Client-side submission flags are not security boundaries. A registered Netlify form endpoint may accept direct requests independently of the website UI, including when the button is disabled for privacy approval. Review automatic builds and site-wide form detection before pushing or opening a PR: a preview build contains static registration even while UI intake is disabled. Neither the release guard nor these changes shut down a previously registered endpoint.
+
+Privacy remains unapproved and the production release guard is unchanged. HTTP success remains an acknowledgement of the provider response, not independent proof of stored data, verified consent or notification delivery. There is still no trusted server schema, server-enforced privacy gate, durable idempotency, custom rate limiter or automated quota cap. No paid infrastructure was added. Owner decisions on legal identity, final privacy wording, processing terms/location, access, retention/deletion and rights handling remain required before activation.
+
+Regression checks cover consultation validation/encoding, each service-card handoff and selected contact option, context clearing and compatible shared values, saved-draft restoration, central email fallback, exact preview hostname restrictions, and the existing form/route/release-guard tests. No real provider submissions are made by these tests.

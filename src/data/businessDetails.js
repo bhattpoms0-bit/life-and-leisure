@@ -1,7 +1,7 @@
 // Populate only with owner-approved, verified business information.
 // Empty fields are omitted from the footer, including their headings.
 export const businessDetails = {
-  email: null,
+  email: 'enquiries@lifeandleisure.travel',
   phone: null,
   address: null,
   supportHours: null,

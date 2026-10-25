@@ -7,7 +7,7 @@ import { ENQUIRY_FORM_NAME, NETLIFY_FIELDS, PRIVACY_NOTICE } from '../src/data/e
 import { checkEnquiryRelease } from '../scripts/check-enquiry-release.mjs'
 
 const today = '2026-10-24'
-const availability = { enabled: true, hostname: 'deploy-preview-3--lifeandleisure.netlify.app', privacyApproved: true }
+const availability = { enabled: true, hostname: 'deploy-preview-3--lifeandleisure.netlify.app', previewSiteName: 'lifeandleisure', privacyApproved: true }
 const valid = () => ({ customer: { fullName: 'Test Traveller', email: 'test@example.com', phone: '', country: '', privacyAcknowledged: true }, serviceType: 'visa', travel: { destination: 'Japan', nationality: 'Indian', purpose: 'Tourism' }, additionalRequirements: '', metadata: { sourcePath: '/visa', clientRequestId: 'synthetic-test' } })
 
 test('required contact, email, optional phone, lengths and privacy are validated', () => {
@@ -22,7 +22,7 @@ test('required contact, email, optional phone, lengths and privacy are validated
   assert.ok(validateEnquiry(input, today).additionalRequirements)
 })
 
-test('all seven services require only their own relevant fields', () => {
+test('all eight services require only their own relevant fields', () => {
   const travel = {
     flights: { from: 'Delhi', to: 'Tokyo', tripType: 'One-way', departure: '2027-02-01', passengers: '1', cabin: 'Economy' },
     hotels: { destination: 'Kyoto', checkIn: '2027-02-01', checkOut: '2027-02-02', rooms: '1', guests: '2' },
@@ -31,6 +31,7 @@ test('all seven services require only their own relevant fields', () => {
     holidays: { destination: 'Bali', month: '2027-02', travellers: '2', budget: '150000', currency: 'INR' },
     tailor_made: { destination: 'Japan', period: 'Spring 2027', travellers: '2' },
     inbound_india: { destination: 'Rajasthan', arrival: '2027-02-01', departure: '2027-02-10', travellers: '2' },
+    travel_consultation: { topic: 'Help choosing a destination' },
   }
   for (const [service, values] of Object.entries(travel)) {
     assert.deepEqual(validateTravel(service, values, today), {}, service)

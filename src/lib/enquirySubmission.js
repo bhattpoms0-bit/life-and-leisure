@@ -1,8 +1,9 @@
 import { createEnquiryContext, createEnquiryDraft, validateTravel } from './serviceEnquiry.js'
 import { ENQUIRY_FORM_NAME, PRIVACY_NOTICE, intakeAvailability } from '../data/enquiryConfig.js'
+import { businessDetails } from '../data/businessDetails.js'
 
 export const SUCCESS_MESSAGE = 'Thank you for contacting Life & Leisure.\n\nYour travel enquiry has been received.\n\nOur team will review your requirements and contact you regarding the next steps.\n\nThis acknowledgement is not a booking confirmation.'
-export const ERROR_MESSAGE = "We couldn't confirm receipt of your enquiry.\n\nPlease try again or contact Life & Leisure through our official contact details."
+export const ERROR_MESSAGE = `We couldn't confirm receipt of your enquiry.\n\nPlease try again or email ${businessDetails.email}.`
 const singleLine = value => typeof value === 'string' && !/[\r\n]/.test(value) && !value.includes('\u0000')
 
 export function validateEnquiry(enquiry, today) {

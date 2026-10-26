@@ -69,6 +69,10 @@ For the first 24 hours monitor Function errors/429s, Resend failures/bounces, Wo
 
 See ENQUIRY_RETENTION_PROCEDURE.md: one owner/operator, weekly manual reviews, ordinary enquiries generally up to 90 days after last relevant customer communication, and separate booking/accounting/legal/dispute/ongoing-enquiry holds. No automatic deletion or marketing subscription exists. Provider content/log retention, backups, privacy requests and deletion limitations must be verified and recorded. The owner must approve the private register location and its own retention. Verification emails and their provider records need the same documented review; no deletion is authorized here.
 
+The current draft proposes a private Google Sheet deletion register with minimal reference/action evidence retained generally for six calendar months after the recorded review/deletion action, subject to owner approval, legal review and documented exceptions. It is separate from active-enquiry tracking and does not extend the 90-day enquiry target. No Sheet or integration has been created. Review sharing, version history, trash, exports and Workspace holds before implementation or deletion claims.
+
+Resend's published information, reviewed on 2026-10-26, states that active Free accounts retain email/log data for 30 days and that stored data is in the United States; sending region does not select storage location. Backups and other provider records can have separate requirements. The owner reports no configured open/click tracking and has selected Opportunistic TLS. That setting attempts encryption but can fall back to unencrypted delivery if the receiving server does not support TLS. The owner must accept this limitation before activation or separately authorize a provider-setting change; this task changes no setting. Two-factor authentication, actual account settings and provider deletion procedures have not been independently verified. Published provider information does not prove the business's operational or legal compliance.
+
 ## Primary references
 
 - https://docs.netlify.com/build/environment-variables/overview/
@@ -78,3 +82,6 @@ See ENQUIRY_RETENTION_PROCEDURE.md: one owner/operator, weekly manual reviews, o
 - https://resend.com/docs/dashboard/domains/introduction
 - https://resend.com/docs/dashboard/api-keys/introduction
 - https://resend.com/docs/dashboard/emails/idempotency-keys
+- https://resend.com/security/gdpr
+- https://resend.com/docs/dashboard/domains/tls
+- https://resend.com/docs/dashboard/domains/tracking

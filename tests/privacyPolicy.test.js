@@ -12,6 +12,7 @@ import { enquiryServices } from '../src/lib/serviceEnquiry.js'
 test('revised acknowledgement tracks its draft version and cannot activate intake', () => {
   assert.equal(PRIVACY_NOTICE.approved, false)
   assert.equal(PRIVACY_NOTICE.version, 'email-first-draft-1')
+  assert.equal(PRIVACY_NOTICE.effectiveDate, null)
   assert.equal(PRIVACY_NOTICE.text, `${PRIVACY_NOTICE.beforeLink}Privacy Policy${PRIVACY_NOTICE.afterLink}`)
   assert.match(PRIVACY_NOTICE.text, /I have read the Privacy Policy and agree to Life & Leisure Travel/)
   assert.match(PRIVACY_NOTICE.text, /submitting an enquiry does not confirm a booking/)
@@ -37,6 +38,10 @@ test('draft policy, business identity, footer and accessible contact acknowledge
     assert.match(article, /Draft for owner review/)
     assert.match(article, /not approved/)
     assert.match(article, /final policy approval is pending/)
+    assert.match(article, /Before adoption, the owner must verify provider terms/)
+    assert.match(article, /These operational and legal checks have not been completed by this implementation/)
+    assert.match(article, /Acceptance by the email provider does not confirm delivery to our inbox/)
+    assert.doesNotMatch(article, /its account, sender verification and credentials have not yet been configured/)
     assert.match(article, /No effective date has been set/)
     assert.match(article, /Online enquiry submission remains disabled/)
     assert.equal((article.match(/<section\b/g) || []).length, 13)

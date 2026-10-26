@@ -1,80 +1,80 @@
-# Email-first enquiry intake: implementation and release checklist
+# Email-first enquiries: production preparation and operation
 
-## Current status and flow
+## Current state and authorization
 
-Local branch `feature/email-first-enquiries` is based on `772438f7da1cfdcca0f7c5937de1eba1e807e489`. The original feature branch, Draft PR #3 and production are untouched. No provider account, credentials, verified sender, DNS or Workspace change is assumed. Nothing has been deployed or activated.
+The local release candidate retains all eight service workflows and the context corrections on `feature/email-first-enquiries`. Draft PR #4 and the existing disabled visual preview are separate from these uncommitted local changes. Production has not been changed by this preparation. Privacy is still `approved: false`, version `email-first-draft-1`, `effectiveDate: null`; no final version or effective date is assigned.
 
-React Contact -> JSON POST `/api/enquiries` -> Netlify Function -> Resend API -> official Google Workspace mailbox. No Netlify Forms storage or notifications, customer database, payment processing or automatic customer reply. Resend and Workspace may retain message content and metadata.
+The owner reports that `mail.lifeandleisure.travel` is verified in Resend and has chosen `notifications@mail.lifeandleisure.travel` as sender. Account status, key restrictions, delivery, permissions, provider retention and billing limits still need owner verification. No credential is included or configured by this source change.
 
-## Configuration (all values require separate authorization)
+React Contact -> JSON POST `/api/enquiries` -> Netlify Function -> Resend -> `enquiries@lifeandleisure.travel`. No Netlify Forms registration/storage, customer database, CRM, document uploads, payment processing or automatic customer reply is introduced. The intended release contains only the normal enquiry function. The abandoned separate testing project/repository is untouched and is not part of this release.
 
-| Variable | Required value/use |
-| --- | --- |
-| `RESEND_API_KEY` | Server-only sending key restricted to verified sender domain; never `VITE_` |
-| `RESEND_FROM_EMAIL` | Bare address on an owner-verified sending domain |
-| `EMAIL_ENQUIRY_TO` | Exactly `businessDetails.email`; never a customer-selected recipient |
-| `EMAIL_ENQUIRY_ENABLED` | Literal `true`, after activation approval |
-| `EMAIL_ENQUIRY_SITE_ID` | Authorized Netlify site UUID |
-| `EMAIL_ENQUIRY_CONTEXT` | Exactly `deploy-preview` or `production`, matching trusted runtime context |
-| `EMAIL_ENQUIRY_ORIGIN` | One exact HTTPS origin without a trailing slash; company production origin or authorized `deploy-preview-N--site.netlify.app` origin |
-| `VITE_ENQUIRY_INTAKE_ENABLED` | Public UI switch; cannot independently authorize sending |
-| `VITE_NETLIFY_SITE_NAME` | Actual isolated Netlify project slug, for frontend preview hostname matching |
+## Privacy adoption and release guard
 
-Source `PRIVACY_NOTICE.approved` must also be approved for normal activation; it remains false. Requests must contain Boolean acknowledgement and the current notice version. No request can override approval or select another recipient.
+`src/lib/privacyAdoption.js` is shared by the build guard, runtime configuration and default UI availability. It requires Boolean approval `true`, a final version matching `email-first-v` followed by a positive integer (maximum 80 characters), and a real calendar effective date in `YYYY-MM-DD` format that is not in the future in Asia/Kolkata. This is a future naming convention, not approval or assignment of a policy version. The owner must approve the exact policy text/version/date together in a reviewed source change. Current draft values fail closed.
 
-Server variables need Functions scope. A future production build guard also needs provider/server configuration in Builds scope. Variables declared only in `netlify.toml` do not configure runtime secrets. Runtime authorization uses Netlify's trusted `context.site.id` and `context.deploy.context`, not a client header or the build-only `CONTEXT` variable. Never put keys in frontend imports, source control, VITE variables or logs. No environment file is created; `.env` files are ignored.
+`node scripts/check-enquiry-release.mjs && npm run build` remains the Netlify build command; publish `dist`, functions `netlify/functions`, bundler `esbuild`. Production requires adopted privacy, explicit frontend/server activation, provider configuration, approved sender, and matching production site/context. Missing or malformed configuration blocks the build. The function checks the same adopted notice at runtime and validates each request's acknowledgement and exact notice version. No client payload or environment variable can approve privacy. A direct Vite build alone does not execute the release guard.
 
-Build command: `node scripts/check-enquiry-release.mjs && npm run build`. Publish: `dist`. Functions: `netlify/functions`, esbuild bundler. Production build fails unless privacy, UI activation, server activation, provider configuration, production context and site ID are approved/matching. Local Vite and preview builds can succeed while the endpoint stays disabled. Manual upload can bypass build scripts; the independent runtime gate still applies.
+## Production environment variables - future owner action only
 
-## Payload and references
+| Variable | Production value or source | Consumer |
+| --- | --- | --- |
+| `RESEND_API_KEY` | Owner-held sending-only key restricted to `mail.lifeandleisure.travel`; secret, never paste into Git, chat or logs | Function runtime; current build guard also checks presence |
+| `RESEND_FROM_EMAIL` | Exactly `notifications@mail.lifeandleisure.travel` | Build guard and function |
+| `EMAIL_ENQUIRY_TO` | Exactly `enquiries@lifeandleisure.travel` | Build guard and function; clients cannot select a recipient |
+| `EMAIL_ENQUIRY_ENABLED` | `true` only after activation approval; otherwise absent/false | Build guard and function |
+| `EMAIL_ENQUIRY_SITE_ID` | `bd40fa12-261f-4443-bb66-6d1862c38cf7`, verified original project UUID | Build guard and trusted runtime context |
+| `EMAIL_ENQUIRY_CONTEXT` | `production` | Build guard and trusted runtime context |
+| `EMAIL_ENQUIRY_ORIGIN` | `https://lifeandleisure.travel`, no trailing slash | Build guard and exact runtime origin checks |
+| `VITE_ENQUIRY_INTAKE_ENABLED` | `true` only in the authorized production build; false/absent elsewhere | Public React UI and build guard |
+| `VITE_NETLIFY_SITE_NAME` | Not needed for production; optional `lifeandleisure` for disabled visual-preview hostname matching | Public React UI only |
+| `CONTEXT`, `SITE_ID` | Netlify-provided metadata; do not manually override | Build guard |
 
-Fields: `schemaVersion`, `serviceType`, `customer`, `travel`, `additionalRequirements`, `metadata`, `privacyNoticeVersion`, `honeypot`. Unknown schema/contact/context/travel keys are rejected. Only selected-service fields reach the email. Package references are unverified catalogue context, never booking authority.
+All server values must be available to Functions. The current guard also consumes them during Builds. Free-plan All scopes may be usable, but exposes values to trusted build code as well as runtime: a Secret label is not scope isolation. Never prefix a secret with `VITE_`, write it into `netlify.toml`, export it into generated files, print the environment, or expose it through errors. Vite exposes VITE variables; custom bundling/plugins can leak other values too. Scan release output and inspect dependencies/build scripts without printing real values.
 
-Reference: `LL-<client UUID>`. The browser creates a stable timestamp at the first attempt and retains it for retries. It is checked within a 24-hour age / five-minute future tolerance and labelled browser-supplied in email, not authoritative server receipt time. A changed service resets reference/time. Reload after a stale timestamp. Provider acceptance/receipt timestamps can be inspected separately.
+Before provisioning any key, verify in Project configuration -> Environment variables that it has a Production-only value and no Deploy Preview, branch, preview-server, local-development, inherited/shared or branch-specific value. Do not set a universal fallback key. Verify the public-repository sensitive-variable policy withholds secrets from untrusted builds and restrict production access to trusted owners. Use available secret marking without assuming it blocks build code. If contextual isolation is unavailable or cannot be proven, the smallest no-paid-plan fallback is to disable all non-production deployment/build paths before provisioning a key and permit only reviewed production builds. Stop if that trust boundary cannot be enforced. Do not require a paid Functions-only scope for the plan; verify actual account options first.
 
-Resend idempotency uses client UUID plus canonical-payload SHA-256. Same data and timestamp produce the same provider request/key; changed content produces a different key. The provider window is 24 hours, not permanent exactly-once delivery. Fresh IDs, changed content, or later retries can duplicate messages.
+Keep Netlify Forms detection disabled. Redirect `www` to the chosen canonical origin: the function accepts one exact origin. Variables declared only in `netlify.toml` are not runtime secret configuration. Runtime site and deploy context come from Netlify's trusted function context, not headers or the build-only CONTEXT value. Environment changes require a new deployment; do not assume older deployments lose credentials.
 
-## Security and abuse controls
+## Payload, security and limitations
 
-- POST only, custom `/api/enquiries` route; no cross-origin CORS permission.
-- Uncompressed JSON only; optional UTF-8 charset. A 24 KiB byte limit is enforced during reading, including requests without Content-Length. Invalid JSON is rejected.
-- Fixed server recipient/sender; customer email is validated Reply-To only. Subject comes from the service enum. HTML is escaped and plain text is provided. No attachments, arbitrary headers or remote email images are added.
-- Server validation covers all eight services, required fields, lengths, dates/chronology, counts, currency, privacy version and honeypot. Server dates use Asia/Kolkata; the browser calendar uses local time, so the server is authoritative near timezone boundaries.
-- Exact origin/host checks are defense in depth, not authentication: direct clients can spoof Origin. There is no synthetic-only restriction or CAPTCHA in this branch.
-- Resend timeout: ten seconds; no automatic retries or provider redirects. Success requires a successful response containing an email ID. The browser also requires structured `accepted: true`, never merely HTTP 200. Provider acceptance is not confirmed inbox delivery.
-- Application code logs no customer data, request bodies, keys or provider exceptions. Generic responses do not echo provider bodies. Platform logs, provider records and backups still need review.
-- Function config requests a Netlify edge limit of five requests/domain/IP per 60 seconds. Verify it in deploy post-processing logs before relying on enforcement. Netlify can delay enforcement and invalid rules need not fail a deployment.
+SchemaVersion 1 includes service, customer, active travel fields, additional requirements, metadata, privacy notice version and honeypot. See ENQUIRY_CONTEXT.md for constrained group/CTA metadata, original/current destination labels and switching behavior. Source/package metadata is unverified context, not analytics or booking authority.
 
-No durable global quota, custom fraud system or permanent deduplication store is implemented. Distributed IPs can evade per-IP controls. Lean initial protection: platform limit, restricted provider key, provider usage alerts, owner monitoring and a short test window. A strict global cap would need a separately approved atomic TTL counter (for example managed Redis) or a suitable platform/provider control; stronger bot protection could use a server-verified challenge. No such service is installed, purchased or assumed free. Client controls are not a public-endpoint security boundary.
+POST-only exact route, uncompressed JSON, optional UTF-8 charset, streaming 24 KiB request limit, allowlisted fields, all eight service validations, required acknowledgement, validated Reply-To, fixed sender/recipient, escaped HTML and plain text remain. No arbitrary headers or attachments are accepted. Customer email is Reply-To only. Origin checks are defense in depth, not authentication: direct clients can spoof them. No CAPTCHA or durable global quota is implemented.
 
-## Resend setup and DNS prerequisites
+Reference `LL-<client UUID>` and browser timestamp survive identical retries. Timestamp tolerance is 24 hours old/five minutes future; it is labelled browser-supplied, not authoritative server receipt. Service changes reset it. Idempotency uses UUID plus canonical-payload SHA-256; Resend's window is 24 hours, not permanent exactly-once delivery. Changed data, fresh IDs or later requests can duplicate emails.
 
-1. Owner creates/verifies the provider account and reviews plan limits, processing terms/locations, subprocessors, access, retained messages/logs and deletion options.
-2. Prefer a separately approved sending subdomain to isolate reputation. The exact subdomain and From address are owner decisions, not preconfigured identities.
-3. Add the sender domain in Resend. Use ONLY its account-generated DNS records: DKIM and SPF/return-path verification, which may include MX at the sending/return-path subdomain. Do not invent selectors, region, names or values.
-4. Do not replace Workspace root MX records or add a second SPF record at the same DNS name. Review existing SPF, DKIM and DMARC before any approved DNS change. Outbound sender verification is distinct from enabling inbound receiving. No Workspace SMTP password is needed.
-5. Leave optional open/click tracking disabled unless separately reviewed; no provider settings have been configured here.
-6. Create a narrow sending key and configure only the authorized site/context. Verify the sender before activating, without assuming example-domain credentials work.
+The form locks concurrent clicks and accepted submissions. The provider request has a ten-second timeout, no automatic retries and no redirects. Structured provider acceptance is required; success explicitly does not guarantee inbox delivery or confirm a booking. Network uncertainty may occur after provider acceptance: inspect records before retrying. There is no durable delivery queue or application copy to recover a lost message from.
 
-## Privacy and retention
+The function declares five requests per IP/domain per 60 seconds. Check deployment post-processing logs for rule acceptance before relying on it. Platform enforcement can lag, and distributed clients can evade per-IP controls. Review actual Netlify/Resend quotas, alerts and billing; do not assume free usage is unlimited. The code logs no request bodies, customer information, API keys or provider exception details; platform/provider records still require review.
 
-Draft version: `email-first-draft-1`; approval false, no effective date. Netlify hosting/serverless processing, proposed Resend sending, Workspace correspondence and existing Fonts/Material Symbols/Unsplash delivery are disclosed separately. No promise of zero provider retention, India-only storage, guaranteed inbox delivery or automatic deletion. One owner/operator, weekly review, ordinary 90-day enquiry retention and exceptions remain. Final policy, processing basis, provider review, actual controls and deletion handling require owner approval.
+## Approval and deployment sequence
 
-## Isolated testing (not authorized here)
+1. Review the final policy text, processing basis, provider terms/locations, access/deletion controls and separate retention schedules. Adopt an exact notice version/effective date only after explicit owner approval.
+2. Review the source changes and run lint, guarded preview build, tests, whitespace and secret scans. Obtain separate commit/push/PR/merge/release authorization. Do not enable preview sending.
+3. Owner verifies the Resend domain, sending-only domain-restricted key, Workspace mailbox access/forwarding/spam handling, optional tracking settings, quotas and rollback capability. Do not alter root MX, DNS or Workspace as part of this source work.
+4. After separate authorization, configure Production-only values, approve the reviewed release and let the production build guard run. A failed build must leave the previous published deployment in place.
+5. Verify the actual deployed SHA, canonical domain, final policy, one normal enquiry function, routing and accepted rate-limit rule. Never publish a disabled preview as a shortcut around the guard.
+6. Immediately after the separately authorized launch, the owner submits one clearly labelled verification enquiry through the normal form using a personal email. This is real personal information and follows the adopted privacy/retention process. No separate testing infrastructure is required. Other visitors may submit as soon as intake opens.
+7. Record the request reference, inspect Resend acceptance/delivery events and confirm Workspace receipt including Spam/quarantine if needed. Verify From, To, Reply-To and the entered requirements. Provider acceptance alone is not receipt. Inspect an uncertain result before making another attempt; do not repeatedly submit.
 
-Use a separately authorized project and testing branch/repository, not PR #3 or the production `lifeandleisure` project. Current source approval remains false and cannot send. A separately reviewed synthetic-only mechanism or actual privacy/activation approval is required; do not fake policy approval merely to run a test.
+## Failure, rollback and first-day monitoring
 
-Run lint/build and mocked tests first. Review all eight services, context switching, keyboard/mobile UI and acknowledgement. After separate provider/DNS/activation/send authorization, send a minimal synthetic enquiry, match reference/provider ID to the Workspace message, inspect Reply-To without replying, and test duplicates/offline recovery without mass sending. Netlify Forms detection stays unnecessary/disabled. Function/email limits replace Forms submission limits; verify actual provider/account allowances.
+If delivery cannot be confirmed promptly, suspend intake and investigate provider events, Function status and Workspace filtering. Show the official email alternative without claiming receipt. For duplicate messages, reconcile references/idempotency before retrying. Preserve only minimal diagnostics; do not log message bodies or credentials.
 
-Cleanup must cover Workspace, forwarded messages, attachments, exports and provider-retained content/logs. Do not assume a per-message erase button exists. Use the account's supported process or provider request, and document limitations. No record is deleted by automated tests.
+A dedicated Resend key can be revoked by the owner to block future provider authorization across deployments using it. This is the fastest sending cutoff for credential exposure or serious abuse, but does not cancel emails already accepted. Changing a flag, restoring an older production deployment or closing a PR does not revoke all older deploy URLs. After separately authorized cutoff, disable activation, build/deploy a disabled release, verify it and review accessible older deployments. Rotate a compromised key only after investigation and re-establishing isolation. Use the known-good production deployment as the UI rollback reference; do not rewrite main history.
+
+For the first 24 hours monitor Function errors/429s, Resend failures/bounces, Workspace receipt, duplicates, spam, quotas/costs and customer complaints. Pause intake for suspected incidents and use the business mailbox for responses. During week one review daily and perform the first weekly retention review. At one month review access, usage, delivery, exceptions and the first upcoming 90-day due dates. Full retention-cycle verification cannot be claimed before it occurs.
+
+## Privacy operations
+
+See ENQUIRY_RETENTION_PROCEDURE.md: one owner/operator, weekly manual reviews, ordinary enquiries generally up to 90 days after last relevant customer communication, and separate booking/accounting/legal/dispute/ongoing-enquiry holds. No automatic deletion or marketing subscription exists. Provider content/log retention, backups, privacy requests and deletion limitations must be verified and recorded. The owner must approve the private register location and its own retention. Verification emails and their provider records need the same documented review; no deletion is authorized here.
 
 ## Primary references
 
-- https://docs.netlify.com/build/functions/api/
+- https://docs.netlify.com/build/environment-variables/overview/
+- https://docs.netlify.com/build/environment-variables/secrets-controller/
 - https://docs.netlify.com/build/functions/environment-variables/
 - https://docs.netlify.com/manage/security/secure-access-to-sites/rate-limiting/
-- https://docs.netlify.com/resources/troubleshooting/request-chain/
-- https://resend.com/docs/api-reference/emails/send-email
-- https://resend.com/docs/dashboard/emails/idempotency-keys
 - https://resend.com/docs/dashboard/domains/introduction
-- https://resend.com/security/gdpr
+- https://resend.com/docs/dashboard/api-keys/introduction
+- https://resend.com/docs/dashboard/emails/idempotency-keys

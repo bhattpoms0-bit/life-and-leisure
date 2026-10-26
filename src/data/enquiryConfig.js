@@ -1,3 +1,5 @@
+import { isPrivacyAdopted } from '../lib/privacyAdoption.js'
+
 export const ENQUIRY_FORM_NAME = 'life-leisure-enquiry'
 export const ENQUIRY_ENDPOINT = '/api/enquiries'
 const acknowledgementBeforeLink = 'I have read the '
@@ -5,13 +7,14 @@ const acknowledgementAfterLink = ' and agree to Life & Leisure Travel using the 
 export const PRIVACY_NOTICE = {
   approved: false,
   version: 'email-first-draft-1',
+  effectiveDate: null, // Unassigned until the owner explicitly adopts the final text.
   beforeLink: acknowledgementBeforeLink,
   afterLink: acknowledgementAfterLink,
   text: `${acknowledgementBeforeLink}Privacy Policy${acknowledgementAfterLink}`,
 }
 
 // Public UI hint only. The function independently enforces activation and privacy.
-export function intakeAvailability({ enabled, hostname, previewSiteName = '', privacyApproved = PRIVACY_NOTICE.approved }) {
+export function intakeAvailability({ enabled, hostname, previewSiteName = '', privacyApproved = isPrivacyAdopted(PRIVACY_NOTICE) }) {
   if (!privacyApproved) return 'Privacy information is awaiting business approval. Online submission is not enabled.'
   if (!enabled) return 'Online enquiry submission has not been enabled yet.'
   const host = (hostname ?? '').toLowerCase()

@@ -1,13 +1,13 @@
-# Phase 2A: email-first enquiries (local replacement)
+# Phase 2A: email-first enquiries - production preparation
 
-This branch, `feature/email-first-enquiries`, starts from `772438f7da1cfdcca0f7c5937de1eba1e807e489`. The original Phase 2A branch, Draft PR #3 and its Forms-based preview remain unchanged. No email-first commit, push, deployment or provider setup has been performed.
+Branch `feature/email-first-enquiries` contains the normal email-first implementation and enquiry-context corrections. Draft PR #4 has a disabled visual preview; these local production-preparation changes are not committed, pushed, deployed or activated. The original Phase 2A branch, older Draft PR #3, production and the abandoned independent testing project are not modified by this preparation.
 
-The eight services, context handoffs, package references, validation, acknowledgement and design are preserved. Contact sends JSON to `/api/enquiries`, a Netlify Function which independently validates and gates sending before calling Resend. Static Netlify Forms registration has been removed from this branch. Old hosted forms, if any, are not removed by a local HTML change.
+The eight services, five homepage forms, twelve package routes, group preference, source attribution, original/requested destinations, Contact review summary and validation remain. Contact sends JSON to `/api/enquiries`; the function validates before calling Resend. Netlify Forms registration/storage is not used. Legacy hosted records, if any, are not deleted by source changes.
 
-The endpoint is disabled. Privacy remains `approved: false`, notice version `email-first-draft-1`, with no effective date. Resend account, credentials and sender verification are not configured. There is no application customer database, queue, payment collection, document upload or customer auto-response.
+Privacy remains `approved: false`, `email-first-draft-1`, `effectiveDate: null`. Shared adoption checks now require explicit approval, a valid final version and a valid non-future effective date, plus provider/site/context/activation configuration. The approved sender is pinned to `notifications@mail.lifeandleisure.travel`; recipient is fixed to `enquiries@lifeandleisure.travel`. Owner-reported domain verification does not prove deployed credential configuration or successful delivery.
 
-Loading, errors, preserved input and duplicate-click protection remain. Success requires structured email-provider acceptance, not bare HTTP success or a Vite HTML response. Acceptance is not proof of inbox delivery and is not a booking confirmation.
+Only the normal enquiry endpoint belongs in this release. Temporary preview-only delivery functionality is retired locally. Existing validation and context regression coverage is retained; release tests assert the intended function inventory. No customer database, queue, payment collection, upload facility or automatic reply is introduced.
 
-The owner remains the sole operator, with weekly manual review, an ordinary 90-day retention target after last relevant communication, booking/ongoing-enquiry/legal/accounting/dispute exceptions and separate promotional-marketing permission. Provider content/log retention requires review.
+Provider acceptance is not inbox delivery or booking confirmation. The owner's planned immediate post-launch verification will use the normal form and a personal email, only after separate release authorization. Current intake remains disabled and no email is sent by local tests.
 
-See [EMAIL_FIRST_ENQUIRIES.md](EMAIL_FIRST_ENQUIRIES.md) for configuration, limits, DNS/provider prerequisites and isolated testing. See [ENQUIRY_RETENTION_PROCEDURE.md](ENQUIRY_RETENTION_PROCEDURE.md) for the manual procedure. Neither document authorizes activation or deletion.
+See [EMAIL_FIRST_ENQUIRIES.md](EMAIL_FIRST_ENQUIRIES.md) for guarded configuration, approval sequence, Free-plan isolation, monitoring and rollback; [ENQUIRY_CONTEXT.md](ENQUIRY_CONTEXT.md) for context handling; and [ENQUIRY_RETENTION_PROCEDURE.md](ENQUIRY_RETENTION_PROCEDURE.md) for weekly manual retention. None authorizes activation, privacy approval or deletion.

@@ -37,7 +37,7 @@ function validatePayload(payload, now, notice) {
   return errors
 }
 
-export async function boundedJson(request) {
+async function boundedJson(request) {
   const length = request.headers.get('content-length')
   if (length !== null && (!/^\d+$/.test(length) || Number(length) > MAX_REQUEST_BYTES)) throw new RangeError('size')
   const reader = request.body?.getReader()
@@ -63,7 +63,7 @@ export function createEmailEnquiryHandler({ env = process.env, requestEmail = gl
       if (request.method !== 'POST') return reply(405, { accepted: false, message: 'Method not allowed.' }, { Allow: 'POST' })
       const url = new URL(request.url)
       if (url.pathname !== ENQUIRY_ENDPOINT) return reply(404, { accepted: false, message: 'Not found.' })
-      const settings = getEmailConfiguration(env, notice.approved)
+      const settings = getEmailConfiguration(env, notice, now())
       if (!settings) return unavailable()
       // Runtime Context is supplied by Netlify, not by the request body/headers.
       if (context.site?.id !== settings.siteId || context.deploy?.context !== settings.context) return unavailable()

@@ -15,8 +15,9 @@ const providerId = '00000000-0000-4000-8000-000000000003'
 const clock = new Date('2026-10-25T08:00:00.000Z')
 const context = { site: { id: siteId }, deploy: { context: 'deploy-preview' } }
 // Placeholder used only by injected mocks; never a live key/configuration.
-const env = { EMAIL_ENQUIRY_ENABLED: 'true', EMAIL_ENQUIRY_CONTEXT: 'deploy-preview', EMAIL_ENQUIRY_SITE_ID: siteId, EMAIL_ENQUIRY_ORIGIN: origin, RESEND_FROM_EMAIL: 'sender@example.com', EMAIL_ENQUIRY_TO: 'enquiries@lifeandleisure.travel', RESEND_API_KEY: 'offline-mock-only' }
-const notice = { ...PRIVACY_NOTICE, approved: true }
+const env = { EMAIL_ENQUIRY_ENABLED: 'true', EMAIL_ENQUIRY_CONTEXT: 'deploy-preview', EMAIL_ENQUIRY_SITE_ID: siteId, EMAIL_ENQUIRY_ORIGIN: origin, RESEND_FROM_EMAIL: 'notifications@mail.lifeandleisure.travel', EMAIL_ENQUIRY_TO: 'enquiries@lifeandleisure.travel', RESEND_API_KEY: 'offline-mock-only' }
+// Fictional adopted notice for injected offline tests only; not business approval.
+const notice = { ...PRIVACY_NOTICE, approved: true, version: 'email-first-v999', effectiveDate: '2000-01-01' }
 const valid = () => ({ schemaVersion: 1, serviceType: 'visa', customer: { fullName: 'Synthetic Traveller', email: 'synthetic@example.com', phone: '', country: '', privacyAcknowledged: true }, travel: { destination: 'Japan', nationality: 'Indian', purpose: 'Tourism' }, additionalRequirements: '', metadata: { clientRequestId: requestId, submittedAt: clock.toISOString(), sourcePath: '/visa' }, privacyNoticeVersion: notice.version, honeypot: '' })
 const request = (body = valid(), options = {}) => new Request(`${origin}/api/enquiries`, { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: origin }, body: JSON.stringify(body), ...options })
 const accepted = () => Response.json({ id: providerId })
@@ -215,7 +216,7 @@ test('provider errors, invalid acceptance and exceptions never leak PII or get l
 test('React transport integrates with mock server; no success from an HTML/unknown response', async () => {
   const availability = { enabled: true, hostname: new URL(origin).hostname, previewSiteName: 'isolated-test', privacyApproved: true }
   const input = valid()
-  const submit = createEnquirySubmitter({ availability, today: '2026-10-25', request: async (url, options) => { assert.equal(url, '/api/enquiries'); return handler()(new Request(origin + url, { ...options, headers: { ...options.headers, Origin: origin } }), context) } })
+  const submit = createEnquirySubmitter({ availability, today: '2026-10-25', request: async (url, options) => { assert.equal(url, '/api/enquiries'); const payload = JSON.parse(options.body); assert.equal(payload.privacyNoticeVersion, PRIVACY_NOTICE.version); payload.privacyNoticeVersion = notice.version; return handler()(new Request(origin + url, { ...options, body: JSON.stringify(payload), headers: { ...options.headers, Origin: origin } }), context) } })
   const result = await submit(input)
   assert.equal(result.status, 'SUCCESS'); assert.equal(result.message, SUCCESS_MESSAGE)
   assert.match(result.message, /does not confirm delivery/)
@@ -232,5 +233,5 @@ test('rate limit declaration, function routing and production guard remain fail 
   assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production', ...env }), /blocked/)
   const production = { ...env, EMAIL_ENQUIRY_CONTEXT: 'production', EMAIL_ENQUIRY_ORIGIN: 'https://lifeandleisure.travel', CONTEXT: 'production', SITE_ID: siteId, VITE_ENQUIRY_INTAKE_ENABLED: 'true' }
   assert.throws(() => checkEnquiryRelease(production), /blocked/)
-  assert.doesNotThrow(() => checkEnquiryRelease(production, true))
+  assert.doesNotThrow(() => checkEnquiryRelease(production, notice, clock))
 })

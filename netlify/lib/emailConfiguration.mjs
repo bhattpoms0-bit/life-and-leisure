@@ -1,13 +1,16 @@
 import { PRIVACY_NOTICE } from '../../src/data/enquiryConfig.js'
 import { businessDetails } from '../../src/data/businessDetails.js'
 import { isEmail } from '../../src/lib/enquiryValidation.js'
+import { isPrivacyAdopted } from '../../src/lib/privacyAdoption.js'
+
+export const ENQUIRY_SENDER = 'notifications@mail.lifeandleisure.travel'
 
 // No environment defaults authorize sending. Never import this module in React.
-export function getEmailConfiguration(env, privacyApproved = PRIVACY_NOTICE.approved) {
-  if (!privacyApproved || env.EMAIL_ENQUIRY_ENABLED !== 'true') return null
+export function getEmailConfiguration(env, notice = PRIVACY_NOTICE, now = new Date()) {
+  if (!isPrivacyAdopted(notice, now) || env.EMAIL_ENQUIRY_ENABLED !== 'true') return null
   if (!['production', 'deploy-preview'].includes(env.EMAIL_ENQUIRY_CONTEXT)) return null
   if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(env.EMAIL_ENQUIRY_SITE_ID ?? '')) return null
-  if (!isEmail(env.RESEND_FROM_EMAIL) || env.EMAIL_ENQUIRY_TO !== businessDetails.email) return null
+  if (!isEmail(env.RESEND_FROM_EMAIL) || env.RESEND_FROM_EMAIL !== ENQUIRY_SENDER || env.EMAIL_ENQUIRY_TO !== businessDetails.email) return null
   if (typeof env.RESEND_API_KEY !== 'string' || !env.RESEND_API_KEY || /\s/.test(env.RESEND_API_KEY)) return null
   try {
     const origin = new URL(env.EMAIL_ENQUIRY_ORIGIN)

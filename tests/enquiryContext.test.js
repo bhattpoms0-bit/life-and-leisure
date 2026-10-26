@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
 import { createServer } from 'vite'
 import { createEnquiryContext, genericEnquiryContext, packageEnquiryContext, switchEnquiryService, getServiceFields, ENQUIRY_CTAS, GROUP_PREFERENCE } from '../src/lib/serviceEnquiry.js'
-import { encodeEnquiry, validateEnquiry } from '../src/lib/enquirySubmission.js'
+import { encodeEnquiry as encodeCurrentEnquiry, validateEnquiry } from '../src/lib/enquirySubmission.js'
 import { createEmailEnquiryHandler } from '../netlify/lib/enquiryHandler.mjs'
 import { PRIVACY_NOTICE } from '../src/data/enquiryConfig.js'
 
@@ -15,7 +15,16 @@ const origin = 'https://deploy-preview-4--lifeandleisure.netlify.app'
 const siteId = '00000000-0000-4000-8000-000000000001'
 const clock = new Date('2026-10-26T09:00:00.000Z')
 const runtime = { site: { id: siteId }, deploy: { context: 'deploy-preview' } }
-const env = { EMAIL_ENQUIRY_ENABLED: 'true', EMAIL_ENQUIRY_CONTEXT: 'deploy-preview', EMAIL_ENQUIRY_SITE_ID: siteId, EMAIL_ENQUIRY_ORIGIN: origin, RESEND_FROM_EMAIL: 'sender@example.com', EMAIL_ENQUIRY_TO: 'enquiries@lifeandleisure.travel', RESEND_API_KEY: 'offline-mock-only' }
+const env = { EMAIL_ENQUIRY_ENABLED: 'true', EMAIL_ENQUIRY_CONTEXT: 'deploy-preview', EMAIL_ENQUIRY_SITE_ID: siteId, EMAIL_ENQUIRY_ORIGIN: origin, RESEND_FROM_EMAIL: 'notifications@mail.lifeandleisure.travel', EMAIL_ENQUIRY_TO: 'enquiries@lifeandleisure.travel', RESEND_API_KEY: 'offline-mock-only' }
+// Offline release fixture only; actual source notice remains an unapproved draft.
+const notice = { ...PRIVACY_NOTICE, approved: true, version: 'email-first-v999', effectiveDate: '2000-01-01' }
+function encodeEnquiry(enquiry) {
+  const payload = JSON.parse(encodeCurrentEnquiry(enquiry))
+  assert.equal(payload.privacyNoticeVersion, PRIVACY_NOTICE.version)
+  // Model a future adopted build without changing or approving the source notice.
+  payload.privacyNoticeVersion = notice.version
+  return JSON.stringify(payload)
+}
 const customer = { fullName: 'Fictional Audit Traveller', email: 'fictional+audit@example.com', phone: '+1 202 555 0123', country: 'Fictional country', privacyAcknowledged: true }
 const samples = {
   flights: { from: 'Alpha Airport', to: 'Beta Airport', tripType: 'Return', departure: '2027-06-01', return: '2027-06-09', passengers: '3', cabin: 'Business' },
@@ -33,7 +42,7 @@ const input = context => ({ ...context, customer: { ...customer }, additionalReq
 const request = payload => new Request(origin + '/api/enquiries', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
 function mockServer() {
   const messages = []
-  const run = createEmailEnquiryHandler({ env, notice: { ...PRIVACY_NOTICE, approved: true }, now: () => clock,
+  const run = createEmailEnquiryHandler({ env, notice, now: () => clock,
     requestEmail: async (url, options) => {
       assert.equal(url, 'https://api.resend.com/emails')
       messages.push(JSON.parse(options.body))

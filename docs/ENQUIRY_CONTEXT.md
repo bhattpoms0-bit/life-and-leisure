@@ -13,4 +13,4 @@ Contact shows the selected service, available package/original destination, curr
 
 Switching service retains contact details, source page and CTA attribution. It clears package, original destination, experience and group metadata. Compatible fields transfer and saved per-service travel/additional-requirement drafts can return; cleared package/group metadata does not return with those drafts. Drafts are local to the mounted form, not persistent storage.
 
-No activation controls change: privacy remains unapproved, both email endpoints remain disabled by default and the production release guard remains active. Tests inject offline provider responses and mock configuration; they do not activate a deployed endpoint or send emails.
+No activation controls change: privacy remains unapproved, the normal email endpoint remains disabled by default and the production release guard remains active. The intended release no longer includes temporary preview-only email functionality. Tests inject offline provider responses and mock configuration; they do not activate a deployed endpoint or send emails.

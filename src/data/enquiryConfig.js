@@ -5,9 +5,9 @@ export const ENQUIRY_ENDPOINT = '/api/enquiries'
 const acknowledgementBeforeLink = 'I have read the '
 const acknowledgementAfterLink = ' and agree to Life & Leisure Travel using the information I provide to review and respond to my travel enquiry.\n\nI understand that submitting an enquiry does not confirm a booking.'
 export const PRIVACY_NOTICE = {
-  approved: false,
-  version: 'email-first-draft-1',
-  effectiveDate: null, // Unassigned until the owner explicitly adopts the final text.
+  approved: true,
+  version: 'email-first-v1',
+  effectiveDate: '2026-10-26', // Owner-approved date, interpreted in Asia/Kolkata.
   beforeLink: acknowledgementBeforeLink,
   afterLink: acknowledgementAfterLink,
   text: `${acknowledgementBeforeLink}Privacy Policy${acknowledgementAfterLink}`,

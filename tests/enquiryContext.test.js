@@ -16,7 +16,7 @@ const siteId = '00000000-0000-4000-8000-000000000001'
 const clock = new Date('2026-10-26T09:00:00.000Z')
 const runtime = { site: { id: siteId }, deploy: { context: 'deploy-preview' } }
 const env = { EMAIL_ENQUIRY_ENABLED: 'true', EMAIL_ENQUIRY_CONTEXT: 'deploy-preview', EMAIL_ENQUIRY_SITE_ID: siteId, EMAIL_ENQUIRY_ORIGIN: origin, RESEND_FROM_EMAIL: 'notifications@mail.lifeandleisure.travel', EMAIL_ENQUIRY_TO: 'enquiries@lifeandleisure.travel', RESEND_API_KEY: 'offline-mock-only' }
-// Offline release fixture only; actual source notice remains an unapproved draft.
+// Offline release fixture only; this does not activate the owner-approved source notice.
 const notice = { ...PRIVACY_NOTICE, approved: true, version: 'email-first-v999', effectiveDate: '2000-01-01' }
 function encodeEnquiry(enquiry) {
   const payload = JSON.parse(encodeCurrentEnquiry(enquiry))
@@ -211,6 +211,6 @@ test('Contact shows friendly package/group/current/original context and all twel
     assert.match(html, /Header: Plan My Trip/)
     const chosen = { ...switchEnquiryService(generic, 'hotels'), travel: samples.hotels }
     assert.match(render('/contact', chosen), /<option value="hotels" selected="">/)
-    assert.equal(PRIVACY_NOTICE.approved, false)
+    assert.equal(PRIVACY_NOTICE.approved, true)
   } finally { await server.close() }
 })

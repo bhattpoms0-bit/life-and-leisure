@@ -51,7 +51,7 @@ test('homepage links, enquiry handoff and existing routes render correctly', asy
     assert.match(render('/?service=hotels#service-selector'), /id="service-selector"/)
     const contact = render('/contact', { enquiry: { serviceType: 'hotels', travel: { destination: 'Kyoto' } } })
     assert.match(contact, /value="Kyoto"/)
-    assert.match(contact, /Privacy information is awaiting business approval/)
+    assert.match(contact, /Online enquiry submission has not been enabled yet/)
     assert.doesNotMatch(contact, /received your message/)
     const { businessDetails } = await server.ssrLoadModule('/src/data/businessDetails.js')
     assert.ok(contact.includes(`href="mailto:${businessDetails.email}"`))

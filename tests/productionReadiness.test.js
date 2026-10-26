@@ -32,24 +32,32 @@ const payload = () => ({
 })
 const request = body => new Request(origin + '/api/enquiries', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' }, body: JSON.stringify(body ?? payload()) })
 const invalidNotices = [
-  null, undefined, true, [], {}, PRIVACY_NOTICE,
+  null, true, [], {}, { ...PRIVACY_NOTICE, approved: false, version: 'email-first-draft-1', effectiveDate: null },
   { ...adopted, approved: false }, { ...adopted, approved: 'true' }, { ...adopted, approved: 1 },
   { ...adopted, approved: undefined }, { ...adopted, version: undefined },
   ...[null, [], {}, 42, false, '', 'email-first-draft-1', 'email-first-preview-1', 'email-first-test-1', 'email-first-v0', 'email-first-v01', ' email-first-v1', 'email-first-v1\n', 'v1', 'x'.repeat(81)].map(version => ({ ...adopted, version })),
   ...[undefined, null, [], {}, 42, '', '2026-02-30', '2026-13-01', '2026-1-01', '2026-10-26T00:00:00Z', '2026-10-26\n', '2027-01-01'].map(effectiveDate => ({ ...adopted, effectiveDate })),
 ]
 
-test('source privacy remains an unapproved draft with no effective date and cannot enable intake', () => {
-  assert.equal(PRIVACY_NOTICE.approved, false)
-  assert.equal(PRIVACY_NOTICE.version, 'email-first-draft-1')
-  assert.equal(PRIVACY_NOTICE.effectiveDate, null)
-  assert.equal(isPrivacyAdopted(PRIVACY_NOTICE, clock), false)
-  assert.equal(getEmailConfiguration(env), null)
-  assert.notEqual(intakeAvailability({ enabled: true, hostname: 'lifeandleisure.travel' }), '')
-  assert.throws(() => checkEnquiryRelease(env), /blocked/)
+test('owner-approved privacy alone cannot activate intake or production release', async () => {
+  assert.equal(PRIVACY_NOTICE.approved, true)
+  assert.equal(PRIVACY_NOTICE.version, 'email-first-v1')
+  assert.equal(PRIVACY_NOTICE.effectiveDate, '2026-10-26')
+  assert.equal(isPrivacyAdopted(PRIVACY_NOTICE, clock), true)
+  for (const settings of [{}, { ...env, EMAIL_ENQUIRY_ENABLED: 'false' }]) {
+    assert.equal(getEmailConfiguration(settings, PRIVACY_NOTICE, clock), null)
+    assert.throws(() => checkEnquiryRelease({ ...settings, CONTEXT: 'production' }, PRIVACY_NOTICE, clock), /blocked/)
+    let calls = 0
+    const handler = createEmailEnquiryHandler({ env: settings, now: () => clock, requestEmail: () => { calls++; assert.fail('Disabled intake must not send') } })
+    assert.equal((await handler(request(), runtime)).status, 503)
+    assert.equal(calls, 0)
+  }
+  assert.notEqual(intakeAvailability({ enabled: false, hostname: 'lifeandleisure.travel' }), '')
+  assert.throws(() => checkEnquiryRelease({ ...env, VITE_ENQUIRY_INTAKE_ENABLED: 'false' }, PRIVACY_NOTICE, clock), /blocked/)
 })
 
 test('build and runtime agree: malformed, missing, draft and future-dated adoption fail closed', async () => {
+  assert.equal(isPrivacyAdopted(undefined, clock), false)
   let providerCalls = 0
   for (const notice of invalidNotices) {
     assert.equal(isPrivacyAdopted(notice, clock), false)
@@ -122,12 +130,12 @@ test('valid offline adoption permits only validated mocked delivery and rejects 
   assert.deepEqual(outgoing.to, ['enquiries@lifeandleisure.travel'])
   assert.equal(outgoing.reply_to, 'fictional@example.com')
   assert.ok(outgoing.html && outgoing.text)
-  assert.equal(PRIVACY_NOTICE.approved, false)
-  assert.equal(PRIVACY_NOTICE.effectiveDate, null)
+  assert.equal(PRIVACY_NOTICE.approved, true)
+  assert.equal(PRIVACY_NOTICE.effectiveDate, '2026-10-26')
 })
 
 test('production guard CLI blocks current source while preview guard passes and normal endpoint defaults to 503', async () => {
-  const production = spawnSync(process.execPath, ['scripts/check-enquiry-release.mjs'], { env: { ...process.env, ...env }, encoding: 'utf8' })
+  const production = spawnSync(process.execPath, ['scripts/check-enquiry-release.mjs'], { env: { ...process.env, ...env, EMAIL_ENQUIRY_ENABLED: 'false', VITE_ENQUIRY_INTAKE_ENABLED: 'false' }, encoding: 'utf8' })
   assert.equal(production.status, 1)
   assert.match(production.stderr, /production release blocked/)
   const preview = spawnSync(process.execPath, ['scripts/check-enquiry-release.mjs'], { env: { ...process.env, CONTEXT: 'deploy-preview' }, encoding: 'utf8' })

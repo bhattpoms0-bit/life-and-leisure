@@ -1,7 +1,6 @@
 import PageMeta from '../components/seo/PageMeta'
 import { businessDetails } from '../data/businessDetails'
 import { PRIVACY_NOTICE } from '../data/enquiryConfig'
-import { isPrivacyAdopted } from '../lib/privacyAdoption'
 
 const sections = [
   ['who-we-are', 'Who We Are'],
@@ -20,7 +19,6 @@ const sections = [
 ]
 
 export default function PrivacyPolicy() {
-  const adopted = isPrivacyAdopted(PRIVACY_NOTICE)
   const emailLink = <a href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a>
   const content = {
     'who-we-are': <><p>{businessDetails.brandName} is a customer-facing brand operated by {businessDetails.legalName}. Legal name: {businessDetails.legalName}. Trade name recorded for the business: {businessDetails.tradeName}. GSTIN: {businessDetails.gstin}.</p><p>We provide assisted travel planning and booking services, including domestic and international holidays, air and train ticket assistance, hotels, visa assistance, tailor-made holidays, India inbound travel and travel consultation. An enquiry does not confirm a booking.</p></>,
@@ -40,7 +38,7 @@ export default function PrivacyPolicy() {
 
   return <article className="site-container section-space privacy-policy">
     <PageMeta title={`Privacy Policy | ${businessDetails.brandName}`} description="Privacy information for travel enquiries, including information use, service providers, retention and contact details." />
-    <header className="privacy-heading"><p className="eyebrow">Your information, thoughtfully handled</p><h1 className="section-title">Privacy Policy</h1><p className="section-intro">At {businessDetails.brandName}, operated by {businessDetails.legalName}, we respect your privacy and are committed to handling your personal information responsibly.</p><p>This Privacy Policy explains what information we collect when you enquire about our travel services, how we use and share it, how long we retain it, and how you can contact us about your information.</p><aside className="privacy-draft" aria-label="Policy version and effective date"><strong>{adopted ? `Privacy notice: ${PRIVACY_NOTICE.version}` : 'Proposed notice version: email-first-v1'}</strong><p>Effective date: {adopted ? PRIVACY_NOTICE.effectiveDate : '[To be confirmed before adoption]'}</p></aside></header>
+    <header className="privacy-heading"><p className="eyebrow">Your information, thoughtfully handled</p><h1 className="section-title">Privacy Policy</h1><p className="section-intro">At {businessDetails.brandName}, operated by {businessDetails.legalName}, we respect your privacy and are committed to handling your personal information responsibly.</p><p>This Privacy Policy explains what information we collect when you enquire about our travel services, how we use and share it, how long we retain it, and how you can contact us about your information.</p><aside className="privacy-draft" aria-label="Policy version and effective date"><strong>Privacy notice: {PRIVACY_NOTICE.version}</strong><p>Effective date: {PRIVACY_NOTICE.effectiveDate}</p></aside></header>
     <div className="privacy-layout">
       <nav className="privacy-contents" aria-label="Privacy Policy contents"><h2>In this policy</h2><ol>{sections.map(([id, title]) => <li key={id}><a href={`#${id}`}>{title}</a></li>)}</ol></nav>
       <div className="privacy-sections">{sections.map(([id, title], index) => <section key={id} id={id} aria-labelledby={`${id}-heading`}><p className="eyebrow">{String(index + 1).padStart(2, '0')}</p><h2 id={`${id}-heading`}>{title}</h2>{content[id]}</section>)}</div>

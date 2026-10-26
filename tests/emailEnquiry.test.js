@@ -86,10 +86,10 @@ test('metadata types reject with 422 before provider calls; valid source paths a
 })
 
 test('deployed function stays disabled even with valid input; no provider calls', async () => {
-  assert.equal(PRIVACY_NOTICE.approved, false)
+  assert.equal(PRIVACY_NOTICE.approved, true)
   assert.equal((await deployedHandler(request(), context)).status, 503)
   let calls = 0
-  const disabled = handler({ notice: PRIVACY_NOTICE, requestEmail: () => { calls++; assert.fail('Must never send') } })
+  const disabled = handler({ env: { ...env, EMAIL_ENQUIRY_ENABLED: 'false' }, notice: PRIVACY_NOTICE, now: () => new Date('2026-10-26T09:00:00Z'), requestEmail: () => { calls++; assert.fail('Must never send') } })
   assert.equal((await disabled(request(), context)).status, 503)
   assert.equal(calls, 0)
 })
@@ -232,6 +232,6 @@ test('rate limit declaration, function routing and production guard remain fail 
   assert.match(readFileSync('netlify.toml', 'utf8'), /directory = "netlify\/functions"/)
   assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production', ...env }), /blocked/)
   const production = { ...env, EMAIL_ENQUIRY_CONTEXT: 'production', EMAIL_ENQUIRY_ORIGIN: 'https://lifeandleisure.travel', CONTEXT: 'production', SITE_ID: siteId, VITE_ENQUIRY_INTAKE_ENABLED: 'true' }
-  assert.throws(() => checkEnquiryRelease(production), /blocked/)
+  assert.throws(() => checkEnquiryRelease({ ...production, EMAIL_ENQUIRY_ENABLED: 'false' }), /blocked/)
   assert.doesNotThrow(() => checkEnquiryRelease(production, notice, clock))
 })

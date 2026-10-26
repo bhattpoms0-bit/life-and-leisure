@@ -132,8 +132,8 @@ test('source and built HTML do not register Netlify Forms, and preserve SPA fall
   assert.match(readFileSync(new URL('../public/_redirects', import.meta.url), 'utf8'), /\/\*\s+\/index.html\s+200/)
 })
 
-test('production build is blocked until business approval and explicit enablement', () => {
-  assert.equal(PRIVACY_NOTICE.approved, false)
+test('production build still requires explicit activation and complete provider configuration', () => {
+  assert.equal(PRIVACY_NOTICE.approved, true)
   assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production', VITE_ENQUIRY_INTAKE_ENABLED: 'true' }), /blocked/)
   assert.throws(() => checkEnquiryRelease({ CONTEXT: 'production' }, true), /blocked/)
   assert.doesNotThrow(() => checkEnquiryRelease({ CONTEXT: 'deploy-preview' }))

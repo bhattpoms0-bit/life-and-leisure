@@ -10,10 +10,10 @@ import { PRIVACY_NOTICE, intakeAvailability } from '../src/data/enquiryConfig.js
 import { encodeEnquiry, validateEnquiry } from '../src/lib/enquirySubmission.js'
 import { enquiryServices } from '../src/lib/serviceEnquiry.js'
 
-test('revised acknowledgement tracks its draft version and cannot activate intake', () => {
-  assert.equal(PRIVACY_NOTICE.approved, false)
-  assert.equal(PRIVACY_NOTICE.version, 'email-first-draft-1')
-  assert.equal(PRIVACY_NOTICE.effectiveDate, null)
+test('acknowledgement tracks the approved version while intake remains separately disabled', () => {
+  assert.equal(PRIVACY_NOTICE.approved, true)
+  assert.equal(PRIVACY_NOTICE.version, 'email-first-v1')
+  assert.equal(PRIVACY_NOTICE.effectiveDate, '2026-10-26')
   assert.equal(PRIVACY_NOTICE.text, `${PRIVACY_NOTICE.beforeLink}Privacy Policy${PRIVACY_NOTICE.afterLink}`)
   assert.match(PRIVACY_NOTICE.text, /I have read the Privacy Policy and agree to Life & Leisure Travel/)
   assert.match(PRIVACY_NOTICE.text, /submitting an enquiry does not confirm a booking/)
@@ -24,11 +24,11 @@ test('revised acknowledgement tracks its draft version and cannot activate intak
   const payload = JSON.parse(encodeEnquiry(input))
   assert.equal(payload.privacyNoticeVersion, PRIVACY_NOTICE.version)
   assert.equal(payload.customer.privacyAcknowledged, true)
-  assert.notEqual(intakeAvailability({ enabled: true, hostname: 'lifeandleisure.travel' }), '')
+  assert.notEqual(intakeAvailability({ enabled: false, hostname: 'lifeandleisure.travel' }), '')
   assert.equal(enquiryServices.length, 8)
 })
 
-test('proposed customer-facing policy preserves safeguards, business identity and accessible acknowledgement', async () => {
+test('approved customer-facing policy preserves safeguards, business identity and accessible acknowledgement', async () => {
   const server = await createServer({ server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' })
   try {
     const { default: App } = await server.ssrLoadModule('/src/App.jsx')
@@ -38,9 +38,9 @@ test('proposed customer-facing policy preserves safeguards, business identity an
     assert.ok(article)
     assert.match(article, /At Life & Leisure Travel, operated by LIFE & LEISURE INDIA PRIVATE LIMITED, we respect your privacy/)
     assert.match(article, /This Privacy Policy explains what information we collect/)
-    assert.match(article, /Proposed notice version: email-first-v1/)
-    assert.match(article, /Effective date: \[To be confirmed before adoption\]/)
-    assert.doesNotMatch(article, /Draft for owner review|not approved|final policy approval is pending|Before adoption, the owner must verify|These operational and legal checks|No effective date has been set|Online enquiry submission remains disabled|Online intake requires separate policy approval/)
+    assert.match(article, /Privacy notice: email-first-v1/)
+    assert.match(article, /Effective date: 2026-10-26/)
+    assert.doesNotMatch(article, /Proposed notice version|To be confirmed before adoption|Draft for owner review|not approved|final policy approval is pending|Before adoption, the owner must verify|These operational and legal checks|No effective date has been set|Online enquiry submission remains disabled|Online intake requires separate policy approval/)
     assert.match(article, /Acceptance by the email provider does not confirm delivery to our inbox/)
     assert.equal((article.match(/<section\b/g) || []).length, 13)
     for (const heading of ['Who We Are', 'Information We Collect', 'Why We Collect Information', 'How We Use Enquiry Information', 'Service Providers', 'Data Sharing', 'Access to Information', 'Enquiry Retention', 'Customer Privacy Requests', 'Information Security', 'International Enquiries', 'Policy Updates', 'Contact Information']) assert.ok(article.includes(heading), heading)
@@ -136,7 +136,7 @@ test('operating documents separate proposed minimal register retention from enqu
     assert.match(document, /have not been independently verified/)
     for (const link of ['https://resend.com/security/gdpr', 'https://resend.com/docs/dashboard/domains/tls', 'https://resend.com/docs/dashboard/domains/tracking']) assert.ok(document.includes(link))
   }
-  assert.equal(PRIVACY_NOTICE.approved, false)
-  assert.equal(PRIVACY_NOTICE.version, 'email-first-draft-1')
-  assert.equal(PRIVACY_NOTICE.effectiveDate, null)
+  assert.equal(PRIVACY_NOTICE.approved, true)
+  assert.equal(PRIVACY_NOTICE.version, 'email-first-v1')
+  assert.equal(PRIVACY_NOTICE.effectiveDate, '2026-10-26')
 })

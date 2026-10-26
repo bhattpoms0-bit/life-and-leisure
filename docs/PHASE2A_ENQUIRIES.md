@@ -1,6 +1,6 @@
 # Phase 2A: email-first enquiries - production preparation
 
-Branch `feature/email-first-enquiries` contains the normal email-first implementation and enquiry-context corrections. Draft PR #4 has a disabled visual preview; these local production-preparation changes are not committed, pushed, deployed or activated. The original Phase 2A branch, older Draft PR #3, production and the abandoned independent testing project are not modified by this preparation.
+Branch `feature/email-first-enquiries` contains the normal email-first implementation and enquiry-context corrections. Production-preparation changes were committed locally in `60fbf2cda448840de71b3628cedb4d56657e181e`. As of this documentation review, that commit has not been pushed, incorporated into Draft PR #4 or deployed to production; the existing visual preview remains disabled. Recheck remote, PR and deployed SHAs before each release; a local commit does not imply privacy approval or enquiry activation. The original Phase 2A branch, older Draft PR #3, production and the abandoned independent testing project are not modified by this preparation.
 
 The eight services, five homepage forms, twelve package routes, group preference, source attribution, original/requested destinations, Contact review summary and validation remain. Contact sends JSON to `/api/enquiries`; the function validates before calling Resend. Netlify Forms registration/storage is not used. Legacy hosted records, if any, are not deleted by source changes.
 

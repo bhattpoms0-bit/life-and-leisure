@@ -2,7 +2,7 @@
 
 ## Current state and authorization
 
-The local release candidate retains all eight service workflows and the context corrections on `feature/email-first-enquiries`. Draft PR #4 and the existing disabled visual preview are separate from these uncommitted local changes. Production has not been changed by this preparation. Privacy is still `approved: false`, version `email-first-draft-1`, `effectiveDate: null`; no final version or effective date is assigned.
+The local release candidate retains all eight service workflows and the context corrections on `feature/email-first-enquiries`. Production-preparation changes were committed locally in `60fbf2cda448840de71b3628cedb4d56657e181e`. As of this documentation review, that commit has not been pushed, incorporated into Draft PR #4 or deployed to production; the existing visual preview remains disabled. Recheck remote, PR and deployed SHAs before each release; a local commit does not imply privacy approval or enquiry activation. Privacy is still `approved: false`, version `email-first-draft-1`, `effectiveDate: null`; no final version or effective date is assigned.
 
 The owner reports that `mail.lifeandleisure.travel` is verified in Resend and has chosen `notifications@mail.lifeandleisure.travel` as sender. Account status, key restrictions, delivery, permissions, provider retention and billing limits still need owner verification. No credential is included or configured by this source change.
 

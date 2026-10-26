@@ -1,29 +1,84 @@
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import PageMeta from '../components/seo/PageMeta'
+import EnquiryFields from '../components/ui/EnquiryFields'
+import { createEnquiryContext, enquiryServices, switchEnquiryService, ENQUIRY_CTAS } from '../lib/serviceEnquiry'
+import { packageDetails } from '../data/packageDetails'
+import { createEnquirySubmitter } from '../lib/enquirySubmission'
+import { ENQUIRY_FORM_NAME, PRIVACY_NOTICE, intakeAvailability } from '../data/enquiryConfig'
+import { businessDetails } from '../data/businessDetails'
 
 export default function Contact() {
   const { state, key } = useLocation()
-  return <ContactDraft key={key} initialMessage={typeof state?.enquiryDraft === 'string' ? state.enquiryDraft : ''} />
+  return <EnquiryForm key={key} initial={state?.enquiry} />
 }
 
-function ContactDraft({ initialMessage }) {
-  const [form, setForm] = useState({ name: '', email: '', message: initialMessage })
-  const [draft, setDraft] = useState('')
-  const [copyStatus, setCopyStatus] = useState('')
-  const change = event => setForm(previous => ({ ...previous, [event.target.name]: event.target.value }))
-  const prepare = event => {
+function EnquiryForm({ initial }) {
+  const [context, setContext] = useState(() => createEnquiryContext(initial?.serviceType, initial?.travel, initial?.metadata))
+  const serviceType = context.serviceType
+  const [drafts, setDrafts] = useState({ [context.serviceType]: context.travel })
+  const [customer, setCustomer] = useState({ fullName: '', email: '', phone: '', country: '', privacyAcknowledged: false })
+  const [additionalDrafts, setAdditionalDrafts] = useState({})
+  const additionalRequirements = additionalDrafts[serviceType] ?? ''
+  const setAdditional = value => setAdditionalDrafts(previous => ({ ...previous, [serviceType]: value }))
+  const [result, setResult] = useState({ status: 'IDLE', errors: {}, message: '' })
+  const statusRef = useRef(null)
+  const requestId = useRef(null)
+  const availability = { enabled: import.meta.env.VITE_ENQUIRY_INTAKE_ENABLED === 'true', hostname: typeof window !== 'undefined' ? window.location.hostname : '', previewSiteName: import.meta.env.VITE_NETLIFY_SITE_NAME ?? '' }
+  const blocked = intakeAvailability(availability)
+  const [submitter] = useState(() => createEnquirySubmitter({ availability, onState: setResult }))
+  const values = drafts[serviceType] ?? {}
+  const summary = [
+    ['Selected service', enquiryServices.find(service => service.key === serviceType)?.label ?? 'Please choose a service'],
+    ['Selected package', context.metadata.packageSlug ? packageDetails[context.metadata.packageSlug]?.title ?? 'Requested package' : ''],
+    [context.metadata.packageSlug ? 'Original package destination' : 'Original destination context', context.metadata.destination],
+    ['Current requested destination', values.destination || values.to],
+    ['Group-travel preference', context.metadata.groupPreference],
+    ['Experience / tier context', context.metadata.experience],
+    ['Started from', ENQUIRY_CTAS[context.metadata.sourceCta]],
+  ].filter(([, value]) => value)
+  const busy = result.status === 'SUBMITTING' || result.status === 'VALIDATING'
+  const changeTravel = (name, value) => setDrafts(previous => ({ ...previous, [serviceType]: { ...previous[serviceType], [name]: value } }))
+  const changeService = nextService => {
+    const next = switchEnquiryService({ ...context, travel: values }, nextService, drafts[nextService])
+    setContext(next)
+    setDrafts(previous => ({ ...previous, [nextService]: next.travel }))
+    setResult({ status: 'IDLE', errors: {}, message: '' })
+    requestId.current = null
+  }
+  const submit = async event => {
     event.preventDefault()
-    setDraft(`Travel enquiry\nName: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\n${form.message.trim()}`)
-    setCopyStatus('')
+    requestId.current ??= { id: crypto.randomUUID(), submittedAt: new Date().toISOString() }
+    await submitter({ customer, serviceType, travel: values, additionalRequirements, metadata: { ...context.metadata, clientRequestId: requestId.current.id, submittedAt: requestId.current.submittedAt } }, new FormData(event.currentTarget).get('bot-field') ?? '')
+    requestAnimationFrame(() => statusRef.current?.focus())
   }
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(draft); setCopyStatus('Draft copied. Nothing has been sent.') }
-    catch { setCopyStatus('Please select and copy the draft below. Nothing has been sent.') }
-  }
+  const contactField = (name, label, type, maxLength, autoComplete, required = false) => <label className="field" htmlFor={`customer-${name}`}><span>{label}{!required && ' (optional)'}</span><input id={`customer-${name}`} name={name} type={type} maxLength={maxLength} autoComplete={autoComplete} required={required} value={customer[name]} onChange={event => setCustomer(previous => ({ ...previous, [name]: event.target.value }))} aria-invalid={!!result.errors[name]} aria-describedby={result.errors[name] ? `${name}-error` : undefined} />{result.errors[name] && <span className="form-error" id={`${name}-error`}>{result.errors[name]}</span>}</label>
   return <section className="site-container section-space contact-section">
-    <PageMeta title="Plan Your Journey | Life & Leisure Travel" description="Prepare a personalised travel enquiry for holidays, flights, hotels, trains or visa assistance with Life & Leisure Travel." />
-    <div><p className="eyebrow">Start with a conversation</p><h1 className="section-title">Your next chapter.<br /><em>Let's plan it together.</em></h1><p className="section-intro">A destination you love. A date in the diary. An idea that isn't quite an itinerary yet.</p><aside className="enquiry-notice"><h2>Prepare your enquiry</h2><p>Online enquiry delivery is not connected yet. This form prepares a draft you can copy and share through your existing Life & Leisure contact. Nothing is sent or booked here.</p></aside></div>
-    <div className="contact-card">{draft ? <div className="draft-review"><h2>Your enquiry draft</h2><p>Review and copy your details. This is not a submission confirmation.</p><label className="field" htmlFor="enquiry-draft"><span>Draft to copy</span><textarea id="enquiry-draft" rows={13} value={draft} readOnly /></label><div className="button-row"><button type="button" className="button button-navy" onClick={copy}>Copy enquiry</button><button type="button" className="button button-outline" onClick={() => setDraft('')}>Edit details</button></div><p role="status">{copyStatus}</p></div> : <form onSubmit={prepare}><label className="field" htmlFor="contact-name"><span>Your name</span><input id="contact-name" autoComplete="name" name="name" required maxLength={120} value={form.name} onChange={change} pattern=".*\S.*" /></label><label className="field" htmlFor="contact-email"><span>Email address</span><input id="contact-email" type="email" autoComplete="email" name="email" required maxLength={254} value={form.email} onChange={change} /></label><label className="field" htmlFor="contact-message"><span>Your travel plans</span><textarea id="contact-message" name="message" required minLength={10} maxLength={5000} rows={9} value={form.message} onChange={change} placeholder="Where would you like to go, and what matters most to you?" /></label><button type="submit" className="button button-navy">Review My Enquiry <span aria-hidden="true">↗</span></button><p className="form-help">Draft preparation only. No data is transmitted by this form.</p></form>}</div>
+    <PageMeta title="Plan Your Journey | Life & Leisure Travel" description="Share your travel requirements with Life & Leisure Travel for personal booking assistance." />
+    <div><p className="eyebrow">Start with a conversation</p><h1 className="section-title">Your next chapter.<br /><em>Let's plan it together.</em></h1><p className="section-intro">A destination you love. A date in the diary. An idea that isn't quite an itinerary yet.</p><aside className="enquiry-notice"><h2>A personally reviewed enquiry</h2><p>Our team reviews your requirements and discusses availability and quotations with you. An enquiry does not reserve travel or confirm a booking.</p><p>Email <a className="text-link break-all" href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a></p><p>Do not include passport numbers, identity documents or payment card details.</p>{blocked && <p role="note">{blocked}</p>}</aside></div>
+    <div className="contact-card">{result.status === 'SUCCESS' ? <div className="enquiry-result" role="status" tabIndex={-1} ref={statusRef}>{result.message}</div> : <form name={ENQUIRY_FORM_NAME} onSubmit={submit} noValidate aria-busy={busy}>
+      <div hidden aria-hidden="true"><label>Leave this empty<input name="bot-field" tabIndex={-1} autoComplete="off" /></label></div>
+      <fieldset disabled={busy} className="service-fieldset"><legend>Your travel requirements</legend>
+        <label className="field" htmlFor="service-type"><span>Travel service</span><select id="service-type" value={serviceType} required onChange={event => changeService(event.target.value)} aria-invalid={!!result.errors.serviceType} aria-describedby={result.errors.serviceType ? 'service-type-error' : undefined}><option value="">Choose a service</option>{enquiryServices.map(service => <option key={service.key} value={service.key}>{service.label}</option>)}</select>{result.errors.serviceType && <span id="service-type-error" className="form-error">{result.errors.serviceType}</span>}</label>
+        <section className="enquiry-context" aria-labelledby="enquiry-context-heading">
+          <h2 id="enquiry-context-heading">Your enquiry summary</h2>
+          <dl>{summary.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          {context.metadata.groupPreference && <p className="form-help">Your group preference is saved. Enter the accurate number of travellers below; “4+” is not an exact count.</p>}
+        </section>
+        <EnquiryFields service={serviceType} values={values} onChange={changeTravel} errors={result.errors} />
+        <h2>Your contact details</h2>
+        {contactField('fullName', 'Full name', 'text', 120, 'name', true)}
+        {contactField('email', 'Email address', 'email', 254, 'email', true)}
+        {contactField('phone', 'WhatsApp / mobile number', 'tel', 40, 'tel')}
+        {contactField('country', 'Country of residence', 'text', 80, 'country-name')}
+        <label className="field" htmlFor="additional-requirements"><span>Additional requirements (optional)</span><textarea id="additional-requirements" maxLength={5000} rows={5} value={additionalRequirements} onChange={event => setAdditional(event.target.value)} aria-invalid={!!result.errors.additionalRequirements} aria-describedby={`additional-help${result.errors.additionalRequirements ? ' additional-error' : ''}`} /><span id="additional-help" className="form-help">Preferences only; no sensitive documents or payment details.</span>{result.errors.additionalRequirements && <span id="additional-error" className="form-error">{result.errors.additionalRequirements}</span>}</label>
+        {!PRIVACY_NOTICE.approved && <p className="form-help">Proposed privacy wording — awaiting business approval</p>}
+        <label className="privacy-ack" htmlFor="privacy-ack"><input id="privacy-ack" type="checkbox" required checked={customer.privacyAcknowledged} onChange={event => setCustomer(previous => ({ ...previous, privacyAcknowledged: event.target.checked }))} aria-invalid={!!result.errors.privacyAcknowledged} aria-describedby={result.errors.privacyAcknowledged ? 'privacy-error' : undefined} /><span>{PRIVACY_NOTICE.beforeLink}<Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy<span className="sr-only"> (opens in a new tab)</span></Link>{PRIVACY_NOTICE.afterLink}</span></label>
+        {result.errors.privacyAcknowledged && <p id="privacy-error" className="form-error">{result.errors.privacyAcknowledged}</p>}
+        <button type="submit" className="button button-navy" disabled={busy || !!blocked}>{busy ? 'Sending enquiry…' : 'Send My Enquiry'}</button>
+        {blocked && <p className="form-help">Submission is disabled pending approval. Nothing has been sent.</p>}
+      </fieldset>
+      <div className="enquiry-result" role={result.status === 'ERROR' ? 'alert' : 'status'} tabIndex={-1} ref={statusRef}>{result.message}</div>
+    </form>}</div>
   </section>
 }

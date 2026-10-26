@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { genericEnquiryContext } from '../../lib/serviceEnquiry'
+import { Link, useLocation } from 'react-router-dom'
 import { businessDetails } from '../../data/businessDetails'
 
 const groups = [
@@ -7,10 +8,11 @@ const groups = [
   { title: 'Life & Leisure', links: [['Our approach', '/#about-us'], ['Plan your trip', '/contact'], ['Contact us', '/contact']] },
 ]
 export default function Footer() {
+  const location = useLocation()
   return <footer className="site-footer">
     <div className="site-container footer-grid">
-      <div className="footer-brand"><Link to="/" aria-label="Life & Leisure Travel home"><img src="/logo.png" alt="Life & Leisure Travel" width="1015" height="813" loading="lazy" /></Link><p>Extraordinary places.<br />A more personal way to travel.</p><p className="footer-small">Holidays, flights, hotels, trains and visa assistance. Start with a conversation.</p></div>
-      {groups.map(group => <div key={group.title}><h2>{group.title}</h2><ul>{group.links.map(([label, to]) => <li key={label}><Link to={to}>{label}</Link></li>)}</ul>{group.title === 'Life & Leisure' && <Link className="button button-navy footer-cta" to="/contact">Plan My Trip <span aria-hidden="true">↗</span></Link>}</div>)}
+      <div className="footer-brand"><Link to="/" aria-label="Life & Leisure Travel home"><img src="/logo.png" alt="Life & Leisure Travel" width="1015" height="813" loading="lazy" /></Link><p>Extraordinary places.<br />A more personal way to travel.</p><p className="footer-small">Holidays, flights, hotels, trains and visa assistance. Start with a conversation.</p><p className="footer-small">Operated by {businessDetails.legalName}.</p></div>
+      {groups.map(group => <div key={group.title}><h2>{group.title}</h2><ul>{group.links.map(([label, to]) => <li key={label}><Link to={to} state={to === '/contact' ? { enquiry: genericEnquiryContext(location, label === 'Contact us' ? 'footer-contact' : 'footer-plan-link') } : undefined}>{label}</Link></li>)}</ul>{group.title === 'Life & Leisure' && <Link className="button button-navy footer-cta" to="/contact" state={{ enquiry: genericEnquiryContext(location, 'footer-plan-trip') }}>Plan My Trip <span aria-hidden="true">↗</span></Link>}</div>)}
     </div>
     {(businessDetails.email || businessDetails.phone || businessDetails.address || businessDetails.supportHours) && <div className="site-container footer-business"><h2>Contact & support</h2><dl>
       {businessDetails.email && <div><dt>Email</dt><dd><a href={`mailto:${businessDetails.email}`}>{businessDetails.email}</a></dd></div>}

@@ -11,6 +11,7 @@ import PackageDetail from './pages/PackageDetail'
 import Visa from './pages/Visa'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/visa" element={<Visa />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </main>
       <Footer />

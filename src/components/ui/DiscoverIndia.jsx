@@ -1,3 +1,4 @@
+import { createEnquiryContext } from '../../lib/serviceEnquiry'
 import { Link } from 'react-router-dom'
 import { indiaJourneys } from '../../data/indiaJourneys'
 
@@ -17,7 +18,7 @@ export default function DiscoverIndia() {
             key={journey.number}
             className="india-card"
             to="/contact"
-            state={{ enquiryDraft: `India journey enquiry\nInterest: ${journey.title}\n\nMy dates, travellers and preferences: ` }}
+            state={{ enquiry: createEnquiryContext('inbound_india', { destination: journey.location, experiences: journey.title }, { sourcePath: '/#discover-india', destination: journey.location, experience: journey.title }) }}
           >
             <figure className="india-photo">
               <img

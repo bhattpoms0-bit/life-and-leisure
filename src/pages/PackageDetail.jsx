@@ -1,4 +1,4 @@
-import { createEnquiryContext } from '../lib/serviceEnquiry'
+import { packageEnquiryContext } from '../lib/serviceEnquiry'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PackageCard from '../components/ui/PackageCard'
@@ -46,7 +46,7 @@ function PackageDetailContent({ slug }) {
   const displayPrice = (activeSeason ? activeSeason.price : pkg.price) || 'Price on request'
   const priceBreakdown = activeSeason ? computeBreakdown(activeSeason.price) : pkg.priceBreakdown
 
-  const enquiry = createEnquiryContext('holidays', { destination: pkg.location, travellers: passengers.startsWith('Group') ? '' : passengers.slice(0, 1), preferences: activeSeason ? `Preferred season: ${activeSeason.label ?? activeSeason.key}` : '' }, { sourcePath: `/packages/${slug}`, packageSlug: slug, destination: pkg.location })
+  const enquiry = packageEnquiryContext(pkg, slug, passengers, activeSeason)
 
   return (
     <div>

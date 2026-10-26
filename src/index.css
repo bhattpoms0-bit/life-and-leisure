@@ -178,6 +178,11 @@ body {
   .service-form-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
   .service-form-bottom p, .form-help { font-size: .7rem; color: var(--muted); line-height: 1.8; }
   .form-help { margin-top: 1rem; }
+  .enquiry-context { min-width: 0; margin: 1rem 0; padding: 1rem; border-left: 2px solid var(--gold); background: var(--ivory); }
+  .enquiry-context h2 { font-size: .85rem; font-weight: 600; margin-bottom: .75rem; }
+  .enquiry-context dl > div { margin-top: .5rem; overflow-wrap: anywhere; }
+  .enquiry-context dt { font-size: .7rem; color: var(--muted); }
+  .enquiry-context dd { margin: 0; font-size: .85rem; }
   .service-form > .text-link { margin-top: 1rem; }
   .form-error { padding: 1rem; color: theme('colors.error'); border: 1px solid currentColor; margin-top: 1rem; font-size: .85rem; }
   .trust-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line); padding-block: 2.3rem; gap: 1rem; }

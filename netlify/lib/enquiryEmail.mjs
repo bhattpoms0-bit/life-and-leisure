@@ -1,4 +1,4 @@
-import { enquiryServices, getServiceFields } from '../../src/lib/serviceEnquiry.js'
+import { enquiryServices, getServiceFields, ENQUIRY_CTAS } from '../../src/lib/serviceEnquiry.js'
 import { businessDetails } from '../../src/data/businessDetails.js'
 
 const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character])
@@ -9,10 +9,12 @@ export function buildEnquiryEmail(enquiry, reference) {
     ['Enquiry reference', reference], ['Service', service.label],
     ['Customer name', enquiry.customer.fullName], ['Customer email', enquiry.customer.email],
     ['Phone', enquiry.customer.phone], ['Country of residence', enquiry.customer.country],
-    ...getServiceFields(enquiry.serviceType, enquiry.travel).map(field => [field.label, enquiry.travel[field.name]]),
+    ...getServiceFields(enquiry.serviceType, enquiry.travel).map(field => [field.name === 'destination' ? 'Current requested destination' : field.label, enquiry.travel[field.name]]),
+    ['Group-travel preference (not an exact count)', enquiry.metadata.groupPreference],
     ['Package reference', enquiry.metadata.packageSlug], ['Experience reference', enquiry.metadata.experience],
-    ['Destination context', enquiry.metadata.destination], ['Additional requirements', enquiry.additionalRequirements],
+    [enquiry.metadata.packageSlug ? 'Original package destination (customer-supplied context)' : 'Original destination context (customer-supplied)', enquiry.metadata.destination], ['Additional requirements', enquiry.additionalRequirements],
     ['Source page (customer-supplied)', enquiry.metadata.sourcePath],
+    ['Source CTA (customer-supplied)', ENQUIRY_CTAS[enquiry.metadata.sourceCta]],
     ['Enquiry timestamp (browser-supplied)', enquiry.metadata.submittedAt],
     ['Privacy acknowledgement', 'Yes'], ['Privacy notice version', enquiry.privacyNoticeVersion],
   ].filter(([, value]) => value !== undefined && value !== '')

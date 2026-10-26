@@ -2,7 +2,8 @@ import { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import PageMeta from '../components/seo/PageMeta'
 import EnquiryFields from '../components/ui/EnquiryFields'
-import { createEnquiryContext, enquiryServices, switchEnquiryService } from '../lib/serviceEnquiry'
+import { createEnquiryContext, enquiryServices, switchEnquiryService, ENQUIRY_CTAS } from '../lib/serviceEnquiry'
+import { packageDetails } from '../data/packageDetails'
 import { createEnquirySubmitter } from '../lib/enquirySubmission'
 import { ENQUIRY_FORM_NAME, PRIVACY_NOTICE, intakeAvailability } from '../data/enquiryConfig'
 import { businessDetails } from '../data/businessDetails'
@@ -27,6 +28,15 @@ function EnquiryForm({ initial }) {
   const blocked = intakeAvailability(availability)
   const [submitter] = useState(() => createEnquirySubmitter({ availability, onState: setResult }))
   const values = drafts[serviceType] ?? {}
+  const summary = [
+    ['Selected service', enquiryServices.find(service => service.key === serviceType)?.label ?? 'Please choose a service'],
+    ['Selected package', context.metadata.packageSlug ? packageDetails[context.metadata.packageSlug]?.title ?? 'Requested package' : ''],
+    [context.metadata.packageSlug ? 'Original package destination' : 'Original destination context', context.metadata.destination],
+    ['Current requested destination', values.destination || values.to],
+    ['Group-travel preference', context.metadata.groupPreference],
+    ['Experience / tier context', context.metadata.experience],
+    ['Started from', ENQUIRY_CTAS[context.metadata.sourceCta]],
+  ].filter(([, value]) => value)
   const busy = result.status === 'SUBMITTING' || result.status === 'VALIDATING'
   const changeTravel = (name, value) => setDrafts(previous => ({ ...previous, [serviceType]: { ...previous[serviceType], [name]: value } }))
   const changeService = nextService => {
@@ -50,8 +60,11 @@ function EnquiryForm({ initial }) {
       <div hidden aria-hidden="true"><label>Leave this empty<input name="bot-field" tabIndex={-1} autoComplete="off" /></label></div>
       <fieldset disabled={busy} className="service-fieldset"><legend>Your travel requirements</legend>
         <label className="field" htmlFor="service-type"><span>Travel service</span><select id="service-type" value={serviceType} required onChange={event => changeService(event.target.value)} aria-invalid={!!result.errors.serviceType} aria-describedby={result.errors.serviceType ? 'service-type-error' : undefined}><option value="">Choose a service</option>{enquiryServices.map(service => <option key={service.key} value={service.key}>{service.label}</option>)}</select>{result.errors.serviceType && <span id="service-type-error" className="form-error">{result.errors.serviceType}</span>}</label>
-        {context.metadata.packageSlug && <p className="form-help">Package: {context.metadata.packageSlug}</p>}
-        {context.metadata.experience && <p className="form-help">Requested service / experience: {context.metadata.experience}</p>}
+        <section className="enquiry-context" aria-labelledby="enquiry-context-heading">
+          <h2 id="enquiry-context-heading">Your enquiry summary</h2>
+          <dl>{summary.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          {context.metadata.groupPreference && <p className="form-help">Your group preference is saved. Enter the accurate number of travellers below; “4+” is not an exact count.</p>}
+        </section>
         <EnquiryFields service={serviceType} values={values} onChange={changeTravel} errors={result.errors} />
         <h2>Your contact details</h2>
         {contactField('fullName', 'Full name', 'text', 120, 'name', true)}

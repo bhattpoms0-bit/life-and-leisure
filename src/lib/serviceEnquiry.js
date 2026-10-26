@@ -9,6 +9,33 @@ export const enquiryServices = [
   { key: 'travel_consultation', label: 'Travel Consultation' },
 ]
 export const services = enquiryServices.slice(0, 5)
+export const GROUP_PREFERENCE = 'Group (4+)'
+export const ENQUIRY_CTAS = {
+  'header-plan-trip': 'Header: Plan My Trip',
+  'header-contact': 'Header: Contact Us',
+  'mobile-plan-trip': 'Mobile navigation: Plan My Trip',
+  'mobile-contact': 'Mobile navigation: Contact Us',
+  'footer-plan-trip': 'Footer: Plan My Trip',
+  'footer-plan-link': 'Footer: Plan your trip',
+  'footer-contact': 'Footer: Contact us',
+  'hero-travel-expert': 'Homepage: Speak to a Travel Expert',
+  'consultation-plan-trip': 'Consultation: Plan My Trip',
+}
+
+// Attribution only, never verified analytics. Exclude query strings, which can
+// contain personal information. A generic CTA must not select a travel service.
+export function genericEnquiryContext(location, sourceCta) {
+  return createEnquiryContext('', {}, { sourcePath: `${location.pathname}${location.hash ?? ''}`, sourceCta })
+}
+
+export function packageEnquiryContext(pkg, slug, passengers, activeSeason) {
+  return createEnquiryContext('holidays', {
+    destination: pkg.location,
+    travellers: passengers === GROUP_PREFERENCE ? '' : ({ '1 Adult': '1', '2 Adults': '2', '3 Adults': '3' }[passengers] ?? ''),
+    preferences: activeSeason ? `Preferred season: ${activeSeason.label ?? activeSeason.key}` : '',
+  }, { sourcePath: `/packages/${slug}`, packageSlug: slug, destination: pkg.location,
+    ...(passengers === GROUP_PREFERENCE ? { groupPreference: GROUP_PREFERENCE } : {}) })
+}
 export const isServiceType = value => enquiryServices.some(service => service.key === value)
 export const CURRENCIES = ['INR', 'USD', 'EUR', 'GBP', 'AED', 'SGD', 'AUD', 'CAD', 'JPY', 'CHF']
 const text = (name, label, placeholder, required = true) => ({ name, label, placeholder, type: 'text', maxLength: 160, required })
@@ -104,7 +131,9 @@ export function createEnquiryContext(serviceType, travel = {}, metadata = {}) {
     if (serviceType === 'flights' && travel.tripType === 'Multi-city' && Number.isInteger(travel.extraFlights)) clean.extraFlights = Math.max(0, Math.min(3, travel.extraFlights))
   }
   const context = {}
-  for (const key of ['sourcePath', 'packageSlug', 'destination', 'experience']) {
+  for (const key of ['sourcePath', 'packageSlug', 'destination', 'experience', 'sourceCta', 'groupPreference']) {
+    if (key === 'sourceCta' && !Object.hasOwn(ENQUIRY_CTAS, metadata[key] ?? '')) continue
+    if (key === 'groupPreference' && metadata[key] !== GROUP_PREFERENCE) continue
     if (typeof metadata[key] === 'string') context[key] = metadata[key].slice(0, 200)
   }
   return { serviceType: isServiceType(serviceType) ? serviceType : '', travel: clean, metadata: context }
@@ -124,5 +153,5 @@ export function switchEnquiryService(current, nextService, savedTravel = {}) {
   if (destinationServices.includes(current.serviceType) && destinationServices.includes(nextService)) shared.destination = current.travel.destination
   const countFields = { flights: 'passengers', trains: 'passengers', hotels: 'guests', holidays: 'travellers', tailor_made: 'travellers', inbound_india: 'travellers' }
   if (countFields[current.serviceType] && countFields[nextService]) shared[countFields[nextService]] = current.travel[countFields[current.serviceType]]
-  return createEnquiryContext(nextService, { ...shared, ...savedTravel }, { sourcePath: current.metadata?.sourcePath })
+  return createEnquiryContext(nextService, { ...shared, ...savedTravel }, { sourcePath: current.metadata?.sourcePath, sourceCta: current.metadata?.sourceCta })
 }

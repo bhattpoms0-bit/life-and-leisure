@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { ENQUIRY_ENDPOINT, PRIVACY_NOTICE } from '../../src/data/enquiryConfig.js'
-import { createEnquiryContext, getServiceFields } from '../../src/lib/serviceEnquiry.js'
+import { createEnquiryContext, getServiceFields, ENQUIRY_CTAS, GROUP_PREFERENCE } from '../../src/lib/serviceEnquiry.js'
 import { isRecord, isSingleLine, validateEnquiry } from '../../src/lib/enquiryValidation.js'
 import { getEmailConfiguration } from './emailConfiguration.mjs'
 import { buildEnquiryEmail } from './enquiryEmail.mjs'
@@ -13,7 +13,7 @@ const unavailable = () => reply(503, { accepted: false, message: 'Online enquiri
 
 function validatePayload(payload, now, notice) {
   if (!onlyKeys(payload, ['schemaVersion', 'serviceType', 'customer', 'travel', 'additionalRequirements', 'metadata', 'privacyNoticeVersion', 'honeypot']) || payload.schemaVersion !== 1) return { serviceType: 'Invalid enquiry format.' }
-  if (!onlyKeys(payload.customer, ['fullName', 'email', 'phone', 'country', 'privacyAcknowledged']) || !isRecord(payload.travel) || !onlyKeys(payload.metadata, ['sourcePath', 'packageSlug', 'destination', 'experience', 'clientRequestId', 'submittedAt'])) return { serviceType: 'Invalid enquiry format.' }
+  if (!onlyKeys(payload.customer, ['fullName', 'email', 'phone', 'country', 'privacyAcknowledged']) || !isRecord(payload.travel) || !onlyKeys(payload.metadata, ['sourcePath', 'packageSlug', 'destination', 'experience', 'sourceCta', 'groupPreference', 'clientRequestId', 'submittedAt'])) return { serviceType: 'Invalid enquiry format.' }
   if (typeof payload.honeypot !== 'string' || payload.honeypot.length > 200 || payload.honeypot.trim()) return { serviceType: 'Unable to accept this enquiry.' }
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now)
   const errors = validateEnquiry(payload, today)
@@ -26,11 +26,13 @@ function validatePayload(payload, now, notice) {
   for (const value of Object.values(payload.metadata)) {
     if (!isSingleLine(value) || value.length > 200) return { ...errors, serviceType: 'Invalid enquiry context.' }
   }
-  const { clientRequestId, submittedAt, sourcePath, packageSlug } = payload.metadata
+  const { clientRequestId, submittedAt, sourcePath, packageSlug, sourceCta, groupPreference } = payload.metadata
+  if (sourceCta !== undefined && !Object.hasOwn(ENQUIRY_CTAS, sourceCta)) errors.serviceType = 'Invalid enquiry source.'
+  if (groupPreference !== undefined && (groupPreference !== GROUP_PREFERENCE || payload.serviceType !== 'holidays' || !packageSlug)) errors.serviceType = 'Invalid group preference.'
   if (!UUID.test(clientRequestId ?? '')) errors.serviceType = 'Please reload the enquiry form.'
   const timestamp = Date.parse(submittedAt)
   if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString() !== submittedAt || timestamp > now.getTime() + 300000 || timestamp < now.getTime() - 86400000) errors.serviceType = 'Please reload the enquiry form.'
-  if (sourcePath && (!sourcePath.startsWith('/') || sourcePath.startsWith('//'))) errors.serviceType = 'Invalid source page.'
+  if (sourcePath && !/^\/(?!\/)[^?\\]*$/.test(sourcePath)) errors.serviceType = 'Invalid source page.'
   if (packageSlug && (payload.serviceType !== 'holidays' || !/^[a-z0-9-]{1,120}$/.test(packageSlug))) errors.serviceType = 'Review the package reference.'
   return errors
 }

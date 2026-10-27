@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { businessDetails } from '../../data/businessDetails'
 
 const groups = [
-  { title: 'Find your journey', links: [['International holidays', '/packages'], ['Explore destinations', '/destinations'], ['Discover India', '/#discover-india'], ['Tailor-made travel', '/#tailor-made']] },
+  { title: 'Find your journey', links: [['International holidays', '/packages'], ['Domestic holidays', '/domestic-holidays'], ['Explore destinations', '/destinations'], ['Discover India', '/#discover-india'], ['Tailor-made travel', '/#tailor-made']] },
   { title: 'Travel, taken care of', links: [['Travel services', '/services'], ['Flight, hotel & train enquiries', '/#service-selector'], ['Visa assistance', '/visa'], ['Travel resources', '/#travel-resources']] },
   { title: 'Life & Leisure', links: [['Our approach', '/#about-us'], ['Plan your trip', '/contact'], ['Contact us', '/contact']] },
 ]

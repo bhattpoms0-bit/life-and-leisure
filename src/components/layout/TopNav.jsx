@@ -50,7 +50,7 @@ export default function TopNav() {
         <nav aria-label="Main navigation" className="desktop-navigation">
           {navigation.map(item => item.children ? (
             <details className="nav-dropdown" key={item.label}>
-              <summary>Travel Services <span aria-hidden="true">⌄</span></summary>
+              <summary>{item.label} <span aria-hidden="true">⌄</span></summary>
               <div className="nav-dropdown-panel">{item.children.map(child => <Link key={child.to} to={child.to} onClick={event => { event.currentTarget.closest('details').open = false }}>{child.label}</Link>)}</div>
             </details>
           ) : <Link key={item.label} to={item.to} state={item.to === '/contact' ? { enquiry: genericEnquiryContext(location, 'header-contact') } : undefined} aria-current={item.to === pathname && !hash ? 'page' : undefined}>{item.label}</Link>)}

@@ -1,5 +1,8 @@
 export const navigation = [
-  { label: 'Holidays', to: '/packages' },
+  { label: 'Holidays', to: '/packages', children: [
+    { label: 'International Holidays', to: '/packages' },
+    { label: 'Domestic Holidays', to: '/domestic-holidays' },
+  ] },
   { label: 'Destinations', to: '/destinations' },
   { label: 'India Tours', to: '/#discover-india' },
   { label: 'Travel Services', to: '/services', children: [

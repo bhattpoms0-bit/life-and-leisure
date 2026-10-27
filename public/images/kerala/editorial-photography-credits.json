@@ -1,0 +1,200 @@
+[
+  {
+    "key": "munnar-panorama",
+    "author": "Rohit Dey",
+    "source": "https://unsplash.com/photos/green-tea-plantation-nestled-among-scenic-mountains-WHLkaYK28TM",
+    "licence": "Unsplash License",
+    "licenceUrl": "https://unsplash.com/license",
+    "location": "Munnar, Kerala, described by the photographer",
+    "originalUrl": "https://images.unsplash.com/photo-1742106850925-7aeec2fb1ce9",
+    "files": [
+      {
+        "file": "munnar-panorama.webp",
+        "width": 1920,
+        "height": 1280,
+        "bytes": 324182
+      },
+      {
+        "file": "munnar-panorama-1280.webp",
+        "width": 1280,
+        "height": 853,
+        "bytes": 208446
+      },
+      {
+        "file": "munnar-panorama-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 54392
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  },
+  {
+    "key": "munnar-mist",
+    "author": "Anil Sharma",
+    "source": "https://www.pexels.com/photo/lush-green-tea-plantation-in-misty-mountains-30708236/",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "location": "Munnar, India, publisher location",
+    "originalUrl": "https://images.pexels.com/photos/30708236/pexels-photo-30708236.jpeg",
+    "files": [
+      {
+        "file": "munnar-mist.webp",
+        "width": 1280,
+        "height": 1920,
+        "bytes": 341338
+      },
+      {
+        "file": "munnar-mist-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 127874
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  },
+  {
+    "key": "thekkady-mist",
+    "author": "Rishi Sreekar",
+    "source": "https://unsplash.com/photos/a-body-of-water-surrounded-by-lush-green-trees-7OjZUOyO_FI",
+    "licence": "Unsplash License",
+    "licenceUrl": "https://unsplash.com/license",
+    "location": "Thekkady, Kumily, Kerala, India, photographer location",
+    "originalUrl": "https://images.unsplash.com/photo-1716404985743-8c0e007cb358",
+    "files": [
+      {
+        "file": "thekkady-mist.webp",
+        "width": 1600,
+        "height": 1069,
+        "bytes": 200126
+      },
+      {
+        "file": "thekkady-mist-1280.webp",
+        "width": 1280,
+        "height": 855,
+        "bytes": 133156
+      },
+      {
+        "file": "thekkady-mist-640.webp",
+        "width": 640,
+        "height": 428,
+        "bytes": 37268
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  },
+  {
+    "key": "alleppey-cruise",
+    "author": "Abhishek Prasad",
+    "source": "https://unsplash.com/photos/brown-wooden-boat-on-water-during-daytime-N3VzleBhOvk",
+    "licence": "Unsplash License",
+    "licenceUrl": "https://unsplash.com/license",
+    "location": "Alappuzha, Kerala, India, photographer location",
+    "originalUrl": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2",
+    "files": [
+      {
+        "file": "alleppey-cruise.webp",
+        "width": 1920,
+        "height": 1282,
+        "bytes": 317192
+      },
+      {
+        "file": "alleppey-cruise-1280.webp",
+        "width": 1280,
+        "height": 855,
+        "bytes": 156862
+      },
+      {
+        "file": "alleppey-cruise-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 47508
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  },
+  {
+    "key": "kumarakom-reflections",
+    "author": "Purushothama Reddy M",
+    "source": "https://unsplash.com/photos/a-house-boat-on-a-river-surrounded-by-palm-trees-PtYLnVWtPz4",
+    "licence": "Unsplash License",
+    "licenceUrl": "https://unsplash.com/license",
+    "location": "Kumarakom, Kerala, India, photographer location",
+    "originalUrl": "https://images.unsplash.com/photo-1654530050931-3b02b28570c1",
+    "files": [
+      {
+        "file": "kumarakom-reflections.webp",
+        "width": 1920,
+        "height": 960,
+        "bytes": 345606
+      },
+      {
+        "file": "kumarakom-reflections-1280.webp",
+        "width": 1280,
+        "height": 640,
+        "bytes": 241326
+      },
+      {
+        "file": "kumarakom-reflections-640.webp",
+        "width": 640,
+        "height": 320,
+        "bytes": 64354
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  },
+  {
+    "key": "kochi-evening",
+    "author": "Sruthik Koneti",
+    "source": "https://www.pexels.com/photo/chinese-fishing-nets-at-sunset-in-kochi-india-40063712/",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "location": "Kochi, Kerala, India, publisher location",
+    "originalUrl": "https://images.pexels.com/photos/40063712/pexels-photo-40063712.jpeg",
+    "files": [
+      {
+        "file": "kochi-evening.webp",
+        "width": 1920,
+        "height": 1440,
+        "bytes": 170294
+      },
+      {
+        "file": "kochi-evening-1280.webp",
+        "width": 1280,
+        "height": 960,
+        "bytes": 96212
+      },
+      {
+        "file": "kochi-evening-640.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 32254
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  },
+  {
+    "key": "kerala-dining",
+    "author": "Saveurs Secretes",
+    "source": "https://www.pexels.com/photo/sadya-dish-on-banana-leaf-5410418/",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "location": "Kerala sadya cuisine, publisher description; no venue or capture location claimed",
+    "originalUrl": "https://images.pexels.com/photos/5410418/pexels-photo-5410418.jpeg",
+    "files": [
+      {
+        "file": "kerala-dining.webp",
+        "width": 1280,
+        "height": 1783,
+        "bytes": 327746
+      },
+      {
+        "file": "kerala-dining-640.webp",
+        "width": 640,
+        "height": 892,
+        "bytes": 142744
+      }
+    ],
+    "changes": "Resized and encoded as WebP. CSS crops to fit; no sky replacement, object removal, saturation filter or generated content. Colour treatment is the source photographer's."
+  }
+]

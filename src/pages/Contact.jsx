@@ -4,6 +4,7 @@ import PageMeta from '../components/seo/PageMeta'
 import EnquiryFields from '../components/ui/EnquiryFields'
 import { createEnquiryContext, enquiryServices, switchEnquiryService, ENQUIRY_CTAS } from '../lib/serviceEnquiry'
 import { packageDetails } from '../data/packageDetails'
+import { keralaPackages } from '../data/domesticHolidays'
 import { createEnquirySubmitter } from '../lib/enquirySubmission'
 import { ENQUIRY_FORM_NAME, PRIVACY_NOTICE, intakeAvailability } from '../data/enquiryConfig'
 import { businessDetails } from '../data/businessDetails'
@@ -30,7 +31,7 @@ function EnquiryForm({ initial }) {
   const values = drafts[serviceType] ?? {}
   const summary = [
     ['Selected service', enquiryServices.find(service => service.key === serviceType)?.label ?? 'Please choose a service'],
-    ['Selected package', context.metadata.packageSlug ? packageDetails[context.metadata.packageSlug]?.title ?? 'Requested package' : ''],
+    ['Selected package', context.metadata.packageSlug ? packageDetails[context.metadata.packageSlug]?.title ?? keralaPackages.find(pkg => pkg.slug === context.metadata.packageSlug)?.title ?? 'Requested package' : ''],
     [context.metadata.packageSlug ? 'Original package destination' : 'Original destination context', context.metadata.destination],
     ['Current requested destination', values.destination || values.to],
     ['Group-travel preference', context.metadata.groupPreference],

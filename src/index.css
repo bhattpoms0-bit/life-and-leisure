@@ -390,3 +390,146 @@ body {
   .service-fields { grid-template-columns: 1fr; }
   .service-tabs button { font-size: .57rem; }
 }
+
+
+/* Domestic collection: existing navy, ivory, gold and type tokens. */
+@layer components {
+  .mobile-navigation .mobile-navigation-child { padding-left: 1rem; font-size: .78rem; }
+  .domestic-intro { max-width: 980px; }
+  .domestic-intro .text-link { display: inline-block; margin-top: 1.5rem; }
+  .domestic-home, .kerala-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; align-items: center; }
+  .domestic-home .button, .kerala-hero .button { margin-top: 1.8rem; }
+  .domestic-home .text-link { display: block; margin-top: 1rem; }
+  .domestic-home figure, .kerala-hero figure { min-width: 0; margin: 0; }
+  .domestic-home img, .kerala-hero img { width: 100%; aspect-ratio: 4 / 4.5; object-fit: cover; }
+  .domestic-home img { object-position: center 78%; }
+  .kerala-hero img { aspect-ratio: 4 / 4.8; }
+  .domestic-home figcaption, .kerala-hero figcaption { margin-top: .7rem; font-size: .7rem; color: var(--muted); }
+  .kerala-hero .eyebrow { margin-top: 2rem; }
+  .domestic-destination-section { margin-bottom: 5rem; }
+  .domestic-destination { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); border: 1px solid var(--line); background: var(--white); }
+  .domestic-destination img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; }
+  .domestic-destination > div { padding: 3rem; align-self: center; }
+  .domestic-destination h2 { font: 500 3rem/1.1 var(--serif); color: var(--navy); margin-block: 1rem; }
+  .domestic-destination p { line-height: 1.8; color: var(--muted); }
+  .domestic-destination .text-link { display: inline-block; margin-top: 1.5rem; }
+  .domestic-conditions { padding: 2rem; background: var(--white); border: 1px solid var(--line); }
+  .domestic-conditions h2, .domestic-content-section h2, .domestic-enquiry h2 { font: 500 1.8rem/1.2 var(--serif); color: var(--navy); }
+  .domestic-conditions ul, .domestic-list, .domestic-inclusions ul { list-style: disc; padding-left: 1.2rem; margin-top: 1rem; }
+  .domestic-conditions li, .domestic-list li, .domestic-inclusions li { margin-block: .65rem; line-height: 1.7; }
+  .domestic-package-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .domestic-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); background: var(--white); }
+  .domestic-card-photo { display: block; position: relative; }
+  .domestic-card-photo img { width: 100%; aspect-ratio: 4 / 3.5; object-fit: cover; }
+  .domestic-card-photo > span { position: absolute; bottom: 1rem; left: 1rem; background: var(--ivory); color: var(--navy); padding: .45rem .75rem; font-size: .7rem; }
+  .domestic-card-body { display: flex; flex: 1; flex-direction: column; padding: 1.5rem; }
+  .domestic-card h3 { font: 500 1.8rem/1.15 var(--serif); color: var(--navy); margin-bottom: 1rem; }
+  .domestic-card-body > p, .domestic-card li { font-size: .85rem; line-height: 1.7; }
+  .domestic-card-body ul { list-style: disc; padding-left: 1.1rem; margin-block: 1rem 1.5rem; }
+  .domestic-stay { color: var(--navy); font-weight: 500; margin-top: 1rem; }
+  .domestic-card-price { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: auto; }
+  .domestic-card-price > span, .domestic-card-price small { display: block; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+  .domestic-card-price p { margin-block: .35rem; }
+  .domestic-card-price strong { font: 500 2rem/1.2 var(--serif); color: var(--navy); }
+  .domestic-card-price p > span { font-size: .8rem; }
+  .domestic-price-note { color: var(--muted); font-size: .75rem; line-height: 1.7; margin-block: 1rem; }
+  .domestic-card .button { margin-top: 1rem; }
+  .domestic-card .text-link { margin-top: 1rem; font-size: .8rem; }
+  .domestic-detail-heading h1 { max-width: 1000px; }
+  .domestic-detail-heading nav { font-size: .8rem; margin-bottom: 2rem; }
+  .domestic-duration { margin-block: 1.5rem 2rem; color: var(--navy); line-height: 1.8; }
+  .domestic-detail-photo { width: 100%; max-height: 520px; aspect-ratio: 2 / 1; object-fit: cover; }
+  .domestic-detail-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 4rem; align-items: start; padding-bottom: 5rem; }
+  .domestic-content-section { margin-bottom: 3rem; }
+  .domestic-content-section p { margin-block: 1rem; line-height: 1.8; }
+  .domestic-itinerary { margin-top: 2rem; }
+  .domestic-itinerary li { border-left: 1px solid var(--gold); padding: 0 0 2rem 1.5rem; }
+  .domestic-itinerary h3 { font: 500 1.6rem/1.2 var(--serif); color: var(--navy); }
+  .domestic-itinerary .domestic-overnight { color: var(--navy); font-weight: 500; font-size: .85rem; }
+  .domestic-inclusions, .domestic-wellness { background: var(--white); border: 1px solid var(--line); padding: 1.5rem; }
+  .domestic-enquiry { background: var(--white); border: 1px solid var(--line); padding: 2rem; position: sticky; top: calc(var(--site-header-height, 123px) + 1rem); }
+  .domestic-enquiry .domestic-card-price { margin-top: 1.5rem; }
+  .domestic-enquiry p, .domestic-enquiry li { font-size: .85rem; line-height: 1.7; }
+  .domestic-enquiry .button { display: flex; margin-block: 1.5rem 1rem; }
+  .domestic-enquiry .text-link { font-size: .8rem; }
+}
+@media (max-width: 1023px) {
+  .domestic-home, .kerala-hero { gap: 2rem; }
+  .domestic-package-grid { grid-template-columns: 1fr; max-width: 700px; margin-inline: auto; }
+  .domestic-card-photo img { aspect-ratio: 16 / 9; }
+  .domestic-detail-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .domestic-enquiry { position: static; }
+}
+@media (max-width: 639px) {
+  .domestic-home, .kerala-hero, .domestic-destination { grid-template-columns: minmax(0, 1fr); }
+  .domestic-home img, .kerala-hero img { aspect-ratio: 4 / 3.5; }
+  .domestic-destination img { min-height: 240px; }
+  .domestic-destination > div, .domestic-conditions, .domestic-enquiry { padding: 1.3rem; }
+  .domestic-destination h2 { font-size: 2.5rem; }
+  .domestic-card-photo img { aspect-ratio: 4 / 3; }
+  .domestic-detail-photo { aspect-ratio: 4 / 3; }
+}
+
+/* Kerala photography: reserved frames and quiet, visible source credits. */
+@layer components {
+  .kerala-photo { min-width: 0; margin: 0; }
+  .kerala-photo img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .kerala-photo figcaption { padding-top: .75rem; color: var(--navy); font-size: .78rem; line-height: 1.6; overflow-wrap: anywhere; }
+  .kerala-photo figcaption > span, .kerala-photo small { display: block; }
+  .kerala-photo small { color: var(--muted); font-size: .62rem; margin-top: .35rem; }
+  .kerala-photo small a { text-decoration: underline; text-underline-offset: 3px; }
+  .kerala-photo .kerala-photo-note { color: var(--muted); margin-top: .4rem; font-size: .72rem; }
+  .kerala-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 1.5rem; }
+  .kerala-gallery > :first-child { grid-column: span 2; }
+  .kerala-gallery > :first-child img { aspect-ratio: 3 / 1.5; }
+  .kerala-gallery > :nth-child(2) img { aspect-ratio: 3 / 3.1; }
+  .domestic-destination > .kerala-photo { padding: 0; align-self: stretch; }
+  .domestic-destination > .kerala-photo img { min-height: 0; height: auto; aspect-ratio: 4 / 4.5; }
+  .domestic-destination > .kerala-photo figcaption { padding: .75rem 1rem 1rem; }
+  .kerala-detail-hero img { aspect-ratio: 2 / 1; max-height: 520px; }
+  .kerala-detail-hero-base img { object-position: center 78%; }
+  .kerala-itinerary-photo { margin-block: 1.5rem; max-width: 720px; }
+  .kerala-itinerary-photo img { aspect-ratio: 16 / 9; }
+  .kerala-experiences > .kerala-photo { margin-top: 2rem; }
+  .kerala-wellness-feature { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; padding: 2rem; margin-top: 1.5rem; border: 1px solid var(--line); background: var(--ivory); }
+  .kerala-wellness-number { font: 500 4rem/1 var(--serif); color: var(--gold); }
+  .kerala-wellness-feature h3 { font: 500 1.6rem/1.25 var(--serif); color: var(--navy); }
+  .kerala-wellness-feature .eyebrow { margin-top: 0; }
+  .kerala-dining-photo img { aspect-ratio: 3 / 2; object-position: center 65%; }
+}
+@media (max-width: 1023px) {
+  .kerala-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kerala-gallery > :first-child { grid-column: span 2; }
+  .kerala-gallery > :nth-child(2) img { aspect-ratio: 3 / 2; }
+}
+@media (max-width: 639px) {
+  .kerala-gallery { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .kerala-gallery > :first-child { grid-column: auto; }
+  .kerala-gallery > :first-child img, .kerala-gallery img, .kerala-detail-hero img { aspect-ratio: 4 / 3; }
+  .domestic-destination > .kerala-photo img { aspect-ratio: 4 / 3; }
+  .kerala-wellness-feature { grid-template-columns: minmax(0, 1fr); padding: 1.3rem; gap: 1rem; }
+}
+
+/* Editorial crops favour the photographed subject, with no colour/sky effects. */
+@layer components {
+  .kerala-photo-credit { display: block; color: var(--muted); font-size: .62rem; line-height: 1.65; }
+  .kerala-photo-credit a { text-decoration: underline; text-underline-offset: 3px; }
+  .domestic-card-credit { padding: .7rem 1.5rem 0; }
+  .kerala-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kerala-gallery > :first-child { grid-column: span 2; }
+  .kerala-gallery > :first-child img { aspect-ratio: 21 / 9; }
+  .kerala-gallery > :nth-child(2) img, .kerala-gallery > :nth-child(3) img { aspect-ratio: 4 / 3; }
+  .kerala-detail-hero img { aspect-ratio: 21 / 9; max-height: 620px; }
+  .kerala-detail-hero-signature img { aspect-ratio: 16 / 10; max-height: 680px; }
+  .kerala-dining-photo { max-width: 560px; }
+  .kerala-dining-photo img { aspect-ratio: 3 / 4; }
+  .domestic-home .kerala-photo img { aspect-ratio: 4 / 5; }
+}
+@media (max-width: 639px) {
+  .kerala-gallery { grid-template-columns: minmax(0, 1fr); }
+  .kerala-gallery > :first-child { grid-column: auto; }
+  .kerala-gallery > :first-child img, .kerala-gallery > :nth-child(3) img { aspect-ratio: 4 / 3; }
+  .kerala-gallery > :nth-child(2) img { aspect-ratio: 4 / 5; }
+  .kerala-detail-hero img { aspect-ratio: 4 / 3; }
+  .kerala-detail-hero-signature img { aspect-ratio: 4 / 5; }
+}

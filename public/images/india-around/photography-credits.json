@@ -1,0 +1,177 @@
+[
+  {
+    "key": "goa",
+    "author": "urtimud.89",
+    "source": "https://www.pexels.com/photo/sunset-over-palolem-beach-with-palm-trees-in-goa-32262464/",
+    "locationEvidence": "Palolem Beach, Goa ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "originalUrl": "https://images.pexels.com/photos/32262464/pexels-photo-32262464.jpeg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "goa-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 106546
+      },
+      {
+        "file": "goa-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 28692
+      }
+    ]
+  },
+  {
+    "key": "kashmir",
+    "author": "Muazam Mohi ud din",
+    "source": "https://www.pexels.com/photo/scenic-view-of-shikaras-on-dal-lake-kashmir-33466692/",
+    "locationEvidence": "Dal Lake, Srinagar, Kashmir ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "originalUrl": "https://images.pexels.com/photos/33466692/pexels-photo-33466692.jpeg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "kashmir-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 59264
+      },
+      {
+        "file": "kashmir-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 19088
+      }
+    ]
+  },
+  {
+    "key": "rajasthan",
+    "author": "Hemant Singh Chauhan",
+    "source": "https://www.pexels.com/photo/scenic-view-of-lake-pichola-udaipur-at-sunset-35338838/",
+    "locationEvidence": "Lake Pichola, Udaipur, Rajasthan ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "originalUrl": "https://images.pexels.com/photos/35338838/pexels-photo-35338838.jpeg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "rajasthan-960.webp",
+        "width": 960,
+        "height": 641,
+        "bytes": 56838
+      },
+      {
+        "file": "rajasthan-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 17078
+      }
+    ]
+  },
+  {
+    "key": "seven-sisters",
+    "author": "Pushkar Sarkar",
+    "source": "https://www.pexels.com/photo/the-beauty-of-meghalaya-27820314/",
+    "locationEvidence": "Riwai, Meghalaya ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "originalUrl": "https://images.pexels.com/photos/27820314/pexels-photo-27820314.jpeg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "seven-sisters-960.webp",
+        "width": 960,
+        "height": 723,
+        "bytes": 252928
+      },
+      {
+        "file": "seven-sisters-480.webp",
+        "width": 480,
+        "height": 362,
+        "bytes": 66026
+      }
+    ]
+  },
+  {
+    "key": "nepal",
+    "author": "Ashok Sharma",
+    "source": "https://www.pexels.com/photo/annapurna-base-camp-trail-14136902/",
+    "locationEvidence": "Annapurna region, Nepal ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "originalUrl": "https://images.pexels.com/photos/14136902/pexels-photo-14136902.jpeg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "nepal-960.webp",
+        "width": 960,
+        "height": 637,
+        "bytes": 163982
+      },
+      {
+        "file": "nepal-480.webp",
+        "width": 480,
+        "height": 318,
+        "bytes": 42236
+      }
+    ]
+  },
+  {
+    "key": "bhutan",
+    "author": "Bernard Gagnon",
+    "source": "https://commons.wikimedia.org/wiki/File:Punakha_Dzong,_Bhutan_01.jpg",
+    "locationEvidence": "Punakha Dzong, Bhutan ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Punakha_Dzong%2C_Bhutan_01.jpg/960px-Punakha_Dzong%2C_Bhutan_01.jpg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "bhutan-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 128704
+      },
+      {
+        "file": "bhutan-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 30890
+      }
+    ]
+  },
+  {
+    "key": "himachal-pradesh",
+    "author": "Julia Volk",
+    "source": "https://www.pexels.com/photo/spruces-growing-on-mountain-slope-in-wild-valley-5205555/",
+    "locationEvidence": "Manali, Himachal Pradesh ? source page supplied; Bhutan also has camera coordinates.",
+    "licence": "Pexels License",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "originalUrl": "https://images.pexels.com/photos/5205555/pexels-photo-5205555.jpeg",
+    "changes": "Resized and encoded to WebP; CSS crops. No colour, sky or object alteration.",
+    "reviewed": "2026-10-27",
+    "files": [
+      {
+        "file": "himachal-pradesh-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 145446
+      },
+      {
+        "file": "himachal-pradesh-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 41790
+      }
+    ]
+  }
+]

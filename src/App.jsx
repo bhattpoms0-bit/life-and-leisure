@@ -12,6 +12,9 @@ import Visa from './pages/Visa'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import DomesticHolidays from './pages/DomesticHolidays'
+import KeralaCollection from './pages/KeralaCollection'
+import DomesticPackageDetail from './pages/DomesticPackageDetail'
 
 export default function App() {
   return (
@@ -26,6 +29,9 @@ export default function App() {
           <Route path="/destinations/thailand" element={<ThailandDestination />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:slug" element={<PackageDetail />} />
+          <Route path="/domestic-holidays" element={<DomesticHolidays />} />
+          <Route path="/domestic-holidays/kerala" element={<KeralaCollection />} />
+          <Route path="/domestic-holidays/kerala/:slug" element={<DomesticPackageDetail />} />
           <Route path="/visa" element={<Visa />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />

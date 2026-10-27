@@ -1,0 +1,194 @@
+[
+  {
+    "key": "thekkady-forest",
+    "title": "Bamboo Forests at Thekkady.jpg",
+    "author": "Nebu George",
+    "source": "https://commons.wikimedia.org/wiki/File:Bamboo_Forests_at_Thekkady.jpg",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/Bamboo_Forests_at_Thekkady.jpg",
+    "files": [
+      {
+        "file": "thekkady-forest.webp",
+        "width": 1280,
+        "height": 853,
+        "bytes": 192994
+      },
+      {
+        "file": "thekkady-forest-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 46454
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "thekkady-cardamom",
+    "title": "Thekkady, Cardomom Abrahams Spice Garden (2267500654).jpg",
+    "author": "michael clarke stuff",
+    "source": "https://commons.wikimedia.org/wiki/File:Thekkady,_Cardomom_Abrahams_Spice_Garden_(2267500654).jpg",
+    "licence": "CC BY-SA 2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Thekkady%2C_Cardomom_Abrahams_Spice_Garden_%282267500654%29.jpg",
+    "files": [
+      {
+        "file": "thekkady-cardamom.webp",
+        "width": 1280,
+        "height": 960,
+        "bytes": 123396
+      },
+      {
+        "file": "thekkady-cardamom-640.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 48362
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "alleppey-houseboat",
+    "title": "Alleppey houseboat.jpg",
+    "author": "Sravanbaddi",
+    "source": "https://commons.wikimedia.org/wiki/File:Alleppey_houseboat.jpg",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/47/Alleppey_houseboat.jpg",
+    "files": [
+      {
+        "file": "alleppey-houseboat.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 207276
+      },
+      {
+        "file": "alleppey-houseboat-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 88076
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "kochi-fishing-nets",
+    "title": "Chinese fishingnet kochi.jpg",
+    "author": "Challiyil Eswaramangalath Vipin from Chalakudy, India",
+    "source": "https://commons.wikimedia.org/wiki/File:Chinese_fishingnet_kochi.jpg",
+    "licence": "CC BY-SA 2.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/87/Chinese_fishingnet_kochi.jpg",
+    "files": [
+      {
+        "file": "kochi-fishing-nets.webp",
+        "width": 1280,
+        "height": 751,
+        "bytes": 125218
+      },
+      {
+        "file": "kochi-fishing-nets-640.webp",
+        "width": 640,
+        "height": 376,
+        "bytes": 35080
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "kochi-heritage",
+    "title": "Jew Street Fort Cochin by KS.jpg",
+    "author": "Krissubh",
+    "source": "https://commons.wikimedia.org/wiki/File:Jew_Street_Fort_Cochin_by_KS.jpg",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Jew_Street_Fort_Cochin_by_KS.jpg",
+    "files": [
+      {
+        "file": "kochi-heritage.webp",
+        "width": 1280,
+        "height": 719,
+        "bytes": 183926
+      },
+      {
+        "file": "kochi-heritage-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 42616
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "kumarakom-resort",
+    "title": "Kerala Backwaters Resort.jpg",
+    "author": "P.K.Niyogi",
+    "source": "https://commons.wikimedia.org/wiki/File:Kerala_Backwaters_Resort.jpg",
+    "licence": "Public domain",
+    "licenceUrl": "https://commons.wikimedia.org/wiki/File:Kerala_Backwaters_Resort.jpg#Licensing",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Kerala_Backwaters_Resort.jpg",
+    "files": [
+      {
+        "file": "kumarakom-resort.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 245394
+      },
+      {
+        "file": "kumarakom-resort-640.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 113934
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "kumarakom-cruise",
+    "title": "KumarakomHouseBoat.jpg",
+    "author": "Lenish at English Wikipedia",
+    "source": "https://commons.wikimedia.org/wiki/File:KumarakomHouseBoat.jpg",
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/83/KumarakomHouseBoat.jpg",
+    "files": [
+      {
+        "file": "kumarakom-cruise.webp",
+        "width": 1280,
+        "height": 847,
+        "bytes": 138208
+      },
+      {
+        "file": "kumarakom-cruise-640.webp",
+        "width": 640,
+        "height": 424,
+        "bytes": 36252
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  },
+  {
+    "key": "kerala-sadya",
+    "title": "Kerala Sadya Feast.jpg",
+    "author": "athulvis",
+    "source": "https://commons.wikimedia.org/wiki/File:Kerala_Sadya_Feast.jpg",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Kerala_Sadya_Feast.jpg",
+    "files": [
+      {
+        "file": "kerala-sadya.webp",
+        "width": 1280,
+        "height": 960,
+        "bytes": 100346
+      },
+      {
+        "file": "kerala-sadya-640.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 30600
+      }
+    ],
+    "changes": "Resized and encoded as WebP; CSS crops to fit. No colour grading or content alteration."
+  }
+]

@@ -12,6 +12,9 @@ test('homepage links, enquiry handoff and existing routes render correctly', asy
   try {
     const { default: App } = await server.ssrLoadModule('/src/App.jsx')
     const { packageDetails } = await server.ssrLoadModule('/src/data/packageDetails.js')
+    const { keralaPhotography } = await server.ssrLoadModule('/src/data/keralaPhotography.js')
+    const { indiaAround } = await server.ssrLoadModule('/src/data/indiaAround.js')
+    const photoCreditLinks = new Set([...Object.values(keralaPhotography), ...indiaAround.map(destination => destination.photo)].flatMap(photo => [photo.source, photo.licenceUrl]))
     const render = (path, state) => {
       const { pathname, search, hash } = new URL(path, 'http://localhost')
       return renderToString(React.createElement(MemoryRouter, {
@@ -34,13 +37,17 @@ test('homepage links, enquiry handoff and existing routes render correctly', asy
         assert.equal(bytes.readUInt16BE(0), 0xffd8, `Valid JPEG: ${path}`)
       }
     }
-    const routes = new Set(['/', '/packages', '/destinations', '/destinations/vietnam', '/destinations/thailand', '/visa', '/services', '/contact', '/privacy-policy',
+    const routes = new Set(['/', '/packages', '/domestic-holidays', '/domestic-holidays/kerala', '/destinations', '/destinations/vietnam', '/destinations/thailand', '/visa', '/services', '/contact', '/privacy-policy',
       ...Object.keys(packageDetails).map(slug => `/packages/${slug}`)])
     // Inspect navigation anchors, excluding React's automatic image preload links.
     for (const match of home.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
       const href = match[1].replaceAll('&amp;', '&')
       const url = new URL(href, 'http://localhost')
       if (url.protocol === 'mailto:') continue
+      if (url.origin !== 'http://localhost') {
+        assert.ok(photoCreditLinks.has(href), `Unexpected external link: ${href}`)
+        continue
+      }
       assert.ok(routes.has(url.pathname), `Unknown navigation route: ${href}`)
       if (url.hash) assert.ok(home.includes(`id="${url.hash.slice(1)}"`), `Missing anchor: ${href}`)
     }

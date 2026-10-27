@@ -5,7 +5,7 @@ import PackageCard from '../components/ui/PackageCard'
 import Reveal from '../components/ui/Reveal'
 import { packageDetails } from '../data/packageDetails'
 import { packages } from '../data/packages'
-import { computeBreakdown } from '../lib/currency'
+import { getDepartureStatus, PRICING_DISCLAIMER } from '../lib/packagePricing'
 
 const PASSENGER_OPTIONS = ['2 Adults', '1 Adult', '3 Adults', 'Group (4+)']
 
@@ -44,7 +44,7 @@ function PackageDetailContent({ slug }) {
   const activeSeason = pkg.seasonalPricing?.find((season) => season.key === seasonKey)
     ?? pkg.seasonalPricing?.[0]
   const displayPrice = (activeSeason ? activeSeason.price : pkg.price) || 'Price on request'
-  const priceBreakdown = activeSeason ? computeBreakdown(activeSeason.price) : pkg.priceBreakdown
+  const departureStatus = getDepartureStatus(pkg.travelDate)
 
   const enquiry = packageEnquiryContext(pkg, slug, passengers, activeSeason)
 
@@ -321,16 +321,16 @@ function PackageDetailContent({ slug }) {
                     ))}
                   </div>
                 )}
-                <span className="font-label-md text-on-surface-variant">Starts from</span>
+                <span className="font-label-md text-on-surface-variant">Starting from</span>
                 <div className="flex items-baseline space-x-2">
                   <h3 className="font-display-lg text-[32px] text-primary">{displayPrice}</h3>
-                  <span className="font-body-md text-on-surface-variant">/ per person</span>
+                  <span className="font-body-md text-on-surface-variant">per person</span>
                 </div>
               </div>
               <div className="space-y-md">
                 <div className="space-y-sm">
                   <label className="font-label-md text-on-surface block">Travel Date</label>
-                  <div className="relative">
+                  {departureStatus === 'scheduled' ? <div className="relative">
                     <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">
                       calendar_today
                     </span>
@@ -340,7 +340,11 @@ function PackageDetailContent({ slug }) {
                       type="text"
                       value={pkg.travelDate}
                     />
-                  </div>
+                  </div> : <p className="font-body-md text-on-surface-variant">
+                    {departureStatus === 'expired'
+                      ? `Departure unavailable: ${pkg.travelDate}. Please enquire about other dates.`
+                      : 'Departure dates to be confirmed. Please enquire about your preferred dates.'}
+                  </p>}
                 </div>
                 <div className="space-y-sm">
                   <label className="font-label-md text-on-surface block">Passengers</label>
@@ -363,21 +367,7 @@ function PackageDetailContent({ slug }) {
                   </div>
                 </div>
               </div>
-              <div className="pt-4 space-y-4">
-                <div className="flex justify-between items-center font-body-md">
-                  <span className="text-on-surface-variant">Subtotal</span>
-                  <span className="font-bold">{priceBreakdown?.subtotal || 'On request'}</span>
-                </div>
-                <div className="flex justify-between items-center font-body-md">
-                  <span className="text-on-surface-variant">Taxes & Fees</span>
-                  <span className="font-bold">{priceBreakdown?.taxes || 'On request'}</span>
-                </div>
-                <div className="h-px bg-outline-variant/30" />
-                <div className="flex justify-between items-center">
-                  <span className="font-headline-md text-body-lg">Total</span>
-                  <span className="font-headline-md text-headline-md text-primary">{priceBreakdown?.total || 'On request'}</span>
-                </div>
-              </div>
+              <p className="text-caption text-on-surface-variant">{PRICING_DISCLAIMER}</p>
               <Link
                 className="block text-center w-full bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
                 to="/contact"

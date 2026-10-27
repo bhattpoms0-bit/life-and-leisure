@@ -1,5 +1,6 @@
 import PackageCard from '../components/ui/PackageCard'
 import { packages } from '../data/packages'
+import { PRICING_DISCLAIMER } from '../lib/packagePricing'
 
 export default function Packages() {
   return (
@@ -16,6 +17,7 @@ export default function Packages() {
           <PackageCard key={pkg.slug} to={`/packages/${pkg.slug}`} {...pkg} />
         ))}
       </div>
+      <p className="text-caption text-on-surface-variant mt-md">{PRICING_DISCLAIMER}</p>
     </section>
   )
 }

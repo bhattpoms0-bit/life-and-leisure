@@ -5,6 +5,34 @@ import { renderToString } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
 import { createServer } from 'vite'
 import { getDepartureStatus, PRICING_DISCLAIMER } from '../src/lib/packagePricing.js'
+import { parsePrice } from '../src/lib/currency.js'
+
+test('Greece and Serengeti use fixed owner-approved INR amounts, with consistent INR catalogue records', async () => {
+  const server = await createServer({ server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' })
+  try {
+    const { packages } = await server.ssrLoadModule('/src/data/packages.js')
+    const { packageDetails } = await server.ssrLoadModule('/src/data/packageDetails.js')
+    for (const [slug, amount, formatted] of [
+      ['grecian-isles-grand-tour', 549000, '₹5,49,000'],
+      ['serengeti-luxury-safari', 799000, '₹7,99,000'],
+    ]) {
+      const listing = packages.find(pkg => pkg.slug === slug)
+      const detail = packageDetails[slug]
+      assert.equal(listing.price, formatted)
+      assert.equal(detail.price, formatted)
+      assert.deepEqual(parsePrice(listing.price), { symbol: '₹', amount })
+      assert.equal(detail.priceBreakdown, undefined, 'Retired USD totals must not contradict the approved INR price')
+    }
+    for (const listing of packages) {
+      const detail = packageDetails[listing.slug]
+      assert.equal(listing.price, detail.price ?? detail.seasonalPricing?.[0]?.price, listing.slug)
+      for (const price of [listing.price, detail.price, ...(detail.seasonalPricing ?? []).map(season => season.price)].filter(Boolean)) {
+        assert.match(price, /^₹[\d,]+$/)
+        assert.doesNotMatch(price, /\$|USD/)
+      }
+    }
+  } finally { await server.close() }
+})
 
 test('departures expire after their start date in India, with no invented dates', () => {
   const departure = 'Oct 27 - Nov 3, 2026'
@@ -34,11 +62,12 @@ test('all twelve package pages retain approved starting prices and enquiry choic
     assert.equal(packages.length, 12)
     assert.equal(Object.keys(packageDetails).length, 12)
     assert.equal(enquiryServices.length, 8)
-    const approvedPrices = ['₹99,999', '$5,400', '$9,200', '₹38,999', '₹1,15,000', '₹49,999', '₹1,65,000', '₹72,999', '₹99,999', '₹1,49,999', '₹74,999', '₹89,999']
+    const approvedPrices = ['₹99,999', '₹5,49,000', '₹7,99,000', '₹38,999', '₹1,15,000', '₹49,999', '₹1,65,000', '₹72,999', '₹99,999', '₹1,49,999', '₹74,999', '₹89,999']
     assert.deepEqual(packages.map(pkg => pkg.price), approvedPrices)
     for (const [index, listing] of packages.entries()) {
       const pkg = packageDetails[listing.slug]
       const html = render(`/packages/${listing.slug}`)
+      assert.doesNotMatch(text(html), /\$\s*\d|\bUSD\b/, listing.slug)
       assert.ok(text(html).includes(`Starting from ${approvedPrices[index]} per person`), listing.slug)
       assert.ok(html.includes(PRICING_DISCLAIMER), listing.slug)
       assert.doesNotMatch(html, /Subtotal|Taxes & Fees|>Total<|Starts from/)
@@ -69,6 +98,7 @@ test('all twelve package pages retain approved starting prices and enquiry choic
     assert.ok(contactHtml.includes('Preferred season: Peak Season'))
     for (const route of ['/', '/packages', '/destinations/vietnam', '/destinations/thailand']) {
       const html = render(route)
+      assert.doesNotMatch(text(html), /\$\s*\d|\bUSD\b/, route)
       assert.ok(html.includes(PRICING_DISCLAIMER), route)
       assert.ok(text(html).includes('Starting from'), route)
       assert.ok(text(html).includes('per person'), route)

@@ -187,9 +187,8 @@ export const packageDetails = {
       'Sunset Cocktail Cruise',
       'Dedicated Local Concierge',
     ],
-    price: '$5,400',
+    price: '₹5,49,000',
     travelDate: 'Sep 6 - Sep 13, 2026',
-    priceBreakdown: { subtotal: '$10,800', taxes: '$540', total: '$11,340' },
   },
   'serengeti-luxury-safari': {
     location: 'Serengeti, Tanzania',
@@ -228,9 +227,8 @@ export const packageDetails = {
       'Return Light-Aircraft Transfers',
       'Conservation Fees Included',
     ],
-    price: '$9,200',
+    price: '₹7,99,000',
     travelDate: 'Jul 3 - Jul 15, 2026',
-    priceBreakdown: { subtotal: '$18,400', taxes: '$920', total: '$19,320' },
   },
   'discover-vietnam': {
     location: 'Vietnam',

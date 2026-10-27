@@ -63,9 +63,10 @@ export default function TierCard({ tier }) {
           <div className="flex-1" />
 
           <div className="pt-md border-t border-outline-variant/30">
-            <div className="flex items-baseline justify-between mb-md">
-              <span className="font-label-md text-caption text-outline uppercase tracking-wider">Per Person</span>
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-md">
+              <span className="font-label-md text-caption text-outline">Starting from</span>
               <span className="font-headline-md text-headline-md text-secondary">{tier.price}</span>
+              <span className="font-label-md text-caption text-outline">per person</span>
             </div>
             {tier.to ? (
               <Link

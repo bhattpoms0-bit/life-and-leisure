@@ -1,5 +1,6 @@
 import Reveal from './Reveal'
 import TierCard from './TierCard'
+import { PRICING_DISCLAIMER } from '../../lib/packagePricing'
 
 export default function TierComparisonSection({ eyebrow = 'Choose Your Journey', heading, tiers }) {
   return (
@@ -15,6 +16,7 @@ export default function TierComparisonSection({ eyebrow = 'Choose Your Journey',
           </Reveal>
         ))}
       </div>
+      <p className="text-caption text-on-surface-variant mt-md">{PRICING_DISCLAIMER}</p>
     </section>
   )
 }

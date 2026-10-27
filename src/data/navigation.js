@@ -4,7 +4,7 @@ export const navigation = [
     { label: 'Domestic Holidays', to: '/domestic-holidays' },
   ] },
   { label: 'Destinations', to: '/destinations' },
-  { label: 'India Tours', to: '/#discover-india' },
+  { label: 'India & Around', to: '/#discover-india' },
   { label: 'Travel Services', to: '/services', children: [
     { label: 'All travel services', to: '/services' },
     { label: 'Flights, hotels & trains', to: '/#travel-essentials' },

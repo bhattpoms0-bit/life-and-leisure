@@ -6,7 +6,6 @@ import TrustStrip from '../components/ui/TrustStrip'
 import DiscoverIndia from '../components/ui/DiscoverIndia'
 import ServiceCard from '../components/ui/ServiceCard'
 import DestinationSection from '../components/ui/DestinationSection'
-import DomesticHolidaysSection from '../components/ui/DomesticHolidaysSection'
 import ConsultationCTA from '../components/ui/ConsultationCTA'
 import PageMeta from '../components/seo/PageMeta'
 import { packages } from '../data/packages'
@@ -30,7 +29,6 @@ export default function Home() {
     <section className="site-container section-space" id="travel-essentials"><div className="section-heading"><div><p className="eyebrow">Every detail, considered</p><h2 className="section-title">Your travel essentials.<br /><em>One place to begin.</em></h2></div><p className="section-intro heading-aside">From the first flight to the final night away, bring your plans together with personal assistance.</p></div><div className="essentials-grid">{ESSENTIALS.map((service, index) => <ServiceCard key={service.title} number={`0${index + 1}`} {...service} />)}</div></section>
 
     <DestinationSection packages={FEATURED.map(slug => packages.find(pkg => pkg.slug === slug))} />
-    <DomesticHolidaysSection />
 
     <DiscoverIndia />
 

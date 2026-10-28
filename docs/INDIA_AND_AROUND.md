@@ -3,12 +3,18 @@
 The existing homepage Discover India section and `/#discover-india` anchor are
 retained. The shared desktop/mobile navigation item and footer label now read
 India & Around. No extra top-level navigation item or duplicate collection is
-introduced. Kerala links to `/domestic-holidays/kerala`; the seven Coming Soon
-cards are ordinary, non-interactive content with no invented packages or prices.
+introduced. The four visible cards are Northeast India (renamed from Seven
+Sisters), Goa, Kerala and Nepal, in that order. Kerala links to
+`/domestic-holidays/kerala`; the other three are non-interactive Coming Soon
+cards with no invented packages or prices. Local Goa implementation remains
+preserved elsewhere pending approval. The Holidays dropdown retains International
+Holidays and no longer includes Domestic Holidays; its underlying route remains.
+The separate “A little closer” Kerala homepage promotion and its section-only
+styles have been removed. Shared Kerala collection styling remains.
 
 The four existing bespoke India experiences, their photographs and Contact
 handoffs remain inside a keyboard-accessible native disclosure in the same
-section. Nepal and Bhutan are explicitly international destinations; this
+section. Nepal is explicitly an international destination; this
 editorial collection does not modify the international package catalogue.
 
 ## Photography and commercial-use rights
@@ -31,9 +37,10 @@ independent geolocation, supplier endorsement, or hotel inclusion.
 | Himachal Pradesh | Julia Volk | [Manali forested mountain slopes](https://www.pexels.com/photo/spruces-growing-on-mountain-slope-in-wild-valley-5205555/) | [Pexels License](https://www.pexels.com/license/) |
 
 Pexels and Unsplash permit commercial use under their linked terms, without
-mandatory attribution; visible credits are nevertheless supplied. The Bhutan
-image and its resized WebP derivatives are used under CC BY-SA 4.0 with visible
-author/source/licence links and a change notice. Those image derivatives remain
+mandatory attribution; optional credits are not displayed for the four retained
+cards. The Bhutan photograph and its attached visible credit were removed from
+the homepage together, as that card is no longer displayed. Its stored image
+files and licence/source records remain intact. Those image derivatives remain
 available under that same licence. This does not relicense the application.
 No endorsement is implied and no image is sold as an unaltered standalone asset.
 

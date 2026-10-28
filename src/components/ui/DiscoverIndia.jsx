@@ -17,16 +17,16 @@ export default function DiscoverIndia() {
         {indiaAround.map(destination => {
           const { photo } = destination
           const content = <>
-            <img src={photo.src} srcSet={photo.srcSet} sizes="(min-width: 1024px) 44vw, 88vw" width={photo.width} height={photo.height} alt={destination.alt ?? photo.alt} loading="lazy" decoding="async" />
+            <img src={photo.src} srcSet={photo.srcSet} sizes="(min-width: 1440px) 300px, (min-width: 1024px) 23vw, (min-width: 480px) 46vw, calc(100vw - 32px)" width={photo.width} height={photo.height} alt={destination.alt ?? photo.alt} loading="lazy" decoding="async" />
             <div className="india-around-copy"><h3>{destination.name}</h3><p>{destination.subtitle}</p><span className={`india-around-status${destination.to ? ' is-available' : ''}`}>{destination.status}{destination.to && <span aria-hidden="true"> ↗</span>}</span></div>
           </>
           return <article className="india-around-card" key={destination.key}>
             {destination.to ? <Link className="india-around-destination" to={destination.to}>{content}</Link> : <div className="india-around-destination">{content}</div>}
-            <small className="india-around-credit"><a href={photo.source} target="_blank" rel="noopener noreferrer">Photo: {photo.author}</a> · <a href={photo.licenceUrl} target="_blank" rel="noopener noreferrer">{photo.licence}</a> · Resized; display cropped.</small>
+            {photo.licence !== 'Pexels License' && photo.licence !== 'Unsplash License' && <small className="india-around-credit"><a href={photo.source} target="_blank" rel="noopener noreferrer">Photo: {photo.author}</a> · <a href={photo.licenceUrl} target="_blank" rel="noopener noreferrer">{photo.licence}</a> · Resized; display cropped.</small>}
           </article>
         })}
       </div>
-      <p className="india-around-note">One collection, across borders. Nepal and Bhutan are international destinations. More journeys are being prepared; only Kerala packages are currently available here.</p>
+      <p className="india-around-note">One collection, across borders. Nepal is an international destination. Explore our Kerala packages; journeys to Northeast India, Goa and Nepal are coming soon.</p>
       <details className="india-experiences" id="india-experiences">
         <summary>Explore our bespoke India experiences <span aria-hidden="true">+</span></summary>
         <p className="section-intro">Begin with what moves you. These are ideas for a bespoke enquiry, with itineraries and availability arranged individually.</p>

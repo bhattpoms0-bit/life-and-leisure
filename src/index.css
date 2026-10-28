@@ -23,11 +23,13 @@ a.india-around-destination:focus-visible { outline: 2px solid var(--navy); outli
 .india-experiences > .section-intro { margin-block: 1.2rem 2rem; }
 @media (max-width: 1023px) { .india-around-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 479px) {
+  .india-around-grid { grid-template-columns: minmax(0, 1fr); }
+  .india-around-destination > img { aspect-ratio: 4 / 3; }
   .india-around-grid { gap: 1.5rem 1rem; }
   .india-around-copy { padding-block: .85rem 1rem; }
   .india-around-copy h3 { font-size: 1.25rem; }
-  .india-around-copy > p { font-size: .7rem; min-height: 5.1em; }
-  .india-around-status { font-size: .6rem; line-height: 1.65; letter-spacing: .025em; }
+  .india-around-copy > p { font-size: .75rem; min-height: 0; }
+  .india-around-status { font-size: .7rem; line-height: 1.65; letter-spacing: .025em; }
 }
 
 .privacy-policy { color: var(--navy); }
@@ -425,14 +427,12 @@ body {
   .mobile-navigation .mobile-navigation-child { padding-left: 1rem; font-size: .78rem; }
   .domestic-intro { max-width: 980px; }
   .domestic-intro .text-link { display: inline-block; margin-top: 1.5rem; }
-  .domestic-home, .kerala-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; align-items: center; }
-  .domestic-home .button, .kerala-hero .button { margin-top: 1.8rem; }
-  .domestic-home .text-link { display: block; margin-top: 1rem; }
-  .domestic-home figure, .kerala-hero figure { min-width: 0; margin: 0; }
-  .domestic-home img, .kerala-hero img { width: 100%; aspect-ratio: 4 / 4.5; object-fit: cover; }
-  .domestic-home img { object-position: center 78%; }
+  .kerala-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; align-items: center; }
+  .kerala-hero .button { margin-top: 1.8rem; }
+  .kerala-hero figure { min-width: 0; margin: 0; }
+  .kerala-hero img { width: 100%; aspect-ratio: 4 / 4.5; object-fit: cover; }
   .kerala-hero img { aspect-ratio: 4 / 4.8; }
-  .domestic-home figcaption, .kerala-hero figcaption { margin-top: .7rem; font-size: .7rem; color: var(--muted); }
+  .kerala-hero figcaption { margin-top: .7rem; font-size: .7rem; color: var(--muted); }
   .kerala-hero .eyebrow { margin-top: 2rem; }
   .domestic-destination-section { margin-bottom: 5rem; }
   .domestic-destination { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); border: 1px solid var(--line); background: var(--white); }
@@ -482,15 +482,15 @@ body {
   .domestic-enquiry .text-link { font-size: .8rem; }
 }
 @media (max-width: 1023px) {
-  .domestic-home, .kerala-hero { gap: 2rem; }
+  .kerala-hero { gap: 2rem; }
   .domestic-package-grid { grid-template-columns: 1fr; max-width: 700px; margin-inline: auto; }
   .domestic-card-photo img { aspect-ratio: 16 / 9; }
   .domestic-detail-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
   .domestic-enquiry { position: static; }
 }
 @media (max-width: 639px) {
-  .domestic-home, .kerala-hero, .domestic-destination { grid-template-columns: minmax(0, 1fr); }
-  .domestic-home img, .kerala-hero img { aspect-ratio: 4 / 3.5; }
+  .kerala-hero, .domestic-destination { grid-template-columns: minmax(0, 1fr); }
+  .kerala-hero img { aspect-ratio: 4 / 3.5; }
   .domestic-destination img { min-height: 240px; }
   .domestic-destination > div, .domestic-conditions, .domestic-enquiry { padding: 1.3rem; }
   .domestic-destination h2 { font-size: 2.5rem; }
@@ -551,7 +551,6 @@ body {
   .kerala-detail-hero-signature img { aspect-ratio: 16 / 10; max-height: 680px; }
   .kerala-dining-photo { max-width: 560px; }
   .kerala-dining-photo img { aspect-ratio: 3 / 4; }
-  .domestic-home .kerala-photo img { aspect-ratio: 4 / 5; }
 }
 @media (max-width: 639px) {
   .kerala-gallery { grid-template-columns: minmax(0, 1fr); }
